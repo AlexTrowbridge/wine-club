@@ -17,6 +17,11 @@ publish the container image to ghcr.io (`ghcr.io/alextrowbridge/wine-club`).
   `gh auth refresh -h github.com -s write:packages`. Don't work around authentication.
 - Report the published tags. Remind the user to update `newTag` in
   `deploy/overlays/prod/kustomization.yaml` if they want to deploy that version.
+- If nothing that goes into the image changed since the published `:latest` (only
+  tests, docs, `deploy/`, i.e. paths excluded by `.dockerignore`), the script reports
+  that and exits successfully without publishing. That's the expected outcome, not an
+  error: don't bump the version or pass `--force` to get around it. Use `--force` only
+  when the user asks.
 - `./release.sh --dry-run` builds without pushing (useful for checking the Dockerfile).
 
 Git auth: if a plain `git push` fails for lack of credentials, use
