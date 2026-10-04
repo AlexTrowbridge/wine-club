@@ -23,7 +23,7 @@ def test_import_details(imported):
     assert s2.status == Session.Status.CLOSED
 
     henschke = Tasting.objects.get(wine__producer="Henschke")
-    assert henschke.purchaser.display_name == "Jun"
+    assert henschke.purchaser.display_name == "Ben"
     assert henschke.price == Decimal("33")
     assert henschke.wine.jh_score == 92
     assert henschke.wine.is_blend is True
@@ -35,8 +35,8 @@ def test_import_details(imported):
         "Viognier",
     ]
     # "x" = tasted, no score.
-    zane = henschke.ratings.get(member__display_name="Zane")
-    assert zane.score is None
+    dev = henschke.ratings.get(member__display_name="Dev")
+    assert dev.score is None
 
     bolly = Tasting.objects.get(wine__producer="Bollinger")
     assert bolly.shared_purchase and bolly.purchaser is None
@@ -44,8 +44,8 @@ def test_import_details(imported):
 
 
 def test_attendance_imported(imported):
-    zane = Member.objects.get(display_name="Zane")
-    assert Attendance.objects.filter(member=zane).count() == 1
+    dev = Member.objects.get(display_name="Dev")
+    assert Attendance.objects.filter(member=dev).count() == 1
 
 
 def test_import_is_idempotent(imported, sample_workbook):
@@ -60,7 +60,7 @@ def test_import_reports_scores_without_attendance(db, tmp_path):
     from .workbook import MEMBERS, SAMPLE, build_workbook
 
     sample = [(era, [dict(s) for s in sessions]) for era, sessions in SAMPLE]
-    sample[1][1][0]["attendance"] = {"Jun": "P", "Alex": "P"}  # Dion & Zane scored, not marked
+    sample[1][1][0]["attendance"] = {"Ben": "P", "Cleo": "P"}  # Ava & Dev scored, not marked
     path = tmp_path / "wb.xlsx"
     build_workbook(path, MEMBERS, sample)
     report = import_workbook(path)
@@ -74,7 +74,7 @@ def test_bad_score_cells_are_flagged(db, tmp_path, value):
 
     sample = [(era, [dict(s) for s in sessions]) for era, sessions in SAMPLE]
     bottle = dict(sample[0][1][0]["bottles"][0])
-    bottle["scores"] = {**bottle["scores"], "Zane": value}
+    bottle["scores"] = {**bottle["scores"], "Dev": value}
     sample[0][1][0]["bottles"] = [bottle]
     path = tmp_path / "wb.xlsx"
     build_workbook(path, MEMBERS, sample)

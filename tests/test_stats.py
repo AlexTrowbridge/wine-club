@@ -24,13 +24,13 @@ def test_top_wines(data):
 
 def test_member_stats(data):
     by_name = {r.member.display_name: r for r in stats.member_stats(data)}
-    dion = by_name["Dion"]
-    assert dion.avg_given == pytest.approx((9 + 8 + 9 + 6) / 4)
-    assert dion.avg_of_purchases == pytest.approx(25 / 3)
-    assert dion.bottles_bought == 1
-    assert dion.attended == 2
-    assert dion.bottles_per_session == 0.5
-    assert dion.purchase_difference == pytest.approx(25 / 3 - 8)
+    ava = by_name["Ava"]
+    assert ava.avg_given == pytest.approx((9 + 8 + 9 + 6) / 4)
+    assert ava.avg_of_purchases == pytest.approx(25 / 3)
+    assert ava.bottles_bought == 1
+    assert ava.attended == 2
+    assert ava.bottles_per_session == 0.5
+    assert ava.purchase_difference == pytest.approx(25 / 3 - 8)
 
 
 def test_breakdown_country_uses_population_stdev(data):
@@ -77,7 +77,7 @@ def test_ranked_ties():
 def test_purchaser_rater_matrix(imported):
     purchasers, raters, cells, diffs = stats.purchaser_rater_matrix()
     names = {p.display_name for p in purchasers}
-    assert names == {"Dion", "Jun", "Alex"}  # 'Everyone' bottles have no purchaser
-    jun = next(p for p in purchasers if p.display_name == "Jun")
-    alex = next(r for r in raters if r.display_name == "Alex")
-    assert cells[(jun.pk, alex.pk)] == (9.0, 1)
+    assert names == {"Ava", "Ben", "Cleo"}  # 'Everyone' bottles have no purchaser
+    ben = next(p for p in purchasers if p.display_name == "Ben")
+    cleo = next(r for r in raters if r.display_name == "Cleo")
+    assert cells[(ben.pk, cleo.pk)] == (9.0, 1)

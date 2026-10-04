@@ -32,9 +32,9 @@ def test_real_workbook_matches_stats_sheet(db):
     single = {r["label"]: r for r in stats.breakdown(data, "single-varietal")}
     assert single["Pinot Meunier"]["mean"] == 8
 
+    # Member leaderboards (values only: this file is public, so no member names).
     ms = stats.member_stats(data)
     best = stats.ranked(ms, lambda r: r.avg_of_purchases)
-    assert best[0][1].member.display_name == "Laurence"
+    assert best[0][1].avg_of_purchases == pytest.approx(8.2857142857142865)
     diff = stats.ranked(ms, lambda r: r.purchase_difference)
-    assert diff[0][1].member.display_name == "Zoe"
     assert diff[0][1].purchase_difference == pytest.approx(1.3571428571428568)

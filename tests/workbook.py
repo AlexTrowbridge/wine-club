@@ -91,7 +91,7 @@ def build_workbook(path, members, eras):
     wb.save(path)
 
 
-MEMBERS = ["Dion", "Jun", "Alex", "Zane"]
+MEMBERS = ["Ava", "Ben", "Cleo", "Dev"]
 
 SAMPLE = [
     (
@@ -100,12 +100,12 @@ SAMPLE = [
             {
                 "number": 1,
                 "date": dt.date(2023, 4, 21),
-                "attendance": {"Dion": "P", "Jun": "X", "Alex": "X"},
+                "attendance": {"Ava": "P", "Ben": "X", "Cleo": "X"},
                 "bottles": [
                     {
                         "name": "Elysian Springs 2017 Spring Lamb Syrah",
-                        "purchaser": "Dion",
-                        "scores": {"Dion": 9, "Jun": 7, "Alex": 9},
+                        "purchaser": "Ava",
+                        "scores": {"Ava": 9, "Ben": 7, "Cleo": 9},
                         "price": 20,
                         "region": "Adelaide Hills",
                         "country": "Australia",
@@ -122,12 +122,12 @@ SAMPLE = [
                 "number": 2,
                 "date": dt.date(2023, 5, 26),
                 "theme": "Grenache Day",
-                "attendance": {"Dion": "X", "Jun": "P", "Alex": "P", "Zane": "X"},
+                "attendance": {"Ava": "X", "Ben": "P", "Cleo": "P", "Dev": "X"},
                 "bottles": [
                     {
                         "name": "Henschke 2020 Henry's Seven Shiraz Grenache Mataro Viognier",
-                        "purchaser": "Jun",
-                        "scores": {"Dion": 8, "Jun": 8, "Alex": 9, "Zane": "x"},
+                        "purchaser": "Ben",
+                        "scores": {"Ava": 8, "Ben": 8, "Cleo": 9, "Dev": "x"},
                         "position": 1,
                         "price": 33,
                         "blend": "Blend",
@@ -138,7 +138,7 @@ SAMPLE = [
                     {
                         "name": "Bollinger NV Special Cuvée Champagne Pinot Noir Chardonnay",
                         "purchaser": "Everyone",
-                        "scores": {"Dion": 9, "Jun": 9, "Alex": 8},
+                        "scores": {"Ava": 9, "Ben": 9, "Cleo": 8},
                         "position": 2,
                         "price": 90,
                         "blend": "Blend",
@@ -147,8 +147,8 @@ SAMPLE = [
                     },
                     {
                         "name": "Pepperjack 2021 Cabernet Sauvignon",
-                        "purchaser": "Alex",
-                        "scores": {"Dion": 6, "Jun": 7, "Alex": 7, "Zane": 6},
+                        "purchaser": "Cleo",
+                        "scores": {"Ava": 6, "Ben": 7, "Cleo": 7, "Dev": 6},
                         "position": 3,
                         "price": 18,
                         "region": "Barossa Valley",
