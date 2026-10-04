@@ -4,6 +4,7 @@ import openpyxl
 import pytest
 from django.urls import reverse
 
+from club import stats
 from club.importer import import_workbook
 from club.models import Rating, Tasting, Wine
 
@@ -36,6 +37,26 @@ def test_detail_pages_render(client, organiser, imported):
     assert client.get(wine.get_absolute_url()).status_code == 200
     member = Rating.objects.first().member
     assert client.get(member.get_absolute_url()).status_code == 200
+
+
+@pytest.mark.parametrize(
+    "name, args",
+    [("analysis", []), ("analysis", ["price"]), ("price_analysis", []), ("matrix", [])],
+)
+def test_analysis_pages_show_every_tab(client, organiser, imported, name, args):
+    client.force_login(organiser)
+    html = client.get(reverse(name, args=args)).content.decode()
+    for key in stats.DIMENSIONS:
+        assert f'href="{reverse("analysis", args=[key])}"' in html
+    assert f'href="{reverse("price_analysis")}"' in html
+    assert f'href="{reverse("matrix")}"' in html
+
+
+def test_price_dimension_is_not_shadowed_by_price_analysis(client, organiser, imported):
+    client.force_login(organiser)
+    response = client.get(reverse("analysis", args=["price"]))
+    assert response.resolver_match.url_name == "analysis"
+    assert response.context["dimension"] == "price"
 
 
 def test_unknown_analysis_dimension_404(client, organiser, db):

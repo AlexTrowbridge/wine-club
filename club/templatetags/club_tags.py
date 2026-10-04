@@ -1,6 +1,8 @@
 from django import template
 from django.utils.html import format_html
 
+from club import stats
+
 register = template.Library()
 
 
@@ -57,3 +59,13 @@ def query(context, **kwargs):
         else:
             params[key] = value
     return "?" + params.urlencode()
+
+
+@register.inclusion_tag("club/_analysis_tabs.html", takes_context=True)
+def analysis_tabs(context, dimension=None):
+    """Tab bar shared by every analysis page; supplies its own list of dimensions."""
+    return {
+        "request": context["request"],
+        "dimension": dimension,
+        "dimensions": [(key, spec[0]) for key, spec in stats.DIMENSIONS.items()],
+    }

@@ -514,7 +514,6 @@ def analysis(request, dimension="varietal"):
         "club/analysis.html",
         {
             "dimension": dimension,
-            "dimensions": [(k, v[0]) for k, v in stats.DIMENSIONS.items()],
             "title": title,
             "rows": rows,
             "chart": chart,
