@@ -1,4 +1,9 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.core.exceptions import PermissionDenied
+from django.db import models
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import path, reverse
+from django.views.decorators.http import require_POST
 
 from .models import (
     Attendance,
@@ -12,7 +17,9 @@ from .models import (
     Varietal,
     Wine,
     WineVarietal,
+    WorkbookSource,
 )
+from .workbook_sync import run_remote_import
 
 
 @admin.register(Member)
@@ -115,3 +122,44 @@ class RatingAdmin(admin.ModelAdmin):
     search_fields = ["tasting__wine__full_name", "member__display_name"]
     autocomplete_fields = ["tasting", "member"]
     readonly_fields = ["entered_by", "created", "updated"]
+
+
+@admin.register(WorkbookSource)
+class WorkbookSourceAdmin(admin.ModelAdmin):
+    fields = ["url", "last_imported_at", "last_imported_by", "last_ok"]
+    readonly_fields = ["last_imported_at", "last_imported_by", "last_ok"]
+    formfield_overrides = {models.URLField: {"assume_scheme": "https"}}
+
+    def has_add_permission(self, request):
+        return False  # the single row is created on first visit
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def changelist_view(self, request, extra_context=None):
+        source = WorkbookSource.load()
+        return redirect("admin:club_workbooksource_change", source.pk)
+
+    def get_urls(self):
+        import_url = path(
+            "<int:pk>/import/",
+            self.admin_site.admin_view(self.import_view),
+            name="club_workbooksource_import",
+        )
+        return [import_url, *super().get_urls()]
+
+    def import_view(self, request, pk):
+        return require_POST(self._run_import)(request, pk)
+
+    def _run_import(self, request, pk):
+        source = get_object_or_404(WorkbookSource, pk=pk)
+        if not self.has_change_permission(request, source):
+            raise PermissionDenied
+        report = run_remote_import(request.user)
+        if report.errors:
+            messages.error(request, "Import failed; nothing was changed. " + report.errors[0])
+        elif not report.ok:
+            messages.warning(request, f"Imported with warnings. {report.counts_line()}")
+        else:
+            messages.success(request, f"Imported. {report.counts_line()}")
+        return redirect(reverse("admin:club_workbooksource_change", args=[source.pk]))

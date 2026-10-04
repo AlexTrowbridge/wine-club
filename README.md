@@ -14,8 +14,13 @@ shipped as one container and deployed to Kubernetes with Kustomize.
 - Wines (filter and sort), members, attendance, leaderboards, and analysis by varietal,
   vintage, region, country, age, price band, style and purchaser. Also a rating-vs-price
   log fit and a purchaser × rater matrix.
-- `import_workbook` loads the legacy spreadsheet. `export_workbook` (or
-  *Attendance → Download*) writes the same layout back out.
+- `import_workbook` loads the legacy spreadsheet, from a file or a Box shared link.
+  `export_workbook` (or *Attendance → Download*) writes the same layout back out.
+- **Import from Box**: save the workbook's Box shared link under *Admin → Workbook
+  import*, then click *Import now* to pull the latest version. Records are added and
+  updated, never deleted, and sessions open in the app keep their status. If anything
+  fails (download, layout, or a clash with data entered in the app), nothing changes.
+  The page shows the last import's report.
 - Django admin (`/admin/`) handles detailed edits: wine details and varietals, linking
   logins to members, regions, and so on.
 

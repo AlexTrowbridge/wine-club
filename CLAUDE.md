@@ -52,6 +52,9 @@ Dependencies are managed with uv (`UV_PROJECT_ENVIRONMENT=.venv .venv/bin/uv syn
   aliases to `VARIETALS`.
 - `club/importer.py` / `club/exporter.py`: legacy workbook import and export. They must
   round-trip (covered by `tests/test_pages.py::test_export_round_trips`).
+- Live re-import: `WorkbookSource` (singleton model) holds the Box link, and the admin
+  "Import now" button calls `club/workbook_sync.py` → `club/workbook_fetch.py` (stdlib
+  urllib, `*.box.com` links only) → `importer.import_workbook_or_rollback` (all or nothing).
 - Permissions live in `club/permissions.py` (Organiser group). All views require login
   except those marked `@login_not_required` (health checks).
 - Front-end libraries are vendored in `club/static/club/vendor/`. Strip `sourceMappingURL`

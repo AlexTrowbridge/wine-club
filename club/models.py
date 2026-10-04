@@ -322,3 +322,34 @@ class Rating(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         Attendance.objects.get_or_create(session_id=self.tasting.session_id, member=self.member)
+
+
+class WorkbookSource(models.Model):
+    """Singleton: where the live club workbook lives, and how the last import went."""
+
+    SINGLETON_PK = 1
+
+    url = models.URLField(
+        "workbook link",
+        max_length=500,
+        blank=True,
+        help_text="Box shared link to Wine Club.xlsx, e.g. https://….box.com/s/<token>.",
+    )
+    last_imported_at = models.DateTimeField(null=True, blank=True)
+    last_imported_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    )
+    last_ok = models.BooleanField("last import succeeded", null=True, blank=True)
+    last_summary = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = "workbook import"
+        verbose_name_plural = "workbook import"
+
+    def __str__(self):
+        return "Workbook import"
+
+    @classmethod
+    def load(cls):
+        source, _ = cls.objects.get_or_create(pk=cls.SINGLETON_PK)
+        return source

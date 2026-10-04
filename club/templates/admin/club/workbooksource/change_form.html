@@ -1,0 +1,26 @@
+{% extends "admin/change_form.html" %}
+
+{% block content %}
+{{ block.super }}
+{% if original %}
+<div class="module aligned" style="margin-top: 2em">
+  <h2>Import from the workbook</h2>
+  <div class="form-row">
+    <p>Downloads the workbook from the saved link and re-imports it. Existing records are
+      updated and new ones added; nothing is deleted. Sessions that are open in the app keep
+      their status. If anything goes wrong, nothing is changed.</p>
+    <form method="post" action="{% url 'admin:club_workbooksource_import' original.pk %}">
+      {% csrf_token %}
+      <input type="submit" value="Import now" {% if not original.url %}disabled{% endif %}>
+      {% if not original.url %}<span class="help">Save a workbook link first.</span>{% endif %}
+    </form>
+  </div>
+  {% if original.last_summary %}
+  <div class="form-row">
+    <h3>Last import report</h3>
+    <pre style="white-space: pre-wrap">{{ original.last_summary }}</pre>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

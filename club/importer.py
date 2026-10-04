@@ -21,7 +21,7 @@ from decimal import Decimal
 from pathlib import Path
 
 import openpyxl
-from django.db import transaction
+from django.db import IntegrityError, transaction
 
 from .models import (
     Attendance,
@@ -50,6 +50,7 @@ DATE_CORRECTIONS: dict[dt.date, dt.date] = {
 SHARED_PURCHASER = "Everyone"
 FIRST_MEMBER_COL = 5  # column F in Raw Ratings (0-based)
 ATT_FIRST_MEMBER_COL = 3  # column D in Attendance
+CLOSED_SESSION = {"status": Session.Status.CLOSED, "scores_revealed": True}
 
 
 @dataclass
@@ -73,6 +74,26 @@ class ImportReport:
     @property
     def ok(self):
         return not self.errors and all(ok for _, ok, _ in self.checks)
+
+    def counts_line(self) -> str:
+        return (
+            f"Members: {self.members}  Sessions: {self.sessions}  "
+            f"Wines: {self.wines} new  Tastings: {self.tastings}  "
+            f"Ratings: {self.ratings}  Attendances: {self.attendances}"
+        )
+
+    def summary_text(self) -> str:
+        """Plain-text report: counts, checks, errors and items to review."""
+        lines = [self.counts_line()]
+        for label, ok, detail in self.checks:
+            lines.append(f"[{'ok' if ok else '!!'}] {label}")
+            if detail:
+                lines.append(f"     {detail}")
+        lines += [f"ERROR: {error}" for error in self.errors]
+        if self.review:
+            lines.append(f"{len(self.review)} item(s) to review:")
+            lines += [f"  #{item['#']} {item['wine']}: {item['issue']}" for item in self.review]
+        return "\n".join(lines)
 
     def write_review_csv(self, path: Path):
         with open(path, "w", newline="") as fh:
@@ -169,15 +190,17 @@ def import_workbook(path) -> ImportReport:
         if era.pk is None:
             era.start_date = date
             era.save()
+        session_fields = {
+            "date": date,
+            "theme": "" if _text(theme) in ("", "-") else _text(theme),
+            "era": era,
+        }
+        # Sessions already in the app keep their status, so re-importing the live
+        # workbook doesn't close (or reveal) a session that's open for scoring.
         session, _ = Session.objects.update_or_create(
             number=int(label),
-            defaults={
-                "date": date,
-                "theme": "" if _text(theme) in ("", "-") else _text(theme),
-                "era": era,
-                "status": Session.Status.CLOSED,
-                "scores_revealed": True,
-            },
+            defaults=session_fields,
+            create_defaults={**session_fields, **CLOSED_SESSION},
         )
         sessions_by_date[date] = session
         for name, mark in zip(att_members, row[ATT_FIRST_MEMBER_COL:], strict=False):
@@ -306,10 +329,41 @@ def import_workbook(path) -> ImportReport:
         actual, expected = member.attendances.count(), expected_attendance.get(name, 0)
         if actual != expected:
             attendance_diffs.append(f"{name}: sheet {expected}, db {actual}")
+    not_closed = sorted(
+        session.number
+        for session in sessions_by_date.values()
+        if session.status != Session.Status.CLOSED
+    )
+    report.check(
+        "Sessions in the sheet are closed in the app",
+        not not_closed,
+        ", ".join(f"#{number} is still open or planned" for number in not_closed),
+    )
     report.check(
         "Attendance totals match the Attendance sheet "
         "(differences = scored without being marked present)",
         not attendance_diffs,
         "; ".join(attendance_diffs),
     )
+    return report
+
+
+def import_workbook_or_rollback(path) -> ImportReport:
+    """Import, but leave the database untouched if anything goes wrong.
+
+    ``import_workbook`` commits what it can and lists problems in ``report.errors``
+    (useful when cleaning up the original spreadsheet). Imports of the live workbook
+    should be all or nothing instead.
+    """
+    try:
+        with transaction.atomic():
+            report = import_workbook(path)
+            if report.errors:
+                transaction.set_rollback(True)
+    except IntegrityError as exc:
+        report = ImportReport()
+        report.errors.append(f"Conflicts with data entered in the app: {exc}")
+    except (KeyError, IndexError) as exc:
+        report = ImportReport()
+        report.errors.append(f"The workbook doesn't have the expected layout: {exc!r}")
     return report
