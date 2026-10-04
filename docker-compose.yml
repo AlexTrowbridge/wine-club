@@ -1,0 +1,35 @@
+# Local development / evaluation: app + Postgres.
+#   docker compose up --build        (or: podman compose up --build)
+#   docker compose exec app python manage.py createsuperuser
+#   docker compose cp "Wine Club.xlsx" app:/tmp/club.xlsx
+#   docker compose exec app python manage.py import_workbook /tmp/club.xlsx --review-csv /tmp/review.csv
+services:
+  db:
+    image: docker.io/library/postgres:17
+    environment:
+      POSTGRES_DB: wineclub
+      POSTGRES_USER: wineclub
+      POSTGRES_PASSWORD: wineclub
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wineclub -d wineclub"]
+      interval: 5s
+      retries: 10
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgres://wineclub:wineclub@db:5432/wineclub
+      SECRET_KEY: local-dev-only-change-me
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      CSRF_TRUSTED_ORIGINS: http://localhost:8000
+    command: sh -c "python manage.py migrate --noinput && exec gunicorn config.wsgi --bind 0.0.0.0:8000 --worker-class gthread --threads 4 --no-control-socket --access-logfile -"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:

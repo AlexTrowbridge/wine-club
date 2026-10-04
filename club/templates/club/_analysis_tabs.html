@@ -1,0 +1,5 @@
+<nav class="tabs">
+  {% for key, label in dimensions %}<a href="{% url 'analysis' key %}" class="{% if key == dimension %}active{% endif %}">{{ label }}</a>{% endfor %}
+  <a href="{% url 'price_analysis' %}" class="{% if request.resolver_match.url_name == 'price_analysis' %}active{% endif %}">Price vs rating</a>
+  <a href="{% url 'matrix' %}" class="{% if request.resolver_match.url_name == 'matrix' %}active{% endif %}">Purchaser vs rater</a>
+</nav>

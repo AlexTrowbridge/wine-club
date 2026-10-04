@@ -1,0 +1,24 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}Members{% endblock %}
+{% block content %}
+<h1>Members</h1>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Member</th><th class="num">Sessions</th><th class="num">Attendance</th><th class="num">Bottles bought</th><th class="num">Scores given</th><th class="num">Avg score given</th><th class="num">Avg of their wines</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+  <tr{% if not r.member.active %} class="muted"{% endif %}>
+    <td><a href="{{ r.member.get_absolute_url }}">{{ r.member }}</a>{% if not r.member.active %} <span class="small">(inactive)</span>{% endif %}</td>
+    <td class="num">{{ r.attended }}</td>
+    <td class="num">{{ r.attendance_rate|pct }}</td>
+    <td class="num">{{ r.bottles_bought }}</td>
+    <td class="num">{{ r.n_ratings }}</td>
+    <td class="num">{{ r.avg_given|score }}</td>
+    <td class="num">{{ r.avg_of_purchases|score }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

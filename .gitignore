@@ -1,0 +1,13 @@
+# Club data contains members' personal information: never commit it.
+*.xlsx
+import_review.csv
+
+.venv/
+__pycache__/
+*.pyc
+db.sqlite3
+staticfiles/
+.env
+.pytest_cache/
+.ruff_cache/
+deploy/overlays/*/secrets.env

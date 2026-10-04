@@ -1,0 +1,43 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{% block title %}Wine Club{% endblock %} · Wine Club</title>
+  <link rel="stylesheet" href="{% static 'club/app.css' %}">
+  <script src="{% static 'club/vendor/htmx.min.js' %}" defer></script>
+  <script src="{% static 'club/vendor/chart.umd.min.js' %}" defer></script>
+  <script src="{% static 'club/app.js' %}" defer></script>
+</head>
+<body>
+<header class="site">
+  <div class="inner">
+    <a class="brand" href="{% url 'dashboard' %}">🍷 Wine Club</a>
+    {% if user.is_authenticated %}
+    {% with u=request.resolver_match.url_name %}
+    <nav>
+      <a href="{% url 'session_list' %}" class="{% if u|slice:':7' == 'session' or u|slice:':7' == 'tasting' %}active{% endif %}">Sessions</a>
+      <a href="{% url 'wine_list' %}" class="{% if u|slice:':4' == 'wine' %}active{% endif %}">Wines</a>
+      <a href="{% url 'member_list' %}" class="{% if u|slice:':6' == 'member' %}active{% endif %}">Members</a>
+      <a href="{% url 'leaderboards' %}" class="{% if u == 'leaderboards' %}active{% endif %}">Leaderboards</a>
+      <a href="{% url 'analysis' %}" class="{% if u == 'analysis' or u == 'price_analysis' or u == 'matrix' %}active{% endif %}">Analysis</a>
+      <a href="{% url 'attendance' %}" class="{% if u == 'attendance' %}active{% endif %}">Attendance</a>
+    </nav>
+    {% endwith %}
+    <div class="user">
+      {% if is_organiser %}<a href="{% url 'admin:index' %}">Admin</a>{% endif %}
+      <a href="{% if me %}{{ me.get_absolute_url }}{% else %}{% url 'password_change' %}{% endif %}">{{ me.display_name|default:user.username }}</a>
+      <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="link" type="submit">Log out</button></form>
+    </div>
+    {% endif %}
+  </div>
+</header>
+<main>
+  {% if messages %}
+  <ul class="messages">{% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

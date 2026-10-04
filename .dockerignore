@@ -1,0 +1,14 @@
+.git
+.venv
+.env
+*.xlsx
+*.sqlite3
+import_review.csv
+staticfiles
+deploy
+tests
+**/__pycache__
+.pytest_cache
+.ruff_cache
+Dockerfile
+docker-compose.yml

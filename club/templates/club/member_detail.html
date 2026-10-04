@@ -1,0 +1,54 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}{{ member }}{% endblock %}
+{% block content %}
+<h1>{{ member }}</h1>
+<div class="tiles">
+  <div class="tile"><div class="value">{{ s.attended }}</div><div class="label">sessions ({{ s.attendance_rate|pct }})</div></div>
+  <div class="tile"><div class="value">{{ s.n_ratings }}</div><div class="label">scores given</div></div>
+  <div class="tile"><div class="value">{{ s.avg_given|score|default:"–" }}</div><div class="label">average score given</div></div>
+  <div class="tile"><div class="value">{{ s.bottles_bought }}</div><div class="label">bottles bought</div></div>
+  <div class="tile"><div class="value">{{ s.avg_of_purchases|score|default:"–" }}</div><div class="label">average of their wines</div></div>
+  <div class="tile"><div class="value {% if s.purchase_difference > 0 %}good{% elif s.purchase_difference < 0 %}bad{% endif %}">{{ s.purchase_difference|signed|default:"–" }}</div><div class="label">their wines vs their own scoring</div></div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3 style="margin-top: 0;">How {{ member }} scores</h3>
+    <div class="chart-box"><canvas data-chart="hist-data"></canvas></div>
+    {{ hist_chart|json_script:"hist-data" }}
+  </div>
+  <div class="card">
+    <h3 style="margin-top: 0;">How {{ member }} rates each purchaser's wines</h3>
+    <p class="small muted">Average score {{ member }} gave, compared with {{ member }}'s overall average.</p>
+    {% if bias %}
+    <table class="compact">
+      <thead><tr><th>Purchaser</th><th class="num">Avg</th><th class="num">vs usual</th><th class="num">n</th></tr></thead>
+      {% for b in bias %}<tr><td><a href="{{ b.purchaser.get_absolute_url }}">{{ b.purchaser }}</a></td><td class="num">{{ b.avg|score }}</td><td class="num {% if b.diff > 0 %}good{% elif b.diff < 0 %}bad{% endif %}">{{ b.diff|signed }}</td><td class="num muted">{{ b.n }}</td></tr>{% endfor %}
+    </table>
+    {% else %}<p class="muted">No scores yet.</p>{% endif %}
+  </div>
+</div>
+
+<h2>Wines bought by {{ member }}</h2>
+{% if purchases %}
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Date</th><th>Wine</th><th class="num">Price</th><th class="num">Score</th></tr></thead>
+  {% for b in purchases %}
+  <tr><td class="small">{{ b.tasting.session.date|date:"j M Y" }}</td><td><a href="{{ b.wine.get_absolute_url }}">{{ b.wine }}</a></td><td class="num">{{ b.tasting.price|money }}</td><td class="num"><strong>{{ b.avg|score }}</strong></td></tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}<p class="muted">None yet.</p>{% endif %}
+
+<h2>Recent scores</h2>
+<div class="table-wrap">
+<table class="compact">
+  {% for r in recent %}
+  <tr><td class="small">{{ r.tasting.session.date|date:"j M Y" }}</td><td><a href="{{ r.tasting.wine.get_absolute_url }}">{{ r.tasting.wine }}</a></td><td class="num">{% if r.score is None %}<span class="muted">x</span>{% else %}{{ r.score|score }}{% endif %}</td></tr>
+  {% empty %}<tr><td class="muted">No scores yet.</td></tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

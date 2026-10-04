@@ -1,0 +1,36 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}Price vs rating{% endblock %}
+{% block content %}
+<h1>Analysis</h1>
+{% include "club/_analysis_tabs.html" %}
+<h2>Does spending more get a better wine?</h2>
+<div class="card">
+  <div class="chart-box" style="height: 400px;"><canvas data-chart="price-data"></canvas></div>
+  {{ chart|json_script:"price-data" }}
+  {% if fit %}
+  <p>Best fit: <strong>rating = {{ fit.a|floatformat:3 }} × ln(price) + {{ fit.b|floatformat:3 }}</strong>
+     <span class="muted">(r² = {{ fit.r2|floatformat:2 }}, {{ fit.n }} bottles)</span>.
+     Each doubling of price adds about <strong>{{ fit.per_doubling|floatformat:2 }}</strong> of a point.
+  </p>
+  {% endif %}
+</div>
+<div class="grid">
+  <div class="card">
+    <h3 style="margin-top: 0;">By price band</h3>
+    <table class="compact">
+      <thead><tr><th>Band</th><th class="num">Bottles</th><th class="num">Avg</th><th class="num">Median</th></tr></thead>
+      {% for r in bands %}<tr><td>{{ r.label }}</td><td class="num">{{ r.n }}</td><td class="num">{{ r.mean|floatformat:2 }}</td><td class="num">{{ r.median|floatformat:2 }}</td></tr>{% endfor %}
+    </table>
+  </div>
+  {% if expected %}
+  <div class="card">
+    <h3 style="margin-top: 0;">Expected price for a score</h3>
+    <p class="small muted">Inverting the fit. Extrapolations beyond the prices we've actually paid are speculative.</p>
+    <table class="compact">
+      {% for rating, price in expected %}<tr><td>{{ rating|score }}</td><td class="num">{{ price|money }}</td></tr>{% endfor %}
+    </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

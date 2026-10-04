@@ -1,0 +1,37 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}{{ wine }}{% endblock %}
+{% block content %}
+<h1>{{ wine }}</h1>
+<div class="card">
+  <table class="compact" style="width: auto;">
+    <tr><th>Producer</th><td>{{ wine.producer }}</td></tr>
+    <tr><th>Vintage</th><td>{{ wine.vintage_label }}</td></tr>
+    {% if wine.cuvee %}<tr><th>Label / cuvée</th><td>{{ wine.cuvee }}</td></tr>{% endif %}
+    <tr><th>Varietals</th><td>{% for v in wine.varietals.all %}<a href="{% url 'wine_list' %}?varietal={{ v.pk }}">{{ v }}</a>{% if not forloop.last %}, {% endif %}{% empty %}<span class="muted">not specified</span>{% endfor %} <span class="muted">({% if wine.blend %}blend{% else %}single varietal{% endif %})</span></td></tr>
+    {% if wine.region %}<tr><th>Region</th><td>{{ wine.region.name }}, <a href="{% url 'wine_list' %}?country={{ wine.region.country.pk }}">{{ wine.region.country }}</a></td></tr>{% endif %}
+    {% if wine.style %}<tr><th>Style</th><td>{{ wine.get_style_display }}</td></tr>{% endif %}
+    {% if wine.jh_score %}<tr><th>James Halliday</th><td>{{ wine.jh_score }}</td></tr>{% endif %}
+  </table>
+  {% if is_organiser %}<p class="small"><a href="{% url 'admin:club_wine_change' wine.pk %}">Edit wine details in admin</a></p>{% endif %}
+</div>
+
+{% for t in tastings %}
+<div class="card">
+  <h3 style="margin-top: 0;"><a href="{{ t.tasting.session.get_absolute_url }}">Session {{ t.tasting.session.number }} · {{ t.tasting.session.date|date:"j F Y" }}</a></h3>
+  <div class="tiles">
+    <div class="tile"><div class="value">{{ t.avg|score }}</div><div class="label">club average</div></div>
+    <div class="tile"><div class="value">{{ t.points_100|floatformat:0 }}</div><div class="label">100-pt scale</div></div>
+    <div class="tile"><div class="value">{{ t.min|score }}–{{ t.max|score }}</div><div class="label">range</div></div>
+    <div class="tile"><div class="value">{{ t.tasting.price|money|default:"–" }}</div><div class="label">price</div></div>
+    <div class="tile"><div class="value">{{ t.tasting.age_consumed|default_if_none:"NV" }}</div><div class="label">years old</div></div>
+  </div>
+  <p class="small muted">Bought by {{ t.tasting.purchaser_label|default:"unknown" }}.</p>
+  <table class="compact" style="width: auto;">
+    {% for r in t.ratings %}<tr><td><a href="{{ r.member.get_absolute_url }}">{{ r.member }}</a></td><td class="num">{% if r.score is None %}<span class="muted">x</span>{% else %}{{ r.score|score }}{% endif %}</td></tr>{% endfor %}
+  </table>
+  {% if t.tasting.notes %}<p>{{ t.tasting.notes|linebreaksbr }}</p>{% endif %}
+</div>
+{% endfor %}
+{% if hidden_tastings %}<p class="muted">Also poured at a session that is still being scored; results appear once scores are revealed.</p>{% endif %}
+{% endblock %}

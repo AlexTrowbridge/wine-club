@@ -1,0 +1,80 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}Session {{ session.number }}{% endblock %}
+{% block content %}
+<div class="pager small">
+  <span>{% if prev %}<a href="{{ prev.get_absolute_url }}">← #{{ prev.number }}</a>{% endif %}</span>
+  <span>{% if next %}<a href="{{ next.get_absolute_url }}">#{{ next.number }} →</a>{% endif %}</span>
+</div>
+<h1>Session {{ session.number }} · {{ session.date|date:"l j F Y" }}</h1>
+<p class="muted">
+  {{ session.era }}{% if session.theme %} · Theme: <strong>{{ session.theme }}</strong>{% endif %}
+  · {% if session.status == "open" %}<span class="badge open">open for scoring</span>{% if not session.scores_revealed %} <span class="badge">scores hidden</span>{% endif %}{% elif session.status == "planned" %}<span class="badge">planned</span>{% else %}closed{% endif %}
+</p>
+
+<div class="btn-row" style="margin-bottom: 16px;">
+  {% if session.status == "open" and me %}<a class="btn" href="{% url 'session_score' session.number %}">Enter my scores</a>{% endif %}
+  {% if is_organiser %}
+    <a class="btn secondary" href="{% url 'tasting_create' session.number %}">Add bottle</a>
+    <a class="btn secondary" href="{% url 'session_edit' session.number %}">Edit session</a>
+    <form method="post" action="{% url 'session_status' session.number %}" class="btn-row">
+      {% csrf_token %}
+      {% if session.status != "open" %}<button name="action" value="open">Open for scoring</button>{% endif %}
+      {% if session.status == "open" and not session.scores_revealed %}<button class="secondary" name="action" value="reveal">Reveal scores</button>{% endif %}
+      {% if session.status == "open" and session.scores_revealed %}<button class="secondary" name="action" value="hide">Hide scores</button>{% endif %}
+      {% if session.status == "open" %}<button class="secondary" name="action" value="close">Close session</button>{% endif %}
+    </form>
+  {% endif %}
+</div>
+
+{% if rows %}
+<div class="table-wrap">
+<table class="grid-scores">
+  <thead>
+    <tr>
+      <th>#</th><th class="wine">Wine</th><th>Bought by</th><th class="num">Price</th>
+      {% for m in columns %}<th><a href="{{ m.get_absolute_url }}">{{ m }}</a></th>{% endfor %}
+      <th>Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in rows %}
+    <tr>
+      <td>{{ row.tasting.position }}</td>
+      <td class="wine">
+        <a href="{{ row.tasting.wine.get_absolute_url }}">{{ row.tasting.wine }}</a>
+        {% if is_organiser %}<a class="small" href="{% url 'tasting_edit' session.number row.tasting.pk %}" title="Edit bottle">✎</a>{% endif %}
+      </td>
+      <td>{{ row.tasting.purchaser_label }}</td>
+      <td class="num">{{ row.tasting.price|money }}</td>
+      {% for cell in row.cells %}{% include "club/_grid_cell.html" with tasting=row.tasting %}{% endfor %}
+      <td><strong>{{ row.avg|score }}</strong>{% if not show_scores %}<span class="muted small">{{ row.n }} in</span>{% endif %}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% if is_organiser %}<p class="small muted">Type a score (0–10, halves allowed), <code>x</code> for tasted but not scored, or clear the cell to remove it. Changes save automatically.</p>{% endif %}
+{% else %}
+<p class="muted">No bottles recorded yet.</p>
+{% endif %}
+
+{% if is_organiser %}
+<div class="card" style="margin-top: 16px;">
+  <h3 style="margin-top: 0;">Attendance</h3>
+  <p class="small muted">Columns above show everyone present. Add a member to give them a column; scoring or bringing a bottle also marks someone present.</p>
+  <form method="post" action="{% url 'session_attendance' session.number %}" class="btn-row">
+    {% csrf_token %}
+    <select name="member">{% for m in absent_members %}<option value="{{ m.pk }}">{{ m }}</option>{% endfor %}</select>
+    <button name="action" value="add" class="secondary">Add to session</button>
+  </form>
+  {% if columns %}
+  <form method="post" action="{% url 'session_attendance' session.number %}" class="btn-row" style="margin-top: 8px;">
+    {% csrf_token %}
+    <select name="member">{% for m in columns %}<option value="{{ m.pk }}">{{ m }}</option>{% endfor %}</select>
+    <button name="action" value="remove" class="secondary">Remove from session</button>
+  </form>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

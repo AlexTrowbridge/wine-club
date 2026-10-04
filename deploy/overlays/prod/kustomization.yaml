@@ -1,0 +1,56 @@
+# Production overlay: copy secrets.env.example to secrets.env (gitignored), fill it in,
+# set the hostname / image / storage class below, then:
+#   kubectl apply -k deploy/overlays/prod
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: wine-club
+resources:
+  - ../../base
+
+images:
+  - name: wine-club
+    newName: ghcr.io/alextrowbridge/wine-club
+    newTag: "0.1.0"
+
+secretGenerator:
+  - name: wine-club-secrets
+    envs:
+      - secrets.env
+
+configMapGenerator:
+  - name: wine-club-config
+    behavior: merge
+    literals:
+      - ALLOWED_HOSTS=wine-club.example.org
+      - CSRF_TRUSTED_ORIGINS=https://wine-club.example.org
+
+patches:
+  # Hostname + TLS (cert-manager issues the certificate if the annotation is kept).
+  - target:
+      kind: Ingress
+      name: wine-club
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: wine-club.example.org
+      - op: replace
+        path: /spec/tls/0/hosts/0
+        value: wine-club.example.org
+      - op: add
+        path: /metadata/annotations/cert-manager.io~1cluster-issuer
+        value: letsencrypt
+  # Uncomment to pin storage classes (default class is used otherwise).
+  # - target:
+  #     kind: StatefulSet
+  #     name: postgres
+  #   patch: |-
+  #     - op: add
+  #       path: /spec/volumeClaimTemplates/0/spec/storageClassName
+  #       value: local-path
+  # - target:
+  #     kind: PersistentVolumeClaim
+  #     name: postgres-backups
+  #   patch: |-
+  #     - op: add
+  #       path: /spec/storageClassName
+  #       value: local-path

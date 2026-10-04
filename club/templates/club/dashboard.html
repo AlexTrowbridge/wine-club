@@ -1,0 +1,51 @@
+{% extends "club/base.html" %}
+{% load club_tags humanize %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% for s in open_sessions %}
+<div class="card" style="border-color: var(--good);">
+  <span class="badge open">Open now</span>
+  <h2 style="margin-top: 6px;">Session {{ s.number }}{% if s.theme %} · {{ s.theme }}{% endif %}</h2>
+  <div class="btn-row">
+    <a class="btn" href="{% url 'session_score' s.number %}">Score tonight's wines</a>
+    <a class="btn secondary" href="{{ s.get_absolute_url }}">Session page</a>
+  </div>
+</div>
+{% endfor %}
+
+<div class="tiles">
+  <div class="tile"><div class="value">{{ totals.sessions }}</div><div class="label">sessions</div></div>
+  <div class="tile"><div class="value">{{ totals.bottles }}</div><div class="label">bottles opened</div></div>
+  <div class="tile"><div class="value">{{ totals.wines }}</div><div class="label">distinct wines</div></div>
+  <div class="tile"><div class="value">{{ totals.ratings|intcomma }}</div><div class="label">scores given</div></div>
+  <div class="tile"><div class="value">{{ totals.members }}</div><div class="label">active members</div></div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3 style="margin-top: 0;">Next session</h3>
+    {% if upcoming %}
+      <p><a href="{{ upcoming.get_absolute_url }}">#{{ upcoming.number }} · {{ upcoming.date|date:"l j F" }}</a>{% if upcoming.theme %} · {{ upcoming.theme }}{% endif %}</p>
+    {% else %}
+      <p class="muted">Nothing scheduled.</p>
+    {% endif %}
+    {% if is_organiser %}<a class="btn secondary" href="{% url 'session_create' %}">Plan a session</a>{% endif %}
+  </div>
+  <div class="card">
+    <h3 style="margin-top: 0;">Last session{% if last %}: <a href="{{ last.get_absolute_url }}">#{{ last.number }}, {{ last.date|date:"j M Y" }}</a>{% endif %}</h3>
+    {% if last_results %}
+    <table class="compact">
+      {% for b in last_results %}
+      <tr><td><a href="{{ b.wine.get_absolute_url }}">{{ b.wine }}</a> <span class="muted small">{{ b.tasting.purchaser_label }}</span></td><td class="num"><strong>{{ b.avg|score }}</strong></td></tr>
+      {% endfor %}
+    </table>
+    {% else %}<p class="muted">No results yet.</p>{% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top: 0;">Club average over time</h3>
+  <div class="chart-box"><canvas data-chart="timeline-data"></canvas></div>
+  {{ timeline_chart|json_script:"timeline-data" }}
+</div>
+{% endblock %}

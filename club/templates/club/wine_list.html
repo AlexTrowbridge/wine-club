@@ -1,0 +1,51 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}Wines{% endblock %}
+{% block content %}
+<h1>Wines <span class="muted small">{{ bottles|length }} bottle{{ bottles|length|pluralize }}</span></h1>
+<form method="get" class="filters">
+  <label>Search<input type="search" name="q" value="{{ filters.q }}" placeholder="Producer, label, grape…"></label>
+  <label>Country<select name="country"><option value="">All</option>{% for c in countries %}<option value="{{ c.pk }}"{% if filters.country == c.pk|stringformat:"s" %} selected{% endif %}>{{ c }}</option>{% endfor %}</select></label>
+  <label>Varietal<select name="varietal"><option value="">All</option>{% for v in varietals %}<option value="{{ v.pk }}"{% if filters.varietal == v.pk|stringformat:"s" %} selected{% endif %}>{{ v }} ({{ v.n }})</option>{% endfor %}</select></label>
+  <label>Blend<select name="blend"><option value="">All</option><option value="single"{% if filters.blend == "single" %} selected{% endif %}>Single varietal</option><option value="blend"{% if filters.blend == "blend" %} selected{% endif %}>Blend</option></select></label>
+  <label>Style<select name="style"><option value="">All</option>{% for k, label in styles %}<option value="{{ k }}"{% if filters.style == k %} selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+  <label>Era<select name="era"><option value="">All</option>{% for e in eras %}<option value="{{ e.pk }}"{% if filters.era == e.pk|stringformat:"s" %} selected{% endif %}>{{ e }}</option>{% endfor %}</select></label>
+  <label>Year<select name="year"><option value="">All</option>{% for y in years %}<option value="{{ y }}"{% if filters.year == y|stringformat:"s" %} selected{% endif %}>{{ y }}</option>{% endfor %}</select></label>
+  <label>Bought by<select name="purchaser"><option value="">Anyone</option>{% for m in purchasers %}<option value="{{ m.pk }}"{% if filters.purchaser == m.pk|stringformat:"s" %} selected{% endif %}>{{ m }}</option>{% endfor %}</select></label>
+  <input type="hidden" name="sort" value="{{ sort }}">
+  <button type="submit">Filter</button>
+  <a href="{% url 'wine_list' %}" class="small">Reset</a>
+</form>
+<div class="table-wrap">
+<table>
+  <thead><tr>
+    <th><a href="{% query sort='-date' %}">Date</a></th>
+    <th><a href="{% query sort='name' %}">Wine</a></th>
+    <th><a href="{% query sort='vintage' %}">Vintage</a></th>
+    <th>Region</th>
+    <th>Bought by</th>
+    <th class="num"><a href="{% query sort='price' %}">Price</a></th>
+    <th class="num"><a href="{% query sort='score' %}">Score</a></th>
+    <th class="num">Range</th>
+    <th class="num">n</th>
+  </tr></thead>
+  <tbody>
+  {% for b in bottles %}
+  <tr>
+    <td class="small"><a href="{{ b.tasting.session.get_absolute_url }}">{{ b.tasting.session.date|date:"j M Y" }}</a></td>
+    <td><a href="{{ b.wine.get_absolute_url }}">{{ b.wine }}</a></td>
+    <td>{{ b.wine.vintage_label }}</td>
+    <td class="small">{% if b.wine.region %}{{ b.wine.region.name }}, {{ b.wine.region.country }}{% endif %}</td>
+    <td class="small">{{ b.tasting.purchaser_label }}</td>
+    <td class="num">{{ b.tasting.price|money }}</td>
+    <td class="num"><strong>{{ b.avg|score }}</strong></td>
+    <td class="num muted small">{{ b.min|score }}–{{ b.max|score }}</td>
+    <td class="num muted small">{{ b.n_scores }}</td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="9" class="muted">No wines match.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

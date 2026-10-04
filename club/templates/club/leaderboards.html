@@ -1,0 +1,43 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}Leaderboards{% endblock %}
+{% block content %}
+<h1>Leaderboards</h1>
+<h2>Highest rated wines</h2>
+<div class="grid">
+  {% for name, rows in groups %}
+  <div class="card">
+    <h3 style="margin-top: 0;">{{ name }}</h3>
+    <table class="compact">
+      {% for b in rows %}
+      <tr><td class="muted">{{ forloop.counter }}</td><td><a href="{{ b.wine.get_absolute_url }}">{{ b.wine }}</a><div class="small muted">{{ b.tasting.purchaser_label }} · {{ b.tasting.session.date|date:"j M Y" }}</div></td><td class="num"><strong>{{ b.avg|score }}</strong></td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endfor %}
+</div>
+
+<h2>Members</h2>
+<div class="grid">
+  <div class="card">
+    <h3 style="margin-top: 0;">Best wine buyers</h3>
+    <p class="small muted">Average club score of the wines each member bought.</p>
+    <table class="compact">{% for rank, r in by_purchases %}<tr><td class="muted">{{ rank }}</td><td><a href="{{ r.member.get_absolute_url }}">{{ r.member }}</a></td><td class="num">{{ r.avg_of_purchases|score }}</td><td class="num muted small">{{ r.bottles_bought }}</td></tr>{% endfor %}</table>
+  </div>
+  <div class="card">
+    <h3 style="margin-top: 0;">Buys above their own taste</h3>
+    <p class="small muted">Their wines' average minus the average score they give.</p>
+    <table class="compact">{% for rank, r in by_difference %}<tr><td class="muted">{{ rank }}</td><td><a href="{{ r.member.get_absolute_url }}">{{ r.member }}</a></td><td class="num {% if r.purchase_difference > 0 %}good{% else %}bad{% endif %}">{{ r.purchase_difference|signed }}</td></tr>{% endfor %}</table>
+  </div>
+  <div class="card">
+    <h3 style="margin-top: 0;">Contribution</h3>
+    <p class="small muted">Bottles bought per session attended.</p>
+    <table class="compact">{% for rank, r in by_contribution %}<tr><td class="muted">{{ rank }}</td><td><a href="{{ r.member.get_absolute_url }}">{{ r.member }}</a></td><td class="num">{{ r.bottles_per_session|floatformat:2 }}</td><td class="num muted small">{{ r.bottles_bought }}/{{ r.attended }}</td></tr>{% endfor %}</table>
+  </div>
+  <div class="card">
+    <h3 style="margin-top: 0;">Most generous scorers</h3>
+    <p class="small muted">Average score given.</p>
+    <table class="compact">{% for rank, r in by_generosity %}<tr><td class="muted">{{ rank }}</td><td><a href="{{ r.member.get_absolute_url }}">{{ r.member }}</a></td><td class="num">{{ r.avg_given|score }}</td><td class="num muted small">{{ r.n_ratings }}</td></tr>{% endfor %}</table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wine-club
+  annotations: {}
+spec:
+  rules:
+    - host: wine-club.example.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wine-club
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - wine-club.example.org
+      secretName: wine-club-tls

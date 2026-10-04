@@ -1,0 +1,32 @@
+{% load club_tags %}<div class="card score-item" id="score-{{ item.tasting.pk }}">
+  <div class="muted small">Wine {{ item.tasting.position }}{% if item.tasting.purchaser_label %} · bought by {{ item.tasting.purchaser_label }}{% endif %}</div>
+  <div class="wine-name">{{ item.tasting.wine }}</div>
+  {% if item.can_rate %}
+  <form hx-post="{% url 'rate' item.tasting.pk %}" hx-target="#score-{{ item.tasting.pk }}" hx-swap="outerHTML">
+    <input type="hidden" name="member" value="{{ member.pk }}">
+    <div class="score-buttons">
+      {% for c in choices %}
+      <button type="submit" name="score" value="{{ c }}" class="{% if item.rating.score == c %}selected{% endif %}">{{ c }}</button>
+      {% endfor %}
+    </div>
+  </form>
+  <div class="score-extra">
+    <form class="btn-row" hx-post="{% url 'rate' item.tasting.pk %}" hx-target="#score-{{ item.tasting.pk }}" hx-swap="outerHTML">
+      <input type="hidden" name="member" value="{{ member.pk }}">
+      <input type="number" name="score" min="0" max="10" step="0.5" placeholder="e.g. 7.5"
+             value="{% if item.rating.score is not None %}{{ item.rating.score|score }}{% endif %}" aria-label="Exact score">
+      <button type="submit" class="secondary">Set</button>
+    </form>
+    <form class="btn-row" hx-post="{% url 'rate' item.tasting.pk %}" hx-target="#score-{{ item.tasting.pk }}" hx-swap="outerHTML">
+      <input type="hidden" name="member" value="{{ member.pk }}">
+      <button type="submit" name="score" value="x" class="secondary{% if item.rating and item.rating.score is None %} selected{% endif %}">Tasted, no score</button>
+      {% if item.rating %}<button type="submit" name="score" value="" class="link">Clear</button>{% endif %}
+    </form>
+    <span class="muted">
+      {% if item.rating %}{% if item.rating.score is None %}Saved: tasted, no score{% else %}Saved: <strong>{{ item.rating.score|score }}</strong>{% endif %}{% else %}Not scored yet{% endif %}
+    </span>
+  </div>
+  {% else %}
+  <p class="muted small">{% if item.rating %}Your score: <strong>{% if item.rating.score is None %}x{% else %}{{ item.rating.score|score }}{% endif %}</strong>. {% endif %}Scoring is closed for this session.</p>
+  {% endif %}
+</div>

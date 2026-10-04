@@ -1,0 +1,27 @@
+{% extends "club/base.html" %}
+{% block title %}Score · session {{ session.number }}{% endblock %}
+{% block content %}
+<h1>Session {{ session.number }} <span class="muted">· {{ session.date|date:"j M" }}</span></h1>
+{% if members %}
+<form method="get" class="filters">
+  <label>Scoring as
+    <select name="member" onchange="this.form.submit()">
+      {% if not member %}<option value="">Choose a member…</option>{% endif %}
+      {% for m in members %}<option value="{{ m.pk }}"{% if member and m.pk == member.pk %} selected{% endif %}>{{ m }}</option>{% endfor %}
+    </select>
+  </label>
+</form>
+{% endif %}
+{% if not member %}
+  <p class="card">Your login isn't linked to a club member yet. Ask an organiser to link it in admin (Members → user).</p>
+{% else %}
+  {% if session.status != "open" %}<p class="card muted">This session isn't open for scoring{% if members %}, but organisers can still enter and correct scores{% endif %}.</p>{% endif %}
+  {% if not session.scores_revealed and session.status == "open" %}<p class="small muted">Other people's scores stay hidden until the organiser reveals them.</p>{% endif %}
+  {% for item in items %}
+    {% include "club/_score_item.html" %}
+  {% empty %}
+    <p class="muted">No bottles have been added yet; check back once the organiser has entered tonight's wines.</p>
+  {% endfor %}
+  <a href="{{ session.get_absolute_url }}">Back to session page</a>
+{% endif %}
+{% endblock %}

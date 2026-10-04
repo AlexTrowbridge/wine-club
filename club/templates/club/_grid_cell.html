@@ -1,0 +1,14 @@
+{% load club_tags %}<td id="cell-{{ tasting.pk }}-{{ cell.member.pk }}"{% if saved %} class="cell-saved"{% endif %}>
+{% if is_organiser %}
+  <input class="cell-input" type="text" inputmode="decimal" name="score" autocomplete="off"
+         value="{% if cell.rating %}{% if cell.rating.score is None %}x{% else %}{{ cell.rating.score|score }}{% endif %}{% endif %}"
+         aria-label="{{ cell.member }} score for {{ tasting.wine }}"
+         hx-post="{% url 'rate' tasting.pk %}" hx-trigger="change"
+         hx-vals='{"member": "{{ cell.member.pk }}", "ui": "grid"}'
+         hx-target="closest td" hx-swap="outerHTML">
+{% elif cell.visible %}
+  {% if cell.rating %}{% if cell.rating.score is None %}<span class="muted" title="Tasted, no score">x</span>{% else %}{{ cell.rating.score|score }}{% endif %}{% endif %}
+{% else %}
+  {% if cell.rating %}<span class="muted" title="Scored (hidden until revealed)">•</span>{% endif %}
+{% endif %}
+</td>

@@ -1,0 +1,23 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}Attendance{% endblock %}
+{% block content %}
+<h1>Attendance</h1>
+<p class="small muted"><strong>P</strong> = brought a bottle, <strong>X</strong> = attended.</p>
+<div class="table-wrap">
+<table class="compact grid-scores">
+  <thead>
+    <tr><th>#</th><th>Date</th>{% for m in members %}<th class="rot"><a href="{{ m.get_absolute_url }}">{{ m }}</a></th>{% endfor %}</tr>
+    <tr><th></th><th>Total</th>{% for t in totals %}<th>{{ t }}</th>{% endfor %}</tr>
+    <tr><th></th><th>Rate</th>{% for r in rates %}<th class="small">{{ r|pct }}</th>{% endfor %}</tr>
+  </thead>
+  <tbody>
+  {% for s, marks in grid %}
+  <tr><td><a href="{{ s.get_absolute_url }}">{{ s.number }}</a></td><td class="small" style="white-space: nowrap;">{{ s.date|date:"j M Y" }}</td>
+    {% for mark in marks %}<td{% if mark == "P" %} style="background: var(--accent-soft); font-weight: 600;"{% endif %}>{{ mark }}</td>{% endfor %}</tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p><a href="{% url 'export_xlsx' %}">Download everything as a spreadsheet (.xlsx)</a></p>
+{% endblock %}

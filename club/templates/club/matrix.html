@@ -1,0 +1,27 @@
+{% extends "club/base.html" %}
+{% load club_tags %}
+{% block title %}Purchaser vs rater{% endblock %}
+{% block content %}
+<h1>Analysis</h1>
+{% include "club/_analysis_tabs.html" %}
+<h2>How each member scores each purchaser's wines</h2>
+<div class="tabs">
+  <a href="?mode=diff" class="{% if mode == 'diff' %}active{% endif %}">Relative to rater's usual score</a>
+  <a href="?mode=avg" class="{% if mode == 'avg' %}active{% endif %}">Average score</a>
+</div>
+<p class="small muted">Rows: who bought the wine. Columns: who scored it. Green means the rater scored that purchaser's wines above the rater's own average, red below. Hover a cell for the number of scores.</p>
+<div class="table-wrap">
+<table class="compact heat">
+  <thead><tr><th>Bought by ↓ / Rated by →</th>{% for r in raters %}<th class="rot">{{ r }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for p, row in rows %}
+  <tr><th><a href="{{ p.get_absolute_url }}">{{ p }}</a></th>
+    {% for c in row %}
+      {% if c %}<td class="num" style="{% heat c.diff %}" title="{{ c.n }} score{{ c.n|pluralize }}">{% if mode == 'avg' %}{{ c.avg|floatformat:1 }}{% else %}{{ c.diff|signed:1 }}{% endif %}</td>{% else %}<td></td>{% endif %}
+    {% endfor %}
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

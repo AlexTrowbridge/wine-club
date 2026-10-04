@@ -1,0 +1,26 @@
+{% extends "club/base.html" %}
+{% block title %}Sessions{% endblock %}
+{% block content %}
+<div class="btn-row" style="justify-content: space-between;">
+  <h1>Sessions</h1>
+  {% if is_organiser %}<a class="btn" href="{% url 'session_create' %}">New session</a>{% endif %}
+</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>#</th><th>Date</th><th>Theme</th><th>Era</th><th class="num">Bottles</th><th class="num">Attendees</th><th>Status</th></tr></thead>
+  <tbody>
+  {% for s in sessions %}
+  <tr>
+    <td><a href="{{ s.get_absolute_url }}">{{ s.number }}</a></td>
+    <td><a href="{{ s.get_absolute_url }}">{{ s.date|date:"D j M Y" }}</a></td>
+    <td>{{ s.theme }}</td>
+    <td class="muted small">{{ s.era }}</td>
+    <td class="num">{{ s.n_wines }}</td>
+    <td class="num">{{ s.n_attendees }}</td>
+    <td>{% if s.status == "open" %}<span class="badge open">open</span>{% elif s.status == "planned" %}<span class="badge">planned</span>{% endif %}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
