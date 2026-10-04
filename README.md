@@ -59,6 +59,8 @@ who scored without being marked present.
 | `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS` | comma-separated |
 | `SECURE_PROXY_SSL` | `true` behind a TLS-terminating ingress |
 | `EMAIL_URL`, `DEFAULT_FROM_EMAIL` | for password-reset mail (console by default) |
+| `ADMIN_PASSWORD` | password for the default superuser; `manage.py ensure_admin` creates it if missing (skipped when unset) |
+| `ADMIN_USERNAME` | default superuser's name (default `admin`) |
 | `WEB_CONCURRENCY` | gunicorn workers (default 3) |
 
 Health endpoints: `/healthz` (process) and `/readyz` (database). Neither needs a login.
@@ -80,11 +82,14 @@ This creates the namespace `wine-club` with:
 - a Postgres 17 StatefulSet
 - a nightly `pg_dump` CronJob that keeps 30 days of dumps on its own PVC
 
+The migrate initContainer also runs `ensure_admin`, so with `ADMIN_PASSWORD` in
+`secrets.env` the first deploy creates the superuser `admin`. It never resets an
+existing user's password, so change it in the app after first login.
+
 First-time setup:
 
 ```sh
 POD=$(kubectl -n wine-club get pod -l app.kubernetes.io/name=wine-club -o name | head -1)
-kubectl -n wine-club exec -it $POD -- python manage.py createsuperuser
 kubectl -n wine-club cp "Wine Club.xlsx" ${POD#pod/}:/tmp/club.xlsx
 kubectl -n wine-club exec $POD -- python manage.py import_workbook /tmp/club.xlsx --review-csv /tmp/review.csv
 ```

@@ -17,6 +17,8 @@ env = environ.Env(
     CSRF_TRUSTED_ORIGINS=(list, []),
     SECURE_PROXY_SSL=(bool, False),
     TIME_ZONE=(str, "Australia/Adelaide"),
+    ADMIN_USERNAME=(str, "admin"),
+    ADMIN_PASSWORD=(str, ""),
 )
 environ.Env.read_env(BASE_DIR / ".env", overwrite=False)
 
@@ -91,6 +93,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+# Default superuser created by `manage.py ensure_admin` (skipped if ADMIN_PASSWORD is unset).
+ADMIN_USERNAME = env("ADMIN_USERNAME")
+ADMIN_PASSWORD = env("ADMIN_PASSWORD")
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "dashboard"

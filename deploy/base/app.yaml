@@ -21,9 +21,13 @@ spec:
       initContainers:
         # Django serialises concurrent migrations with a lock, so running this in
         # every replica is safe at this scale.
+        # ensure_admin creates the default superuser on first deploy (if ADMIN_PASSWORD is set).
         - name: migrate
           image: wine-club
-          command: ["python", "manage.py", "migrate", "--noinput"]
+          command:
+            - sh
+            - -c
+            - python manage.py migrate --noinput && python manage.py ensure_admin
           envFrom:
             - configMapRef:
                 name: wine-club-config
@@ -40,6 +44,12 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: DATABASE_URL
               value: postgres://wineclub:$(POSTGRES_PASSWORD)@postgres:5432/wineclub
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wine-club-secrets
+                  key: ADMIN_PASSWORD
+                  optional: true
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
