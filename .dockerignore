@@ -12,3 +12,5 @@ tests
 .ruff_cache
 Dockerfile
 docker-compose.yml
+CLAUDE.md
+release.sh
