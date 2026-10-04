@@ -1,0 +1,14 @@
+{% extends "club/base.html" %}
+{% block title %}Enter scoring code{% endblock %}
+{% block content %}
+<div class="card" style="max-width: 420px; margin: 40px auto;">
+  <h1>Score tonight's wines</h1>
+  <p class="muted">Enter the 6-character code shown at the session.</p>
+  {% if error %}<p class="bad">{{ error }}</p>{% endif %}
+  <form method="get" action="{% url 'scoring_code' %}" class="btn-row">
+    <input class="code-input" name="code" value="{{ code|default:'' }}" maxlength="12" required
+           autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Scoring code" autofocus>
+    <button type="submit">Go</button>
+  </form>
+</div>
+{% endblock %}

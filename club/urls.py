@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from . import token_views, views
 
 urlpatterns = [
     path("", views.dashboard, name="dashboard"),
@@ -13,9 +13,14 @@ urlpatterns = [
     path("sessions/<int:number>/status/", views.session_status, name="session_status"),
     path("sessions/<int:number>/attendance/", views.session_attendance, name="session_attendance"),
     path("sessions/<int:number>/score/", views.session_score, name="session_score"),
+    path("sessions/<int:number>/code/", views.session_qr, name="session_qr"),
     path("sessions/<int:number>/bottles/new/", views.tasting_edit, name="tasting_create"),
     path("sessions/<int:number>/bottles/<int:pk>/", views.tasting_edit, name="tasting_edit"),
     path("bottles/<int:pk>/rate/", views.rate, name="rate"),
+    # Scoring with a session's code, no login needed.
+    path("score/", token_views.scoring_code, name="scoring_code"),
+    path("s/<str:token>/", token_views.token_score, name="token_score"),
+    path("s/<str:token>/bottles/<int:pk>/rate/", token_views.token_rate, name="token_rate"),
     path("wines/", views.wine_list, name="wine_list"),
     path("wines/<int:pk>/", views.wine_detail, name="wine_detail"),
     path("members/", views.member_list, name="member_list"),

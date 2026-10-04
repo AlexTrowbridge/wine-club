@@ -153,3 +153,17 @@ input, select, textarea {
   box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 10; max-width: calc(100% - 32px);
 }
 [hidden] { display: none !important; }
+
+/* Scoring code: QR code plus the code itself, for people who can't scan. */
+.scoring-code { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 16px; }
+.scoring-code h3 { margin-top: 0; }
+.scoring-code p { margin: 0.3em 0; }
+svg.qr { display: block; width: 160px; height: auto; border-radius: 4px; }
+.code {
+  font: 700 2rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.2em;
+}
+.code-input { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-transform: uppercase; letter-spacing: 0.15em; width: 9em; }
+.scoring-code-full { text-align: center; }
+.scoring-code-full svg.qr { width: min(70vh, 90vw); margin: 16px auto; }
+.scoring-code-full .code { font-size: clamp(2.5rem, 8vw, 5rem); margin: 0.2em 0; }

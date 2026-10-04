@@ -9,6 +9,10 @@ shipped as one container and deployed to Kubernetes with Kustomize.
 - **Live scoring**: an organiser opens a session; members score each bottle on their
   phone (`/sessions/<n>/score/`). Scores stay hidden, including from stats, until
   the organiser reveals or closes the session.
+- **Scoring code**: while a session is open, its page shows a 6-character code and a
+  QR code (full-screen version at `/sessions/<n>/code/`). Scanning it, or typing the
+  code at `/score/`, opens a scoring page that needs no login: pick your name from the
+  list and score. The code stops working when the session is closed.
 - **Score grid**: organisers can enter or correct anyone's score in a spreadsheet-like
   grid on the session page (number, `x` = tasted but not scored, blank = remove).
 - Wines (filter and sort), members, attendance, leaderboards, and analysis by varietal,
@@ -25,8 +29,8 @@ shipped as one container and deployed to Kubernetes with Kustomize.
   logins to members, regions, and so on.
 
 Roles: anyone logged in can view. Members score their own wines while a session is
-open. Users in the **Organiser** group (or superusers) manage sessions and bottles and
-can edit any score.
+open; anyone with the session's code can score as any active member. Users in the
+**Organiser** group (or superusers) manage sessions and bottles and can edit any score.
 
 ## Local development
 

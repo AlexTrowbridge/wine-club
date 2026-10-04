@@ -1,0 +1,11 @@
+{% extends "club/base.html" %}
+{% block title %}Scoring code · session {{ session.number }}{% endblock %}
+{% block content %}
+<div class="scoring-code-full">
+  <h1>Score session {{ session.number }}</h1>
+  {{ scoring_code.qr }}
+  <p class="muted">Scan, or go to <strong>{{ request.get_host }}{% url 'scoring_code' %}</strong> and enter</p>
+  <p class="code">{{ scoring_code.token }}</p>
+  <p class="small"><a href="{{ session.get_absolute_url }}">Back to session page</a></p>
+</div>
+{% endblock %}

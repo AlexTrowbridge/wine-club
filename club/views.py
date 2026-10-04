@@ -7,6 +7,7 @@ from django.db import connection
 from django.db.models import Count, Prefetch
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 
@@ -20,6 +21,8 @@ from .permissions import (
     member_for,
     organiser_required,
 )
+from .scoring_tokens import qr_svg
+from .services import save_score
 
 # --- Health -----------------------------------------------------------------------
 
@@ -155,8 +158,27 @@ def session_detail(request, number):
             "absent_members": absent,
             "prev": Session.objects.filter(date__lt=session.date).order_by("-date").first(),
             "next": Session.objects.filter(date__gt=session.date).order_by("date").first(),
+            "scoring_code": _scoring_code(request, session),
         },
     )
+
+
+def _scoring_code(request, session):
+    """The code, link and QR code for scoring without a login, while the session is open."""
+    if not (session.is_open and session.scoring_token):
+        return None
+    url = request.build_absolute_uri(reverse("token_score", args=[session.scoring_token]))
+    return {"token": session.scoring_token, "url": url, "qr": qr_svg(url)}
+
+
+def session_qr(request, number):
+    """Full-screen scoring code, for putting up on a screen at the session."""
+    session = get_object_or_404(Session, number=number)
+    code = _scoring_code(request, session)
+    if code is None:
+        messages.error(request, "This session isn't open for scoring, so it has no code.")
+        return redirect(session)
+    return render(request, "club/session_qr.html", {"session": session, "scoring_code": code})
 
 
 @organiser_required
@@ -293,15 +315,7 @@ def rate(request, pk):
     if not can_rate(request.user, tasting, member):
         return HttpResponse("Scoring is closed for this session.", status=403)
 
-    rating = None
-    if form.cleaned_data["clear"]:
-        Rating.objects.filter(tasting=tasting, member=member).delete()
-    else:
-        rating, _ = Rating.objects.update_or_create(
-            tasting=tasting,
-            member=member,
-            defaults={"score": form.cleaned_data["score"], "entered_by": request.user},
-        )
+    rating = save_score(tasting, member, form.cleaned_data, request.user)
 
     if request.headers.get("HX-Request"):
         if request.POST.get("ui") == "grid":
@@ -309,13 +323,24 @@ def rate(request, pk):
             return render(
                 request, "club/_grid_cell.html", {"cell": cell, "tasting": tasting, "saved": True}
             )
-        item = {"tasting": tasting, "rating": rating, "can_rate": True}
-        return render(
-            request,
-            "club/_score_item.html",
-            {"item": item, "member": member, "choices": SCORE_CHOICES, "session": tasting.session},
-        )
+        return render_score_item(request, tasting, member, rating)
     return redirect(tasting.session)
+
+
+def render_score_item(request, tasting, member, rating, token=None):
+    """One wine's scoring card, after a score is saved. ``token`` for code-based scoring."""
+    item = {"tasting": tasting, "rating": rating, "can_rate": True}
+    return render(
+        request,
+        "club/_score_item.html",
+        {
+            "item": item,
+            "member": member,
+            "choices": SCORE_CHOICES,
+            "session": tasting.session,
+            "token": token,
+        },
+    )
 
 
 # --- Wines ------------------------------------------------------------------------

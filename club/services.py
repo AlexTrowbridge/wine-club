@@ -1,4 +1,4 @@
-from .models import Country, Region, Varietal, Wine, WineVarietal
+from .models import Country, Rating, Region, Varietal, Wine, WineVarietal
 from .naming import parse_wine_name
 
 
@@ -41,3 +41,16 @@ def get_or_create_wine(full_name: str, region: Region | None = None) -> tuple[Wi
     )
     set_varietals(wine, parsed.varietals)
     return wine, True
+
+
+def save_score(tasting, member, cleaned_score, entered_by) -> Rating | None:
+    """Store a ScoreForm result for ``member``; a cleared score deletes the rating."""
+    if cleaned_score["clear"]:
+        Rating.objects.filter(tasting=tasting, member=member).delete()
+        return None
+    rating, _ = Rating.objects.update_or_create(
+        tasting=tasting,
+        member=member,
+        defaults={"score": cleaned_score["score"], "entered_by": entered_by},
+    )
+    return rating

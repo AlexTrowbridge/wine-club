@@ -1,0 +1,24 @@
+{% extends "club/base.html" %}
+{% block title %}Score · session {{ session.number }}{% endblock %}
+{% block content %}
+<h1>Session {{ session.number }} <span class="muted">· {{ session.date|date:"j M" }}</span></h1>
+<form method="get" class="filters">
+  <label>I am
+    <select name="member" onchange="this.form.submit()">
+      {% if not member %}<option value="">Choose yourself…</option>{% endif %}
+      {% for m in members %}<option value="{{ m.pk }}"{% if member and m.pk == member.pk %} selected{% endif %}>{{ m }}</option>{% endfor %}
+    </select>
+  </label>
+  <noscript><button type="submit">Go</button></noscript>
+</form>
+{% if member %}
+  {% if not session.scores_revealed %}<p class="small muted">Other people's scores stay hidden until the organiser reveals them.</p>{% endif %}
+  {% for item in items %}
+    {% include "club/_score_item.html" %}
+  {% empty %}
+    <p class="muted">No bottles have been added yet; check back once the organiser has entered tonight's wines.</p>
+  {% endfor %}
+{% else %}
+  <p class="muted">Pick your name above to start scoring.</p>
+{% endif %}
+{% endblock %}

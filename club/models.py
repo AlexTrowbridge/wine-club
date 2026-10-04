@@ -6,6 +6,8 @@ from django.db import models
 from django.db.models import Avg, Count, Q
 from django.urls import reverse
 
+from .scoring_tokens import TOKEN_LENGTH, generate_token
+
 SCORE_MIN = Decimal("0")
 SCORE_MAX = Decimal("10")
 
@@ -53,6 +55,10 @@ class SessionQuerySet(models.QuerySet):
             n_attendees=Count("attendances", distinct=True),
         )
 
+    def open_with_token(self, token):
+        """The session currently open for scoring under ``token``, or None."""
+        return self.filter(status=Session.Status.OPEN, scoring_token=token).first()
+
 
 class Session(models.Model):
     class Status(models.TextChoices):
@@ -69,6 +75,14 @@ class Session(models.Model):
         default=False,
         help_text="While a session is open, members only see their own scores until revealed.",
     )
+    scoring_token = models.CharField(
+        max_length=TOKEN_LENGTH,
+        null=True,
+        blank=True,
+        unique=True,
+        editable=False,
+        help_text="Code for scoring without a login; set while the session is open.",
+    )
 
     objects = SessionQuerySet.as_manager()
 
@@ -78,12 +92,31 @@ class Session(models.Model):
     def __str__(self):
         return f"#{self.number} – {self.date:%d %b %Y}"
 
+    def save(self, *args, **kwargs):
+        """Keep the scoring code in step with the status: issued on opening, revoked after."""
+        before = self.scoring_token
+        if not self.is_open:
+            self.scoring_token = None
+        elif not self.scoring_token:
+            self.scoring_token = unused_scoring_token()
+        update_fields = kwargs.get("update_fields")
+        if update_fields is not None and self.scoring_token != before:
+            kwargs["update_fields"] = {*update_fields, "scoring_token"}
+        super().save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse("session_detail", args=[self.number])
 
     @property
     def is_open(self):
         return self.status == self.Status.OPEN
+
+
+def unused_scoring_token():
+    while True:
+        token = generate_token()
+        if not Session.objects.filter(scoring_token=token).exists():
+            return token
 
 
 class Attendance(models.Model):

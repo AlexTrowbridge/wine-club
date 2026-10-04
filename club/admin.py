@@ -46,6 +46,7 @@ class TastingInline(admin.TabularInline):
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_display = ["number", "date", "theme", "era", "status", "scores_revealed"]
+    readonly_fields = ["scoring_token"]
     list_filter = ["era", "status"]
     search_fields = ["theme"]
     date_hierarchy = "date"
