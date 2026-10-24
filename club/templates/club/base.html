@@ -9,6 +9,7 @@
   <script src="{% static 'club/vendor/htmx.min.js' %}" defer></script>
   <script src="{% static 'club/vendor/chart.umd.min.js' %}" defer></script>
   <script src="{% static 'club/app.js' %}" defer></script>
+  {% block head %}{% endblock %}
 </head>
 <body>
 <header class="site">
@@ -19,6 +20,7 @@
     <nav>
       <a href="{% url 'session_list' %}" class="{% if u|slice:':7' == 'session' or u|slice:':7' == 'tasting' %}active{% endif %}">Sessions</a>
       <a href="{% url 'wine_list' %}" class="{% if u|slice:':4' == 'wine' %}active{% endif %}">Wines</a>
+      <a href="{% url 'region_map' %}" class="{% if u == 'region_map' or u == 'region_detail' %}active{% endif %}">Map</a>
       <a href="{% url 'member_list' %}" class="{% if u|slice:':6' == 'member' %}active{% endif %}">Members</a>
       <a href="{% url 'leaderboards' %}" class="{% if u == 'leaderboards' %}active{% endif %}">Leaderboards</a>
       <a href="{% url 'analysis' %}" class="{% if u == 'analysis' or u == 'price_analysis' or u == 'matrix' %}active{% endif %}">Analysis</a>

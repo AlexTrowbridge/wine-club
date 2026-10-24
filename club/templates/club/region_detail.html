@@ -1,0 +1,6 @@
+{% extends "club/base.html" %}
+{% block title %}{{ region }}{% endblock %}
+{% block content %}
+<p class="small"><a href="{% url 'region_map' %}">← Wine region map</a></p>
+<div class="card">{% include "club/_region_panel.html" %}</div>
+{% endblock %}

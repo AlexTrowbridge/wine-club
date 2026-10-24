@@ -36,6 +36,7 @@ from .models import (
     Wine,
 )
 from .naming import VARIETALS, parse_wine_name
+from .region_details import fill_region_details
 from .services import set_varietals
 
 # Known data-entry errors in the workbook, verified against session order:
@@ -312,6 +313,8 @@ def import_workbook(path) -> ImportReport:
         seen_numbers.add(number)
 
     report.attendances = Attendance.objects.count()
+    # New regions get their curated map location and details, if we have them.
+    fill_region_details(Region)
 
     # --- Validation ---------------------------------------------------------------
     report.check(

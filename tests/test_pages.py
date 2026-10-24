@@ -14,6 +14,7 @@ PAGES = [
     ("session_detail", [2]),
     ("session_score", [2]),
     ("wine_list", []),
+    ("region_map", []),
     ("member_list", []),
     ("leaderboards", []),
     ("analysis", []),

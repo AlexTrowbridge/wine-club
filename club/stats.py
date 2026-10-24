@@ -8,7 +8,7 @@ score, as the spreadsheet did.
 
 import math
 import statistics
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 
 from django.db.models import Count, Prefetch, Q
@@ -310,6 +310,36 @@ def breakdown(data: list[Bottle], dimension: str):
     else:
         rows.sort(key=lambda r: (r["label"] != "NV", r["label"]))
     return rows
+
+
+# --- Regions --------------------------------------------------------------------
+
+
+def tastings_per_region() -> dict[int, int]:
+    """Visible bottles opened per region pk, scored or not (for the map)."""
+    rows = (
+        Tasting.objects.visible()
+        .filter(wine__region__isnull=False)
+        .values("wine__region")
+        .annotate(n=Count("id"))
+        .order_by()
+    )
+    return {row["wine__region"]: row["n"] for row in rows}
+
+
+def region_means(data: list[Bottle]) -> dict[int, float]:
+    """Mean bottle score per region pk (keyed by pk: region names repeat across countries)."""
+    scores = defaultdict(list)
+    for b in data:
+        if b.wine.region_id is not None:
+            scores[b.wine.region_id].append(b.avg)
+    return {region_id: statistics.fmean(values) for region_id, values in scores.items()}
+
+
+def varietal_counts(data: list[Bottle]) -> list[tuple[str, int]]:
+    """How many bottles contained each varietal, most common first."""
+    counts = Counter(wv.varietal.name for b in data for wv in b.wine.winevarietal_set.all())
+    return counts.most_common()
 
 
 # --- Price vs rating -------------------------------------------------------------

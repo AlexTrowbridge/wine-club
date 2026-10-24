@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import token_views, views
+from . import region_views, token_views, views
 
 urlpatterns = [
     path("", views.dashboard, name="dashboard"),
@@ -23,6 +23,8 @@ urlpatterns = [
     path("s/<str:token>/bottles/<int:pk>/rate/", token_views.token_rate, name="token_rate"),
     path("wines/", views.wine_list, name="wine_list"),
     path("wines/<int:pk>/", views.wine_detail, name="wine_detail"),
+    path("map/", region_views.region_map, name="region_map"),
+    path("regions/<int:pk>/", region_views.region_detail, name="region_detail"),
     path("members/", views.member_list, name="member_list"),
     path("members/<int:pk>/", views.member_detail, name="member_detail"),
     path("attendance/", views.attendance, name="attendance"),

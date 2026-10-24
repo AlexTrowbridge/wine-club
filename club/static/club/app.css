@@ -167,3 +167,22 @@ svg.qr { display: block; width: 160px; height: auto; border-radius: 4px; }
 .scoring-code-full { text-align: center; }
 .scoring-code-full svg.qr { width: min(70vh, 90vw); margin: 16px auto; }
 .scoring-code-full .code { font-size: clamp(2.5rem, 8vw, 5rem); margin: 0.2em 0; }
+
+/* Wine region map: map beside the region panel, stacked on narrow screens. */
+.map-layout { display: grid; gap: 16px; grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr); align-items: start; }
+@media (max-width: 860px) { .map-layout { grid-template-columns: minmax(0, 1fr); } }
+.region-map { height: min(70vh, 620px); min-height: 360px; border: 1px solid var(--border); border-radius: var(--radius); z-index: 0; }
+.region-panel-box { max-height: min(78vh, 700px); overflow-y: auto; }
+.region-panel h2 { margin-top: 0; }
+.region-facts dt { font-weight: 600; font-size: 0.85em; color: var(--muted); margin-top: 10px; }
+.region-facts dd { margin: 2px 0 0; }
+.region-panel .badge { margin-bottom: 4px; }
+.map-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 6px; }
+.map-legend .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
+.map-legend .swatch.low { background: var(--chart-2); }
+.map-legend .swatch.high { background: var(--chart-1); }
+.map-legend .swatch.none { background: var(--muted); }
+@media (prefers-color-scheme: dark) {
+  .region-map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+  .region-map { background: var(--surface); }
+}

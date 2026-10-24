@@ -35,7 +35,7 @@
     <td class="small"><a href="{{ b.tasting.session.get_absolute_url }}">{{ b.tasting.session.date|date:"j M Y" }}</a></td>
     <td><a href="{{ b.wine.get_absolute_url }}">{{ b.wine }}</a></td>
     <td>{{ b.wine.vintage_label }}</td>
-    <td class="small">{% if b.wine.region %}{{ b.wine.region.name }}, {{ b.wine.region.country }}{% endif %}</td>
+    <td class="small">{% if b.wine.region %}<a href="{{ b.wine.region.get_absolute_url }}">{{ b.wine.region.name }}</a>, {{ b.wine.region.country }}{% endif %}</td>
     <td class="small">{{ b.tasting.purchaser_label }}</td>
     <td class="num">{{ b.tasting.price|money }}</td>
     <td class="num"><strong>{{ b.avg|score }}</strong></td>

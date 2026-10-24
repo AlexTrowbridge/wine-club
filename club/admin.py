@@ -1,6 +1,7 @@
 from django.contrib import admin, messages
 from django.core.exceptions import PermissionDenied
 from django.db import models
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import path, reverse
 from django.views.decorators.http import require_POST
@@ -62,7 +63,25 @@ class AttendanceAdmin(admin.ModelAdmin):
 
 class RegionInline(admin.TabularInline):
     model = Region
+    fields = ["name"]
     extra = 0
+    show_change_link = True
+
+
+class RegionLocationFilter(admin.SimpleListFilter):
+    title = "map location"
+    parameter_name = "located"
+
+    def lookups(self, request, model_admin):
+        return [("yes", "On the map"), ("no", "No location")]
+
+    def queryset(self, request, queryset):
+        missing = Q(latitude__isnull=True) | Q(longitude__isnull=True)
+        if self.value() == "yes":
+            return queryset.exclude(missing)
+        if self.value() == "no":
+            return queryset.filter(missing)
+        return queryset
 
 
 @admin.register(Country)
@@ -73,9 +92,27 @@ class CountryAdmin(admin.ModelAdmin):
 
 @admin.register(Region)
 class RegionAdmin(admin.ModelAdmin):
-    list_display = ["name", "country"]
-    list_filter = ["country"]
+    list_display = ["name", "country", "on_map"]
+    list_filter = [RegionLocationFilter, "country"]
     search_fields = ["name", "country__name"]
+    fieldsets = [
+        (None, {"fields": ["name", "country"]}),
+        (
+            "Map location",
+            {
+                "fields": [("latitude", "longitude")],
+                "description": "Approximate centre of the region, in decimal degrees.",
+            },
+        ),
+        (
+            "Region notes",
+            {"fields": ["summary", "typical_varietals", "blends", "climate", "soils"]},
+        ),
+    ]
+
+    @admin.display(boolean=True, description="on map")
+    def on_map(self, region):
+        return region.has_location
 
 
 @admin.register(Varietal)

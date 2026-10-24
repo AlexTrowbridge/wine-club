@@ -146,6 +146,14 @@ class Country(models.Model):
 class Region(models.Model):
     name = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name="regions")
+    # Approximate centre, for the map.
+    latitude = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=8, decimal_places=5, null=True, blank=True)
+    summary = models.TextField(blank=True)
+    climate = models.TextField(blank=True)
+    soils = models.TextField(blank=True)
+    typical_varietals = models.TextField(blank=True)
+    blends = models.TextField("signature blends and styles", blank=True)
 
     class Meta:
         ordering = ["country__name", "name"]
@@ -155,6 +163,13 @@ class Region(models.Model):
 
     def __str__(self):
         return f"{self.name}, {self.country}"
+
+    def get_absolute_url(self):
+        return reverse("region_detail", args=[self.pk])
+
+    @property
+    def has_location(self):
+        return self.latitude is not None and self.longitude is not None
 
 
 class Varietal(models.Model):

@@ -9,7 +9,7 @@
     <tr><th>Vintage</th><td>{{ wine.vintage_label }}</td></tr>
     {% if wine.cuvee %}<tr><th>Label / cuvée</th><td>{{ wine.cuvee }}</td></tr>{% endif %}
     <tr><th>Varietals</th><td>{% for v in wine.varietals.all %}<a href="{% url 'wine_list' %}?varietal={{ v.pk }}">{{ v }}</a>{% if not forloop.last %}, {% endif %}{% empty %}<span class="muted">not specified</span>{% endfor %} <span class="muted">({% if wine.blend %}blend{% else %}single varietal{% endif %})</span></td></tr>
-    {% if wine.region %}<tr><th>Region</th><td>{{ wine.region.name }}, <a href="{% url 'wine_list' %}?country={{ wine.region.country.pk }}">{{ wine.region.country }}</a></td></tr>{% endif %}
+    {% if wine.region %}<tr><th>Region</th><td><a href="{{ wine.region.get_absolute_url }}">{{ wine.region.name }}</a>, <a href="{% url 'wine_list' %}?country={{ wine.region.country.pk }}">{{ wine.region.country }}</a></td></tr>{% endif %}
     {% if wine.style %}<tr><th>Style</th><td>{{ wine.get_style_display }}</td></tr>{% endif %}
     {% if wine.jh_score %}<tr><th>James Halliday</th><td>{{ wine.jh_score }}</td></tr>{% endif %}
   </table>

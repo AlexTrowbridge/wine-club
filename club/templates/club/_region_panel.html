@@ -1,0 +1,37 @@
+{% load club_tags %}
+<div class="region-panel">
+  <h2>{{ region.name }} <span class="muted small">{{ region.country }}</span></h2>
+  {% if region.summary %}<p>{{ region.summary }}</p>{% endif %}
+  <div class="tiles">
+    <div class="tile"><div class="value">{{ n_bottles }}</div><div class="label">bottles tasted</div></div>
+    <div class="tile"><div class="value">{{ mean|score|default:"–" }}</div><div class="label">club average</div></div>
+  </div>
+  {% if region.typical_varietals or region.blends or region.climate or region.soils %}
+  <dl class="region-facts">
+    {% if region.typical_varietals %}<dt>Typical varietals</dt><dd>{{ region.typical_varietals }}</dd>{% endif %}
+    {% if region.blends %}<dt>Signature blends &amp; styles</dt><dd>{{ region.blends }}</dd>{% endif %}
+    {% if region.climate %}<dt>Climate</dt><dd>{{ region.climate }}</dd>{% endif %}
+    {% if region.soils %}<dt>Soils</dt><dd>{{ region.soils }}</dd>{% endif %}
+  </dl>
+  {% else %}
+  <p class="muted">No region notes yet.</p>
+  {% endif %}
+  {% if varietals %}
+  <h3>Varietals the club has tasted from here</h3>
+  <p>{% for name, n in varietals %}<span class="badge">{{ name }} · {{ n }}</span> {% endfor %}</p>
+  {% endif %}
+  {% if top_wines %}
+  <h3>Top wines</h3>
+  <table class="compact">
+    <tbody>
+    {% for b in top_wines %}
+      <tr><td><a href="{{ b.wine.get_absolute_url }}">{{ b.wine }}</a></td><td class="num">{{ b.avg|score }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  <p class="small">
+    <a href="{% url 'wine_list' %}?country={{ region.country.pk }}">All wines from {{ region.country }}</a>
+    {% if is_organiser %} · <a href="{% url 'admin:club_region_change' region.pk %}">Edit region in admin</a>{% endif %}
+  </p>
+</div>
