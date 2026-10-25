@@ -4,6 +4,9 @@
   const TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
   const TILE_ATTRIBUTION =
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  // OSM's tile policy blocks requests without a Referer, and Django's default
+  // Referrer-Policy (same-origin) strips it, so send our origin with tile requests only.
+  const TILE_REFERRER_POLICY = "strict-origin-when-cross-origin";
   const MAX_ZOOM = 12;
   const HOME_COUNTRY = "Australia";
   const HOME_BOUNDS = [[-44, 112], [-10, 154]];
@@ -118,7 +121,11 @@
     const source = document.getElementById(element.dataset.markers);
     const markers = source ? JSON.parse(source.textContent) : [];
     const map = L.map(element, { worldCopyJump: true });
-    L.tileLayer(TILE_URL, { maxZoom: MAX_ZOOM, attribution: TILE_ATTRIBUTION }).addTo(map);
+    L.tileLayer(TILE_URL, {
+      maxZoom: MAX_ZOOM,
+      attribution: TILE_ATTRIBUTION,
+      referrerPolicy: TILE_REFERRER_POLICY,
+    }).addTo(map);
     addMarkers(map, markers);
     bindViewTabs(map, markers);
   }
