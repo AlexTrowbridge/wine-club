@@ -2,10 +2,14 @@
 <div class="region-panel">
   <h2>{{ region.name }} <span class="muted small">{{ region.country }}</span></h2>
   {% if region.summary %}<p>{{ region.summary }}</p>{% endif %}
+  {% if n_bottles %}
   <div class="tiles">
     <div class="tile"><div class="value">{{ n_bottles }}</div><div class="label">bottles tasted</div></div>
     <div class="tile"><div class="value">{{ mean|score|default:"–" }}</div><div class="label">club average</div></div>
   </div>
+  {% else %}
+  <p class="muted">The club hasn't tasted a wine from this region yet.</p>
+  {% endif %}
   {% if region.typical_varietals or region.blends or region.climate or region.soils %}
   <dl class="region-facts">
     {% if region.typical_varietals %}<dt>Typical varietals</dt><dd>{{ region.typical_varietals }}</dd>{% endif %}
@@ -31,7 +35,8 @@
   </table>
   {% endif %}
   <p class="small">
-    <a href="{% url 'wine_list' %}?country={{ region.country.pk }}">All wines from {{ region.country }}</a>
-    {% if is_organiser %} · <a href="{% url 'admin:club_region_change' region.pk %}">Edit region in admin</a>{% endif %}
+    {% if country_has_wines %}<a href="{% url 'wine_list' %}?country={{ region.country.pk }}">All wines from {{ region.country }}</a>{% endif %}
+    {% if country_has_wines and is_organiser %} · {% endif %}
+    {% if is_organiser %}<a href="{% url 'admin:club_region_change' region.pk %}">Edit region in admin</a>{% endif %}
   </p>
 </div>

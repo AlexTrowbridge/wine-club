@@ -552,7 +552,7 @@
     "blends": "Mostly varietal wines."
   },
   {
-    "country": "Portugal", "name": "Duoro", "lat": 41.16, "lng": -7.55,
+    "country": "Portugal", "name": "Duoro", "lat": 41.16, "lng": -7.55, "variant_of": "Douro",
     "summary": "The Douro Valley in northern Portugal, one of the world's oldest demarcated regions (1756), home of Port and of increasingly acclaimed dry reds, grown on steep terraced slopes.",
     "climate": "Hot, dry continental, sheltered from the Atlantic by the Marão mountains.",
     "soils": "Schist, which is broken up to make terraces and lets roots go deep.",
@@ -584,7 +584,7 @@
     "blends": "Bordeaux-style blends; Cape Blend (Pinotage-led)."
   },
   {
-    "country": "Spain", "name": "Valdapeñas", "lat": 38.76, "lng": -3.38,
+    "country": "Spain", "name": "Valdapeñas", "lat": 38.76, "lng": -3.38, "variant_of": "Valdepeñas",
     "summary": "Valdepeñas, a DO in the south of La Mancha, Castilla-La Mancha, historically supplying Madrid with soft, affordable Tempranillo (locally Cencibel).",
     "climate": "Extreme continental: very hot summers, cold winters, low rainfall.",
     "soils": "Red-brown clay over limestone, with a chalky crust.",
@@ -670,5 +670,1333 @@
     "soils": "Alluvial sands, gravels and limestone deposits.",
     "typical_varietals": "Malbec, Cabernet Sauvignon, Bonarda, Torrontés, Chardonnay.",
     "blends": "Malbec–Cabernet."
+  },
+  {
+    "country": "Australia", "name": "Adelaide Plains", "lat": -34.6, "lng": 138.6,
+    "summary": "Flat, warm region on the plains north of Adelaide around Virginia and Angle Vale, long a source of bulk fruit and now home to a handful of estate producers.",
+    "climate": "Hot and dry Mediterranean with low rainfall; some relief from gulf breezes.",
+    "soils": "Red-brown sandy loams over limestone and alluvial clays.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Grenache, Chardonnay, Colombard.",
+    "blends": "Shiraz–Cabernet; generous, early-drinking reds."
+  },
+  {
+    "country": "Australia", "name": "Currency Creek", "lat": -35.45, "lng": 138.77,
+    "summary": "Small Fleurieu Peninsula region around Goolwa and the mouth of the Murray, neighbouring Langhorne Creek and Southern Fleurieu.",
+    "climate": "Moderate maritime, cooled by breezes off Lake Alexandrina and the Southern Ocean.",
+    "soils": "Sandy loams and deep sands over clay and limestone.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Sauvignon Blanc, Chardonnay, Merlot.",
+    "blends": "Cabernet–Merlot, Shiraz–Cabernet."
+  },
+  {
+    "country": "Australia", "name": "Mount Benson", "lat": -37.05, "lng": 139.8,
+    "summary": "Young coastal region on the Limestone Coast near Kingston SE, planted from the late 1980s, with vineyards just a few kilometres from the sea.",
+    "climate": "Cool maritime with strong sea breezes and a long, mild ripening season.",
+    "soils": "Terra rossa and sandy loams over limestone, with good drainage.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Sauvignon Blanc, Chardonnay, Merlot.",
+    "blends": "Cabernet–Merlot; peppery cool-climate Shiraz."
+  },
+  {
+    "country": "Australia", "name": "Mount Gambier", "lat": -37.83, "lng": 140.78,
+    "summary": "South Australia's coolest region, around the volcanic city of Mount Gambier at the southern tip of the Limestone Coast.",
+    "climate": "Cool maritime, with high rainfall and a short, marginal ripening season.",
+    "soils": "Volcanic ash and loams over limestone, from the region's extinct volcanoes.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Sauvignon Blanc, Riesling.",
+    "blends": "Traditional-method sparkling; delicate Pinot Noir."
+  },
+  {
+    "country": "Australia", "name": "Robe", "lat": -37.2, "lng": 139.85,
+    "summary": "Coastal Limestone Coast region around the fishing town of Robe, between Mount Benson and Coonawarra, dominated by a few large plantings.",
+    "climate": "Cool maritime with a long, even growing season moderated by the Southern Ocean.",
+    "soils": "Terra rossa and sands over limestone ridges.",
+    "typical_varietals": "Cabernet Sauvignon, Shiraz, Chardonnay, Merlot, Pinot Noir.",
+    "blends": "Cabernet–Merlot; sparkling base."
+  },
+  {
+    "country": "Australia", "name": "Southern Flinders Ranges", "lat": -33.2, "lng": 138.05,
+    "summary": "South Australia's most northerly region, in the foothills of the southern Flinders Ranges around Wirrabara and Laura, near the top of Spencer Gulf.",
+    "climate": "Warm, with elevation and gulf breezes cooling nights; dry summers.",
+    "soils": "Red-brown loams and gravels over quartzite and shale.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Grenache, Riesling.",
+    "blends": "Shiraz–Cabernet."
+  },
+  {
+    "country": "Australia", "name": "Ballarat", "lat": -37.55, "lng": 143.85,
+    "summary": "Cool, high region around the gold-rush city of Ballarat in central Victoria, small in size but noted for fine Pinot Noir and Chardonnay.",
+    "climate": "Cool continental at 400–600 m, with frost risk and a long, slow ripening season.",
+    "soils": "Quartz-rich gravelly loams, volcanic basalt soils and clays.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Shiraz, Pinot Gris.",
+    "blends": "Traditional-method sparkling; mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Bendigo", "lat": -36.75, "lng": 144.28,
+    "summary": "Historic central Victorian region around the gold-rush city of Bendigo, known for rich, minty Shiraz and Cabernet from small family vineyards.",
+    "climate": "Warm continental with hot, dry summers and cool nights; low rainfall.",
+    "soils": "Gravelly quartz and sandy loams over clay, with ironstone in places.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Merlot, Chardonnay.",
+    "blends": "Cabernet–Shiraz, Cabernet–Merlot."
+  },
+  {
+    "country": "Australia", "name": "Gippsland", "lat": -38.2, "lng": 146.5,
+    "summary": "Huge, sparsely planted region covering Victoria's south-east, with small producers making characterful Pinot Noir and Chardonnay.",
+    "climate": "Cool and maritime in the south and west, more continental and drier in the east.",
+    "soils": "Varied: sandy loams, alluvial river flats, red volcanic and grey clay soils.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Sauvignon Blanc, Shiraz, Cabernet Sauvignon.",
+    "blends": "Mostly varietal; some sparkling."
+  },
+  {
+    "country": "Australia", "name": "Glenrowan", "lat": -36.47, "lng": 146.22,
+    "summary": "North-east Victorian region near Rutherglen, famous (with it) for fortified Muscat and Topaque, and for robust Durif and Shiraz.",
+    "climate": "Hot continental with warm days, cool nights and late autumn sugar concentration.",
+    "soils": "Deep red granitic loams on the slopes of the Warby Ranges.",
+    "typical_varietals": "Shiraz, Durif, Cabernet Sauvignon, Muscat à Petits Grains Rouge, Muscadelle.",
+    "blends": "Fortified Muscat and Topaque; Shiraz–Durif."
+  },
+  {
+    "country": "Australia", "name": "Henty", "lat": -37.9, "lng": 141.6,
+    "summary": "Victoria's coolest mainland region, in the far south-west around Drumborg and Portland, known for steely Riesling and sparkling base wine.",
+    "climate": "Very cool maritime, with long ripening and frost and rain risk.",
+    "soils": "Volcanic basalt soils, red clays and limestone in the west.",
+    "typical_varietals": "Riesling, Chardonnay, Pinot Noir, Pinot Gris, Shiraz.",
+    "blends": "Traditional-method sparkling; dry and off-dry Riesling."
+  },
+  {
+    "country": "Australia", "name": "Strathbogie Ranges", "lat": -36.85, "lng": 145.75,
+    "summary": "Elevated granite plateau in central Victoria between the Goulburn Valley and Upper Goulburn, producing elegant cool-climate wines.",
+    "climate": "Cool to moderate with altitude (up to 600 m), cool nights and good rainfall.",
+    "soils": "Decomposed granite sands and loams.",
+    "typical_varietals": "Riesling, Chardonnay, Shiraz, Pinot Noir, Cabernet Sauvignon.",
+    "blends": "Traditional-method sparkling; mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Sunbury", "lat": -37.58, "lng": 144.73,
+    "summary": "Small historic region just north-west of Melbourne, with nineteenth-century wineries such as Craiglee and Goona Warra, known for peppery Shiraz.",
+    "climate": "Cool and windy, with low rainfall and a long growing season.",
+    "soils": "Volcanic basalt clays and sandy loams over sandstone.",
+    "typical_varietals": "Shiraz, Chardonnay, Pinot Noir, Cabernet Sauvignon.",
+    "blends": "Mostly varietal; cool-climate Shiraz."
+  },
+  {
+    "country": "Australia", "name": "Swan Hill", "lat": -35.34, "lng": 143.55,
+    "summary": "Irrigated Murray River region straddling the Victoria–New South Wales border, a large source of everyday and alternative-variety wines.",
+    "climate": "Hot, dry continental with very low rainfall; irrigation from the Murray.",
+    "soils": "Red sandy loams and calcareous Mallee soils.",
+    "typical_varietals": "Chardonnay, Shiraz, Cabernet Sauvignon, Colombard, Fiano, Nero d'Avola.",
+    "blends": "Commercial blends; Mediterranean varietals."
+  },
+  {
+    "country": "Australia", "name": "Upper Goulburn", "lat": -37.1, "lng": 145.9,
+    "summary": "Mountainous region around Mansfield and Lake Eildon, at the foot of Victoria's Alps, with vineyards from valley floors to high slopes.",
+    "climate": "Cool to moderate, with altitude moderating warm summers; snow on higher ground.",
+    "soils": "Granitic and volcanic loams, with alluvial river soils.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Riesling, Sauvignon Blanc, Shiraz.",
+    "blends": "Sparkling base; mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Cowra", "lat": -33.83, "lng": 148.7,
+    "summary": "Central-west New South Wales region on the Lachlan River, which made its name with rich, early-ripening Chardonnay in the 1970s.",
+    "climate": "Warm continental with hot days and cool nights.",
+    "soils": "Red-brown loams and granitic sands over clay.",
+    "typical_varietals": "Chardonnay, Shiraz, Cabernet Sauvignon, Verdelho.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Gundagai", "lat": -35.07, "lng": 148.1,
+    "summary": "Small southern New South Wales region on the Murrumbidgee River between Hilltops and Tumbarumba.",
+    "climate": "Warm to moderate continental, with cooler higher sites to the east.",
+    "soils": "Red-brown loams and granite-derived soils.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Chardonnay.",
+    "blends": "Shiraz–Cabernet."
+  },
+  {
+    "country": "Australia", "name": "Hastings River", "lat": -31.45, "lng": 152.75,
+    "summary": "Subtropical coastal region around Port Macquarie on the New South Wales mid-north coast, one of Australia's wettest wine regions.",
+    "climate": "Warm and humid subtropical with summer rainfall, demanding disease-resistant varieties.",
+    "soils": "Red and brown volcanic loams and alluvial river soils.",
+    "typical_varietals": "Chambourcin, Chardonnay, Semillon, Verdelho, Shiraz.",
+    "blends": "Chambourcin (a hybrid suited to humidity)."
+  },
+  {
+    "country": "Australia", "name": "Hilltops", "lat": -34.35, "lng": 148.3,
+    "summary": "Elevated region around Young in southern New South Wales, known for structured Shiraz and Cabernet and a growing range of Italian varieties.",
+    "climate": "Continental at 450–600 m, with warm days, cold nights and frost risk.",
+    "soils": "Deep red granitic and basalt-derived clay loams.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Nebbiolo, Barbera, Chardonnay.",
+    "blends": "Shiraz–Viognier; Cabernet–Shiraz."
+  },
+  {
+    "country": "Australia", "name": "New England Australia", "lat": -30.5, "lng": 151.65,
+    "summary": "Australia's highest wine region, on the Northern Tablelands of New South Wales around Armidale and Tenterfield.",
+    "climate": "Cool, high-altitude (up to 1,300 m) with summer rainfall and big diurnal swings.",
+    "soils": "Granite and basalt-derived soils.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Shiraz, Riesling, Sauvignon Blanc.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Perricoota", "lat": -36.1, "lng": 144.75,
+    "summary": "Irrigated Murray River region around Moama in southern New South Wales, opposite Echuca.",
+    "climate": "Hot and dry continental, irrigated from the Murray.",
+    "soils": "Red sandy loams and river alluvium.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Chardonnay, Merlot.",
+    "blends": "Commercial red blends."
+  },
+  {
+    "country": "Australia", "name": "Riverina", "lat": -34.3, "lng": 146.05,
+    "summary": "Large irrigated region around Griffith, one of Australia's biggest producers of everyday wine and home of world-class botrytis Semillon.",
+    "climate": "Hot, dry continental; humid autumns favour noble rot.",
+    "soils": "Red-brown loams and grey clays, irrigated from the Murrumbidgee.",
+    "typical_varietals": "Semillon, Shiraz, Chardonnay, Cabernet Sauvignon, Durif.",
+    "blends": "Botrytised (noble rot) sweet Semillon; commercial blends."
+  },
+  {
+    "country": "Australia", "name": "Shoalhaven Coast", "lat": -34.85, "lng": 150.6,
+    "summary": "Coastal region south of Sydney around Nowra and Berry, with small vineyards supplying cellar doors and tourism.",
+    "climate": "Warm, humid maritime with summer rainfall.",
+    "soils": "Volcanic and sandstone-derived loams and river alluvium.",
+    "typical_varietals": "Chambourcin, Chardonnay, Verdelho, Shiraz, Semillon.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Southern Highlands", "lat": -34.5, "lng": 150.4,
+    "summary": "Elevated region south-west of Sydney around Bowral and Moss Vale, with cool-climate whites and Pinot Noir.",
+    "climate": "Cool and fairly wet, with altitude of 500–900 m.",
+    "soils": "Basalt-derived red loams and sandstone soils.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Pinot Gris, Sauvignon Blanc, Riesling.",
+    "blends": "Sparkling; mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Tumbarumba", "lat": -35.78, "lng": 148.0,
+    "summary": "High, cool region on the western slopes of the Snowy Mountains, prized as a source of fine Chardonnay and sparkling base.",
+    "climate": "Cool alpine (300–800 m), with a short season and frost risk.",
+    "soils": "Granitic and basalt-derived soils.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Sauvignon Blanc, Pinot Meunier.",
+    "blends": "Traditional-method sparkling (Chardonnay–Pinot Noir)."
+  },
+  {
+    "country": "Australia", "name": "Blackwood Valley", "lat": -33.95, "lng": 116.15,
+    "summary": "Western Australian region around Boyup Brook and Bridgetown, between Margaret River and Great Southern.",
+    "climate": "Mediterranean, warmer and drier than the coast, with cool nights.",
+    "soils": "Gravelly loams over clay, and lateritic soils.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Chardonnay, Sauvignon Blanc, Merlot.",
+    "blends": "Cabernet–Merlot."
+  },
+  {
+    "country": "Australia", "name": "Geographe", "lat": -33.55, "lng": 115.75,
+    "summary": "Coastal region around Bunbury and the Ferguson Valley, north of Margaret River, known for Mediterranean varieties and Shiraz.",
+    "climate": "Warm Mediterranean with sea breezes; cooler in the elevated Ferguson Valley.",
+    "soils": "Sandy coastal plain soils, alluvium and gravelly loams in the hills.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Chardonnay, Tempranillo, Sangiovese.",
+    "blends": "Cabernet–Merlot; Mediterranean blends."
+  },
+  {
+    "country": "Australia", "name": "Manjimup", "lat": -34.25, "lng": 116.15,
+    "summary": "Elevated south-west Western Australian region among karri and jarrah forests, also known for truffles.",
+    "climate": "Moderate to cool with more continental influence than nearby Pemberton.",
+    "soils": "Gravelly loams and karri loams over granite.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Merlot, Cabernet Sauvignon, Sauvignon Blanc.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Peel", "lat": -32.6, "lng": 115.9,
+    "summary": "Region south of Perth around Mandurah, where Peel Estate made a long-lived Shiraz and Chenin Blanc.",
+    "climate": "Warm to hot Mediterranean with afternoon sea breezes.",
+    "soils": "Coastal sands, and gravelly loams in the Darling Range foothills.",
+    "typical_varietals": "Shiraz, Chenin Blanc, Chardonnay, Cabernet Sauvignon.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Australia", "name": "Pemberton", "lat": -34.45, "lng": 116.03,
+    "summary": "Cool south-west Western Australian region in the tall karri forests, known for Chardonnay, Pinot Noir and crisp Sauvignon Blanc.",
+    "climate": "Cool and wet maritime, with a long, mild ripening season.",
+    "soils": "Fertile karri loams and gravelly soils over granite.",
+    "typical_varietals": "Chardonnay, Sauvignon Blanc, Pinot Noir, Merlot, Shiraz.",
+    "blends": "Sauvignon Blanc–Semillon; sparkling."
+  },
+  {
+    "country": "Australia", "name": "Perth Hills", "lat": -32.0, "lng": 116.15,
+    "summary": "Small-scale region in the Darling Range escarpment just east of Perth, with many boutique wineries.",
+    "climate": "Warm Mediterranean, cooler than the Swan Valley thanks to altitude.",
+    "soils": "Gravelly loams and granite-derived soils.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Chardonnay, Merlot.",
+    "blends": "Cabernet–Merlot."
+  },
+  {
+    "country": "Australia", "name": "Swan District", "lat": -31.8, "lng": 116.0,
+    "summary": "Western Australia's oldest wine area, including the Swan Valley just north-east of Perth, settled in the 1830s and known for fortified Verdelho and Chenin Blanc.",
+    "climate": "Hot Mediterranean, one of Australia's hottest regions, with the 'Fremantle Doctor' sea breeze.",
+    "soils": "Deep alluvial loams and sands.",
+    "typical_varietals": "Chenin Blanc, Verdelho, Shiraz, Grenache, Chardonnay.",
+    "blends": "Fortifieds; Chenin Blanc–Verdelho whites."
+  },
+  {
+    "country": "Australia", "name": "Granite Belt", "lat": -28.65, "lng": 151.95,
+    "summary": "Queensland's leading region, on a high granite plateau around Stanthorpe near the New South Wales border, championing 'Strange Bird' alternative varieties.",
+    "climate": "Cool for its latitude thanks to altitude (750–1,000 m), with summer rain and frost risk.",
+    "soils": "Decomposed granite sands, free-draining and low in fertility.",
+    "typical_varietals": "Shiraz, Cabernet Sauvignon, Chardonnay, Verdelho, Tempranillo, Fiano, Saperavi.",
+    "blends": "Alternative-variety ('Strange Bird') wines."
+  },
+  {
+    "country": "Australia", "name": "South Burnett", "lat": -26.55, "lng": 151.85,
+    "summary": "Queensland region around Kingaroy, inland from the Sunshine Coast, with small cellar-door wineries.",
+    "climate": "Warm subtropical with summer rainfall, moderated by altitude (about 450 m).",
+    "soils": "Red basalt-derived volcanic soils and sandy loams.",
+    "typical_varietals": "Shiraz, Chardonnay, Verdelho, Semillon, Cabernet Sauvignon.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "France", "name": "Chablis", "lat": 47.81, "lng": 3.8,
+    "summary": "Burgundy's northernmost district, an outpost in the Yonne making taut, mineral, usually unoaked Chardonnay, graded from Petit Chablis to seven Grand Cru climats.",
+    "climate": "Cool continental with harsh winters and dangerous spring frosts.",
+    "soils": "Kimmeridgian marl and limestone full of fossilised oyster shells; Portlandian limestone for Petit Chablis.",
+    "typical_varietals": "Chardonnay.",
+    "blends": "Single-varietal Chardonnay."
+  },
+  {
+    "country": "France", "name": "Côte de Nuits", "lat": 47.2, "lng": 4.95,
+    "summary": "The northern half of Burgundy's Côte d'Or, from Marsannay to Nuits-Saint-Georges, home to most of the region's red Grand Crus (Chambertin, Musigny, Romanée-Conti).",
+    "climate": "Cool continental; east-facing slopes catch the morning sun.",
+    "soils": "Jurassic limestone and marl, with the best sites on mid-slope.",
+    "typical_varietals": "Pinot Noir, with a little Chardonnay.",
+    "blends": "Single-varietal Pinot Noir, classified by village, Premier and Grand Cru."
+  },
+  {
+    "country": "France", "name": "Côte de Beaune", "lat": 47.0, "lng": 4.8,
+    "summary": "The southern half of the Côte d'Or, around Beaune, Meursault and Puligny-Montrachet, home of the world's most famous white Burgundy and fine reds from Volnay and Pommard.",
+    "climate": "Cool continental, slightly warmer and more open than the Côte de Nuits.",
+    "soils": "Limestone and marl; marlier soils for whites, more iron-rich clay for reds.",
+    "typical_varietals": "Chardonnay, Pinot Noir.",
+    "blends": "Single-varietal wines classified by village, Premier and Grand Cru."
+  },
+  {
+    "country": "France", "name": "Mâconnais", "lat": 46.35, "lng": 4.75,
+    "summary": "Southern Burgundy district between the Côte Chalonnaise and Beaujolais, making ripe, approachable Chardonnay, led by Pouilly-Fuissé.",
+    "climate": "Moderate continental with Mediterranean hints; warmer than the Côte d'Or.",
+    "soils": "Limestone and clay, with dramatic limestone outcrops at Solutré and Vergisson.",
+    "typical_varietals": "Chardonnay, Gamay, Pinot Noir.",
+    "blends": "Single-varietal Chardonnay (Mâcon-Villages, Pouilly-Fuissé, Saint-Véran)."
+  },
+  {
+    "country": "France", "name": "Médoc", "lat": 45.15, "lng": -0.75,
+    "summary": "Bordeaux's Left Bank peninsula north of the city, home to Pauillac, Margaux, Saint-Julien and Saint-Estèphe and most of the 1855-classified châteaux.",
+    "climate": "Temperate maritime, moderated by the Atlantic and the Gironde estuary; vintage variation is marked.",
+    "soils": "Deep, warm gravel croupes over clay and limestone, ideal for Cabernet.",
+    "typical_varietals": "Cabernet Sauvignon, Merlot, Cabernet Franc, Petit Verdot.",
+    "blends": "Cabernet Sauvignon–dominant Bordeaux blends."
+  },
+  {
+    "country": "France", "name": "Graves", "lat": 44.65, "lng": -0.45,
+    "summary": "The Left Bank south of Bordeaux city, named for its gravels and including Pessac-Léognan (Haut-Brion), producing reds and dry whites.",
+    "climate": "Temperate maritime, a little warmer than the Médoc.",
+    "soils": "Gravel and sand over clay and limestone.",
+    "typical_varietals": "Cabernet Sauvignon, Merlot, Sauvignon Blanc, Sémillon.",
+    "blends": "Red Bordeaux blends; dry white Sauvignon Blanc–Sémillon."
+  },
+  {
+    "country": "France", "name": "Sauternes", "lat": 44.53, "lng": -0.33,
+    "summary": "Bordeaux enclave on the Ciron river, with neighbouring Barsac, making the world's most famous botrytised sweet wines, led by Château d'Yquem.",
+    "climate": "Maritime; autumn mists from the cold Ciron meeting the warm Garonne encourage noble rot.",
+    "soils": "Gravel, sand and clay over limestone.",
+    "typical_varietals": "Sémillon, Sauvignon Blanc, Muscadelle.",
+    "blends": "Botrytised sweet Sémillon–Sauvignon Blanc."
+  },
+  {
+    "country": "France", "name": "Saint-Émilion", "lat": 44.89, "lng": -0.15,
+    "summary": "Right Bank Bordeaux appellation around a medieval hilltop town, a UNESCO World Heritage site with its own regularly revised classification.",
+    "climate": "Maritime with more continental influence than the Left Bank.",
+    "soils": "Limestone plateau and côtes, clay-limestone slopes and sand and gravel near Pomerol.",
+    "typical_varietals": "Merlot, Cabernet Franc, Cabernet Sauvignon.",
+    "blends": "Merlot–Cabernet Franc blends."
+  },
+  {
+    "country": "France", "name": "Pomerol", "lat": 44.93, "lng": -0.2,
+    "summary": "Tiny, unclassified Right Bank plateau next to Saint-Émilion, home of Pétrus and Le Pin and some of the world's most expensive Merlot.",
+    "climate": "Maritime with continental influence.",
+    "soils": "Clay and gravel, with the famous iron-rich blue clay (crasse de fer) at the plateau's heart.",
+    "typical_varietals": "Merlot, Cabernet Franc.",
+    "blends": "Merlot-dominant blends."
+  },
+  {
+    "country": "France", "name": "Côte-Rôtie", "lat": 45.48, "lng": 4.8,
+    "summary": "Steep, terraced northern Rhône appellation above Ampuis, the 'roasted slope', making perfumed Syrah sometimes co-fermented with Viognier.",
+    "climate": "Continental, with the vines' south-east exposure and steepness capturing heat.",
+    "soils": "Schist and mica-schist in the Côte Brune; granite and gneiss in the Côte Blonde.",
+    "typical_varietals": "Syrah, Viognier.",
+    "blends": "Syrah with up to 20% Viognier, co-fermented."
+  },
+  {
+    "country": "France", "name": "Hermitage", "lat": 45.07, "lng": 4.84,
+    "summary": "The famous hill above Tain-l'Hermitage in the northern Rhône, making powerful, long-lived Syrah and rich Marsanne–Roussanne whites.",
+    "climate": "Continental; south-facing hill sheltered from the cold mistral.",
+    "soils": "Granite in the west, with loess, alluvial stones and clay to the east.",
+    "typical_varietals": "Syrah, Marsanne, Roussanne.",
+    "blends": "Syrah (up to 15% white allowed); Marsanne–Roussanne whites; sweet vin de paille."
+  },
+  {
+    "country": "France", "name": "Châteauneuf-du-Pape", "lat": 44.06, "lng": 4.83,
+    "summary": "The southern Rhône's most famous appellation, named for the summer castle of the Avignon popes, allowing thirteen grape varieties.",
+    "climate": "Hot Mediterranean, swept by the drying mistral wind.",
+    "soils": "Famous large galets roulés (rounded pudding stones), plus sand, clay and limestone.",
+    "typical_varietals": "Grenache, Syrah, Mourvèdre, Cinsault, Counoise, Grenache Blanc, Clairette, Roussanne.",
+    "blends": "Grenache-led blends of up to 13 varieties."
+  },
+  {
+    "country": "France", "name": "Jura", "lat": 46.75, "lng": 5.6,
+    "summary": "Small, idiosyncratic region in the hills between Burgundy and Switzerland, known for oxidative vin jaune aged under a film of yeast.",
+    "climate": "Cool continental, with cold winters and wet springs.",
+    "soils": "Blue, grey and red marls, with limestone.",
+    "typical_varietals": "Savagnin, Chardonnay, Poulsard (Ploussard), Trousseau, Pinot Noir.",
+    "blends": "Vin jaune (Savagnin under flor), vin de paille, Crémant du Jura."
+  },
+  {
+    "country": "France", "name": "Southwest France", "lat": 44.0, "lng": 0.5,
+    "summary": "Scattered collection of appellations between Bordeaux and the Pyrenees, including Cahors, Madiran, Bergerac, Gaillac and Jurançon, with many native grapes.",
+    "climate": "Maritime in the west becoming warmer and more continental inland.",
+    "soils": "Varied: limestone plateaux (Cahors), clay and gravel terraces, and Pyrenean foothill soils.",
+    "typical_varietals": "Malbec (Côt), Tannat, Merlot, Fer Servadou, Petit Manseng, Gros Manseng, Colombard.",
+    "blends": "Cahors Malbec; Madiran Tannat; sweet and dry Jurançon."
+  },
+  {
+    "country": "France", "name": "Corsica", "lat": 42.15, "lng": 9.1,
+    "summary": "Mountainous Mediterranean island with Italian-influenced grapes, best known for Patrimonio and Ajaccio.",
+    "climate": "Hot Mediterranean, tempered by sea breezes and altitude.",
+    "soils": "Granite in the south and west, schist and limestone in the north.",
+    "typical_varietals": "Nielluccio (Sangiovese), Sciaccarellu, Vermentinu, Grenache.",
+    "blends": "Rosé; Nielluccio and Sciaccarellu reds."
+  },
+  {
+    "country": "France", "name": "Sancerre", "lat": 47.33, "lng": 2.84,
+    "summary": "Hilltop town and appellation at the eastern end of the Loire, the benchmark for flinty Sauvignon Blanc, facing Pouilly-Fumé across the river.",
+    "climate": "Cool continental.",
+    "soils": "Kimmeridgian marl (terres blanches), limestone (caillottes) and flint (silex).",
+    "typical_varietals": "Sauvignon Blanc, Pinot Noir.",
+    "blends": "Single-varietal Sauvignon Blanc; light Pinot Noir reds and rosés."
+  },
+  {
+    "country": "France", "name": "Muscadet", "lat": 47.15, "lng": -1.35,
+    "summary": "Westernmost Loire region near Nantes and the Atlantic, making crisp, saline whites, often aged on lees (sur lie), classic with oysters.",
+    "climate": "Maritime, mild and humid.",
+    "soils": "Gneiss, granite, schist and gabbro.",
+    "typical_varietals": "Melon de Bourgogne.",
+    "blends": "Muscadet sur lie; single-varietal."
+  },
+  {
+    "country": "France", "name": "Bandol", "lat": 43.17, "lng": 5.78,
+    "summary": "Coastal Provence appellation near Toulon making structured, long-lived Mourvèdre-based reds and serious rosé.",
+    "climate": "Hot, sunny Mediterranean; terraced amphitheatre facing the sea.",
+    "soils": "Limestone, sandstone and clay on terraces (restanques).",
+    "typical_varietals": "Mourvèdre, Grenache, Cinsault.",
+    "blends": "Mourvèdre-dominant reds and rosés."
+  },
+  {
+    "country": "Italy", "name": "Barolo", "lat": 44.6, "lng": 7.95,
+    "summary": "Piemonte's most famous DOCG, in the Langhe hills south-west of Alba, making powerful, tannic, long-lived Nebbiolo from mapped crus (MGA).",
+    "climate": "Continental with cold, foggy autumns; long ripening season.",
+    "soils": "Tortonian calcareous marl in the west (La Morra, Barolo) and Serravallian sandstone in the east (Serralunga, Monforte).",
+    "typical_varietals": "Nebbiolo.",
+    "blends": "Single-varietal Nebbiolo."
+  },
+  {
+    "country": "Italy", "name": "Barbaresco", "lat": 44.73, "lng": 8.08,
+    "summary": "Small Langhe DOCG north-east of Alba, Barolo's neighbour, making slightly more approachable and perfumed Nebbiolo.",
+    "climate": "Continental, a little warmer and closer to the Tanaro than Barolo.",
+    "soils": "Calcareous marl with sand.",
+    "typical_varietals": "Nebbiolo.",
+    "blends": "Single-varietal Nebbiolo."
+  },
+  {
+    "country": "Italy", "name": "Chianti Classico", "lat": 43.5, "lng": 11.3,
+    "summary": "The historic heart of Chianti between Florence and Siena, with its black rooster emblem and new village subzones (UGA).",
+    "climate": "Continental-Mediterranean with altitude (250–600 m) providing cool nights.",
+    "soils": "Galestro (friable schist), alberese (limestone), sandstone and clay.",
+    "typical_varietals": "Sangiovese, Canaiolo, Colorino, Merlot, Cabernet Sauvignon.",
+    "blends": "Sangiovese-based (at least 80%); Gran Selezione at the top."
+  },
+  {
+    "country": "Italy", "name": "Montalcino", "lat": 43.06, "lng": 11.49,
+    "summary": "Hilltop town south of Siena whose Brunello di Montalcino is one of Italy's greatest wines, made from a local Sangiovese clone.",
+    "climate": "Warmer and drier than Chianti, with Mediterranean influence and protection from Monte Amiata.",
+    "soils": "Galestro and limestone at height; clay and sand lower down.",
+    "typical_varietals": "Sangiovese (Brunello).",
+    "blends": "Brunello di Montalcino and Rosso di Montalcino (100% Sangiovese)."
+  },
+  {
+    "country": "Italy", "name": "Montepulciano", "lat": 43.1, "lng": 11.78,
+    "summary": "Renaissance hill town in south-east Tuscany making Vino Nobile di Montepulciano from Sangiovese (here called Prugnolo Gentile).",
+    "climate": "Continental-Mediterranean with warm days and cool nights.",
+    "soils": "Sand and clay, with marine fossils and tufa.",
+    "typical_varietals": "Sangiovese (Prugnolo Gentile), Canaiolo, Mammolo.",
+    "blends": "Vino Nobile (at least 70% Sangiovese)."
+  },
+  {
+    "country": "Italy", "name": "Bolgheri", "lat": 43.23, "lng": 10.6,
+    "summary": "Coastal Tuscan zone on the Maremma, birthplace of the 'Super Tuscans' Sassicaia and Ornellaia.",
+    "climate": "Warm Mediterranean cooled by sea breezes.",
+    "soils": "Gravel, sand, clay and stony alluvial fans.",
+    "typical_varietals": "Cabernet Sauvignon, Merlot, Cabernet Franc, Syrah, Vermentino.",
+    "blends": "Bordeaux-style blends."
+  },
+  {
+    "country": "Italy", "name": "Valpolicella", "lat": 45.52, "lng": 10.9,
+    "summary": "Hills north of Verona making Amarone and Recioto from air-dried grapes, plus lighter Valpolicella and ripasso styles.",
+    "climate": "Moderate continental, tempered by Lake Garda.",
+    "soils": "Limestone, marl, volcanic basalt and alluvial gravel.",
+    "typical_varietals": "Corvina, Corvinone, Rondinella, Molinara.",
+    "blends": "Amarone (dried-grape dry red), Recioto (sweet), Ripasso."
+  },
+  {
+    "country": "Italy", "name": "Soave", "lat": 45.42, "lng": 11.25,
+    "summary": "Veneto zone east of Verona making almond-scented whites from Garganega, with the best from the hilly Classico core.",
+    "climate": "Moderate continental.",
+    "soils": "Volcanic basalt in the hills, limestone in the west, alluvium on the plain.",
+    "typical_varietals": "Garganega, Trebbiano di Soave.",
+    "blends": "Garganega-based dry whites; sweet Recioto di Soave."
+  },
+  {
+    "country": "Italy", "name": "Prosecco", "lat": 45.9, "lng": 12.1,
+    "summary": "Sparkling-wine zone across Veneto and Friuli, with the steep hills of Conegliano Valdobbiadene (DOCG) at its heart.",
+    "climate": "Moderate, with Alpine influence and good rainfall.",
+    "soils": "Marl, sandstone and moraine in the hills; alluvial plains elsewhere.",
+    "typical_varietals": "Glera, Verdiso, Bianchetta, Perera, Pinot Noir (rosé).",
+    "blends": "Tank-method sparkling (Charmat); col fondo."
+  },
+  {
+    "country": "Italy", "name": "Alto Adige", "lat": 46.5, "lng": 11.35,
+    "summary": "German-speaking South Tyrol in the Dolomites, Italy's northernmost region, known for crisp, aromatic whites and strong co-operatives.",
+    "climate": "Alpine-continental with hot, sunny days, cold nights and protection from the Alps.",
+    "soils": "Porphyry, dolomitic limestone, granite and glacial moraine.",
+    "typical_varietals": "Pinot Grigio, Pinot Bianco, Gewürztraminer, Sauvignon Blanc, Schiava, Lagrein, Pinot Noir.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Italy", "name": "Trentino", "lat": 46.07, "lng": 11.12,
+    "summary": "Alpine province around Trento, south of Alto Adige, best known for Trentodoc traditional-method sparkling.",
+    "climate": "Alpine to sub-Mediterranean around Lake Garda.",
+    "soils": "Limestone, dolomite, alluvium and moraine.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Teroldego, Marzemino, Nosiola.",
+    "blends": "Trentodoc sparkling; Teroldego Rotaliano."
+  },
+  {
+    "country": "Italy", "name": "Franciacorta", "lat": 45.62, "lng": 10.0,
+    "summary": "Lombardy zone south of Lake Iseo, Italy's leading traditional-method sparkling wine region.",
+    "climate": "Moderate, tempered by Lake Iseo and the Alps.",
+    "soils": "Glacial moraine: gravel, sand and limestone.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Pinot Bianco, Erbamat.",
+    "blends": "Traditional-method sparkling, including Satèn."
+  },
+  {
+    "country": "Italy", "name": "Etna", "lat": 37.78, "lng": 15.0,
+    "summary": "Vineyards on the slopes of Sicily's active volcano, revived since the 2000s, with old bush vines and many pre-phylloxera plantings.",
+    "climate": "Mountain-Mediterranean (400–1,000 m), with large diurnal shifts and high rainfall for Sicily.",
+    "soils": "Black volcanic sands and lava stone, varying by contrada.",
+    "typical_varietals": "Nerello Mascalese, Nerello Cappuccio, Carricante, Catarratto.",
+    "blends": "Etna Rosso (Nerello blends); Etna Bianco (Carricante)."
+  },
+  {
+    "country": "Italy", "name": "Campania", "lat": 40.95, "lng": 14.8,
+    "summary": "Southern region around Naples, home to Taurasi, Fiano di Avellino and Greco di Tufo, with grapes dating from Roman times.",
+    "climate": "Mediterranean on the coast; cooler and continental in the Irpinia hills.",
+    "soils": "Volcanic ash and tuff (Vesuvius), clay and limestone.",
+    "typical_varietals": "Aglianico, Fiano, Greco, Falanghina, Piedirosso.",
+    "blends": "Taurasi (Aglianico); single-varietal whites."
+  },
+  {
+    "country": "Italy", "name": "Abruzzo", "lat": 42.35, "lng": 14.0,
+    "summary": "Region between the Apennines and the Adriatic, known for generous Montepulciano d'Abruzzo and Cerasuolo rosé.",
+    "climate": "Mediterranean on the coast, continental in the mountains.",
+    "soils": "Clay and limestone with alluvial soils.",
+    "typical_varietals": "Montepulciano, Trebbiano d'Abruzzo, Pecorino, Passerina.",
+    "blends": "Montepulciano d'Abruzzo; Cerasuolo d'Abruzzo rosé."
+  },
+  {
+    "country": "Italy", "name": "Basilicata", "lat": 40.95, "lng": 15.65,
+    "summary": "Small southern region best known for Aglianico del Vulture, grown on the slopes of an extinct volcano.",
+    "climate": "Continental at altitude (Vulture at 200–700 m), with cool nights.",
+    "soils": "Volcanic tuff and ash.",
+    "typical_varietals": "Aglianico, Malvasia, Moscato.",
+    "blends": "Aglianico del Vulture."
+  },
+  {
+    "country": "Italy", "name": "Umbria", "lat": 42.95, "lng": 12.5,
+    "summary": "Landlocked central region best known for tannic Sagrantino di Montefalco and white Orvieto.",
+    "climate": "Continental with hot summers and cold winters.",
+    "soils": "Clay, limestone, and volcanic tuff around Orvieto.",
+    "typical_varietals": "Sagrantino, Sangiovese, Grechetto, Trebbiano.",
+    "blends": "Montefalco Rosso; Orvieto white blends."
+  },
+  {
+    "country": "Italy", "name": "Lombardy", "lat": 45.6, "lng": 9.8,
+    "summary": "Northern region around Milan, with Valtellina's terraced Alpine Nebbiolo and Oltrepò Pavese as well as Franciacorta.",
+    "climate": "Continental, Alpine in the north; lakes moderate some areas.",
+    "soils": "Alpine granite and schist (Valtellina), moraine, limestone and clay.",
+    "typical_varietals": "Nebbiolo (Chiavennasca), Croatina, Barbera, Pinot Noir, Chardonnay.",
+    "blends": "Sforzato di Valtellina (dried-grape Nebbiolo); Oltrepò blends."
+  },
+  {
+    "country": "Italy", "name": "Valle d'Aosta", "lat": 45.74, "lng": 7.4,
+    "summary": "Italy's smallest wine region, on steep Alpine terraces along the Dora Baltea, with rare native grapes.",
+    "climate": "Alpine continental, dry and sunny, with vines up to 1,200 m.",
+    "soils": "Glacial moraine, sand and granite.",
+    "typical_varietals": "Petit Rouge, Fumin, Cornalin, Prié Blanc, Petite Arvine, Nebbiolo.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Spain", "name": "Rías Baixas", "lat": 42.4, "lng": -8.7,
+    "summary": "Atlantic Galician DO of fjord-like estuaries near the Portuguese border, Spain's home of fresh, saline Albariño.",
+    "climate": "Cool, wet maritime ('green Spain'); vines often trained on pergolas.",
+    "soils": "Granite-based sandy soils.",
+    "typical_varietals": "Albariño, Loureiro, Treixadura, Caíño.",
+    "blends": "Single-varietal Albariño; Albariño-led blends."
+  },
+  {
+    "country": "Spain", "name": "Ribeira Sacra", "lat": 42.45, "lng": -7.6,
+    "summary": "Inland Galician DO with dramatic Roman-terraced slopes above the Miño and Sil rivers.",
+    "climate": "Atlantic with continental influence; hot sunny slopes, cool nights.",
+    "soils": "Slate and granite.",
+    "typical_varietals": "Mencía, Godello, Garnacha Tintorera, Merenzao.",
+    "blends": "Mencía-based reds."
+  },
+  {
+    "country": "Spain", "name": "Bierzo", "lat": 42.6, "lng": -6.75,
+    "summary": "Mountain basin in north-west Castilla y León on the Camino de Santiago, revived for its old-vine Mencía.",
+    "climate": "Transitional between Atlantic Galicia and continental Castilla.",
+    "soils": "Slate and quartz on slopes; clay on valley floors.",
+    "typical_varietals": "Mencía, Godello, Doña Blanca.",
+    "blends": "Mencía; Godello whites."
+  },
+  {
+    "country": "Spain", "name": "Rueda", "lat": 41.4, "lng": -4.95,
+    "summary": "High-plateau DO in Castilla y León south of Valladolid, Spain's best-known white region for crisp Verdejo.",
+    "climate": "Extreme continental at 700–850 m, with hot days and cold nights.",
+    "soils": "Stony alluvial gravels, sand and limestone.",
+    "typical_varietals": "Verdejo, Sauvignon Blanc, Viura.",
+    "blends": "Verdejo; Verdejo–Sauvignon Blanc."
+  },
+  {
+    "country": "Spain", "name": "Toro", "lat": 41.52, "lng": -5.4,
+    "summary": "Duero valley DO near Zamora making powerful, dark reds from Tinta de Toro (a local Tempranillo).",
+    "climate": "Extreme continental, hot dry summers and cold winters.",
+    "soils": "Sandy and clay soils with stones; phylloxera-resistant sands host ungrafted vines.",
+    "typical_varietals": "Tinta de Toro (Tempranillo), Garnacha, Malvasía, Verdejo.",
+    "blends": "Tinta de Toro reds."
+  },
+  {
+    "country": "Spain", "name": "Jerez", "lat": 36.7, "lng": -6.1,
+    "summary": "The sherry triangle of Jerez, El Puerto de Santa María and Sanlúcar de Barrameda in Andalucía, ageing fortified wine in solera systems.",
+    "climate": "Hot Mediterranean with Atlantic influence; humid poniente and dry levante winds.",
+    "soils": "Bright white albariza chalk that stores winter rain, plus barro clay and arena sand.",
+    "typical_varietals": "Palomino Fino, Pedro Ximénez, Moscatel.",
+    "blends": "Fino, Manzanilla, Amontillado, Oloroso, Palo Cortado, PX."
+  },
+  {
+    "country": "Spain", "name": "Penedès", "lat": 41.35, "lng": 1.7,
+    "summary": "Catalan region south-west of Barcelona, the heartland of Cava and of the Corpinnat and Clàssic Penedès sparkling movements.",
+    "climate": "Mediterranean, from warm coast to cooler upper Penedès.",
+    "soils": "Limestone, clay and sandy soils.",
+    "typical_varietals": "Xarel·lo, Macabeo, Parellada, Chardonnay, Tempranillo, Garnacha.",
+    "blends": "Traditional-method sparkling (Cava); Xarel·lo whites."
+  },
+  {
+    "country": "Spain", "name": "Navarra", "lat": 42.5, "lng": -1.65,
+    "summary": "Northern region around Pamplona, once known mainly for rosado, now producing varied reds and whites.",
+    "climate": "Atlantic-influenced in the north, Mediterranean and continental in the south.",
+    "soils": "Limestone, clay and gravel.",
+    "typical_varietals": "Garnacha, Tempranillo, Cabernet Sauvignon, Merlot, Chardonnay.",
+    "blends": "Garnacha rosado; Tempranillo blends."
+  },
+  {
+    "country": "Spain", "name": "Campo de Borja", "lat": 41.8, "lng": -1.55,
+    "summary": "Aragón DO, styled 'the empire of Garnacha', with old bush vines on the slopes of the Moncayo.",
+    "climate": "Continental with dry, cold cierzo winds.",
+    "soils": "Stony limestone and clay.",
+    "typical_varietals": "Garnacha, Tempranillo, Macabeo.",
+    "blends": "Old-vine Garnacha."
+  },
+  {
+    "country": "Spain", "name": "Jumilla", "lat": 38.47, "lng": -1.33,
+    "summary": "South-eastern DO in Murcia, home of rich, ripe Monastrell from old ungrafted vines.",
+    "climate": "Hot, dry continental-Mediterranean.",
+    "soils": "Limestone and sandy soils, which kept phylloxera at bay for a long time.",
+    "typical_varietals": "Monastrell, Garnacha Tintorera, Syrah.",
+    "blends": "Monastrell; Monastrell–Syrah."
+  },
+  {
+    "country": "Spain", "name": "Canary Islands", "lat": 28.3, "lng": -16.5,
+    "summary": "Volcanic Atlantic islands off Africa, with ancient, phylloxera-free vines, including Lanzarote's vines in ash-pit craters (hoyos).",
+    "climate": "Subtropical, moderated by trade winds and altitude.",
+    "soils": "Black volcanic ash (picón) and basalt.",
+    "typical_varietals": "Listán Negro, Listán Blanco, Malvasía, Negramoll, Marmajuelo.",
+    "blends": "Malvasía Volcánica; light volcanic reds."
+  },
+  {
+    "country": "Spain", "name": "Montsant", "lat": 41.2, "lng": 0.85,
+    "summary": "Catalan DO wrapped around Priorat, making similar, more affordable Garnacha–Cariñena reds.",
+    "climate": "Mediterranean with continental influence.",
+    "soils": "Limestone, granite and clay, with some licorella slate.",
+    "typical_varietals": "Garnacha, Cariñena, Syrah, Cabernet Sauvignon.",
+    "blends": "Garnacha–Cariñena."
+  },
+  {
+    "country": "Spain", "name": "Getariako Txakolina", "lat": 43.3, "lng": -2.2,
+    "summary": "Basque coastal DO near San Sebastián making light, spritzy, high-acid Txakoli, poured from a height.",
+    "climate": "Cool, wet Atlantic.",
+    "soils": "Clay and sandstone.",
+    "typical_varietals": "Hondarrabi Zuri, Hondarrabi Beltza.",
+    "blends": "Txakoli (slightly sparkling white)."
+  },
+  {
+    "country": "Portugal", "name": "Vinho Verde", "lat": 41.7, "lng": -8.4,
+    "summary": "North-west Portugal's large, green Minho region, known for light, fresh and often slightly spritzy whites and fine Alvarinho.",
+    "climate": "Cool, wet Atlantic.",
+    "soils": "Granite.",
+    "typical_varietals": "Alvarinho, Loureiro, Arinto, Avesso, Vinhão.",
+    "blends": "Light white blends; Alvarinho from Monção e Melgaço."
+  },
+  {
+    "country": "Portugal", "name": "Dão", "lat": 40.55, "lng": -7.9,
+    "summary": "Granite plateau ringed by mountains in central Portugal, making elegant reds and textured Encruzado whites.",
+    "climate": "Continental, protected from Atlantic and Spanish extremes by mountains.",
+    "soils": "Sandy granite, with some schist.",
+    "typical_varietals": "Touriga Nacional, Alfrocheiro, Jaen, Tinta Roriz, Encruzado.",
+    "blends": "Touriga Nacional–led reds; Encruzado whites."
+  },
+  {
+    "country": "Portugal", "name": "Bairrada", "lat": 40.45, "lng": -8.45,
+    "summary": "Atlantic region near Coimbra, known for tannic, age-worthy Baga and traditional-method sparkling.",
+    "climate": "Maritime, mild and wet.",
+    "soils": "Clay-limestone and sand.",
+    "typical_varietals": "Baga, Maria Gomes (Fernão Pires), Bical, Arinto.",
+    "blends": "Baga reds; sparkling (espumante)."
+  },
+  {
+    "country": "Portugal", "name": "Alentejo", "lat": 38.6, "lng": -7.9,
+    "summary": "Vast, hot southern plain known for cork forests, ripe, approachable reds and revived amphora (talha) wines.",
+    "climate": "Hot, dry Mediterranean-continental.",
+    "soils": "Schist, granite, limestone and clay.",
+    "typical_varietals": "Aragonez (Tempranillo), Trincadeira, Alicante Bouschet, Antão Vaz, Arinto.",
+    "blends": "Red blends; Vinho de Talha."
+  },
+  {
+    "country": "Portugal", "name": "Madeira", "lat": 32.75, "lng": -16.95,
+    "summary": "Atlantic island making uniquely long-lived fortified wines, deliberately heated and oxidised during ageing.",
+    "climate": "Subtropical oceanic, humid.",
+    "soils": "Volcanic basalt on steep terraces (poios).",
+    "typical_varietals": "Sercial, Verdelho, Boal, Malvasia, Tinta Negra.",
+    "blends": "Fortified Madeira, from dry Sercial to rich Malmsey."
+  },
+  {
+    "country": "Portugal", "name": "Setúbal", "lat": 38.5, "lng": -8.9,
+    "summary": "Peninsula south of Lisbon famous for fortified Moscatel de Setúbal.",
+    "climate": "Warm Mediterranean with Atlantic influence.",
+    "soils": "Limestone in the Arrábida hills; sand on the plains.",
+    "typical_varietals": "Moscatel de Setúbal, Castelão, Moscatel Roxo.",
+    "blends": "Fortified Moscatel; Castelão reds."
+  },
+  {
+    "country": "Portugal", "name": "Tejo", "lat": 39.3, "lng": -8.5,
+    "summary": "Region along the Tagus river north-east of Lisbon, a source of good-value reds and whites.",
+    "climate": "Mediterranean with Atlantic influence.",
+    "soils": "Alluvial river plains, clay-limestone and sand.",
+    "typical_varietals": "Castelão, Touriga Nacional, Fernão Pires, Arinto.",
+    "blends": "Red and white blends."
+  },
+  {
+    "country": "Portugal", "name": "Azores", "lat": 38.5, "lng": -28.4,
+    "summary": "Mid-Atlantic volcanic islands; Pico's vineyards, in walled basalt plots (currais), are a UNESCO World Heritage site.",
+    "climate": "Oceanic, mild, humid and windy.",
+    "soils": "Black basalt lava.",
+    "typical_varietals": "Arinto dos Açores, Verdelho, Terrantez do Pico.",
+    "blends": "Saline volcanic whites; traditional fortified Verdelho."
+  },
+  {
+    "country": "Germany", "name": "Rheingau", "lat": 50.0, "lng": 8.05,
+    "summary": "South-facing slope along the Rhine between Wiesbaden and Lorch, historically Germany's most aristocratic Riesling region (Schloss Johannisberg, Kloster Eberbach).",
+    "climate": "Cool continental, with the Rhine reflecting warmth and the Taunus hills sheltering from north winds.",
+    "soils": "Loess and loam near the river, slate and quartzite higher up.",
+    "typical_varietals": "Riesling, Spätburgunder (Pinot Noir).",
+    "blends": "Dry (trocken) to noble-sweet Riesling; Assmannshausen Pinot Noir."
+  },
+  {
+    "country": "Germany", "name": "Rheinhessen", "lat": 49.85, "lng": 8.15,
+    "summary": "Germany's largest wine region, in rolling hills west of the Rhine around Mainz and Worms, transformed by a young generation of growers.",
+    "climate": "Mild and dry, sheltered by surrounding hills.",
+    "soils": "Loess and limestone, with red slate (Roter Hang) at Nierstein.",
+    "typical_varietals": "Riesling, Müller-Thurgau, Silvaner, Dornfelder, Spätburgunder.",
+    "blends": "Dry Riesling and Silvaner."
+  },
+  {
+    "country": "Germany", "name": "Baden", "lat": 48.3, "lng": 7.8,
+    "summary": "Germany's warmest and most southerly region, stretching from Heidelberg to Lake Constance opposite Alsace, a stronghold of the Pinot family.",
+    "climate": "Warm for Germany, sunny, sheltered by the Black Forest.",
+    "soils": "Volcanic Kaiserstuhl, loess, limestone and granite.",
+    "typical_varietals": "Spätburgunder, Grauburgunder, Weissburgunder, Müller-Thurgau, Riesling.",
+    "blends": "Dry Pinot Noir and Pinot Blanc/Gris."
+  },
+  {
+    "country": "Germany", "name": "Ahr", "lat": 50.53, "lng": 7.05,
+    "summary": "Tiny, steep valley south of Bonn and one of the world's most northerly red-wine regions, famed for Pinot Noir.",
+    "climate": "Cool, but steep slate slopes trap heat.",
+    "soils": "Slate and greywacke, with loess on lower ground.",
+    "typical_varietals": "Spätburgunder, Frühburgunder, Riesling.",
+    "blends": "Pinot Noir."
+  },
+  {
+    "country": "Germany", "name": "Württemberg", "lat": 49.0, "lng": 9.2,
+    "summary": "Region around Stuttgart along the Neckar, Germany's main red-wine area, with much consumed locally.",
+    "climate": "Continental, warm summers.",
+    "soils": "Keuper marl, shell limestone (Muschelkalk) and loess.",
+    "typical_varietals": "Trollinger, Lemberger (Blaufränkisch), Schwarzriesling (Pinot Meunier), Riesling.",
+    "blends": "Light Trollinger–Lemberger reds."
+  },
+  {
+    "country": "Germany", "name": "Mittelrhein", "lat": 50.15, "lng": 7.7,
+    "summary": "Romantic, castle-lined Rhine gorge between Bingen and Bonn, a UNESCO site with steep slate Riesling vineyards.",
+    "climate": "Cool, moderated by the river.",
+    "soils": "Slate and greywacke.",
+    "typical_varietals": "Riesling.",
+    "blends": "Riesling."
+  },
+  {
+    "country": "Austria", "name": "Wachau", "lat": 48.37, "lng": 15.42,
+    "summary": "Stunning Danube valley west of Krems with dry-stone terraces, making world-class dry Riesling and Grüner Veltliner graded Steinfeder, Federspiel and Smaragd.",
+    "climate": "Meeting point of cool Atlantic and warm Pannonian influences; large day–night swings.",
+    "soils": "Gneiss and granite on the terraces; loess on lower slopes.",
+    "typical_varietals": "Grüner Veltliner, Riesling.",
+    "blends": "Dry single-varietal wines (Steinfeder, Federspiel, Smaragd)."
+  },
+  {
+    "country": "Austria", "name": "Kamptal", "lat": 48.48, "lng": 15.7,
+    "summary": "Valley of the Kamp river around Langenlois, north-east of the Wachau, with the famous Heiligenstein Riesling vineyard.",
+    "climate": "Warm Pannonian days, cool nights from the Waldviertel forest.",
+    "soils": "Loess, gneiss and the desert sandstone of the Heiligenstein.",
+    "typical_varietals": "Grüner Veltliner, Riesling, Zweigelt.",
+    "blends": "Single-varietal DAC whites."
+  },
+  {
+    "country": "Austria", "name": "Kremstal", "lat": 48.42, "lng": 15.6,
+    "summary": "Region around the historic town of Krems, between Wachau and Kamptal, making Grüner Veltliner and Riesling.",
+    "climate": "Pannonian warmth meets cool northern air.",
+    "soils": "Loess terraces and primary rock (gneiss).",
+    "typical_varietals": "Grüner Veltliner, Riesling.",
+    "blends": "Single-varietal DAC whites."
+  },
+  {
+    "country": "Austria", "name": "Weinviertel", "lat": 48.6, "lng": 16.4,
+    "summary": "Austria's largest region, north of Vienna up to the Czech border, the original home of peppery Grüner Veltliner.",
+    "climate": "Dry, continental and cool.",
+    "soils": "Loess, with clay and limestone.",
+    "typical_varietals": "Grüner Veltliner, Welschriesling, Zweigelt.",
+    "blends": "Peppery Grüner Veltliner."
+  },
+  {
+    "country": "Austria", "name": "Burgenland", "lat": 47.6, "lng": 16.7,
+    "summary": "Eastern state around the shallow Lake Neusiedl, Austria's red-wine heart and home of botrytised sweet wines.",
+    "climate": "Warm Pannonian continental; the lake's mists encourage noble rot.",
+    "soils": "Gravel, sand, loess, limestone and slate.",
+    "typical_varietals": "Blaufränkisch, Zweigelt, St Laurent, Welschriesling, Chardonnay.",
+    "blends": "Blaufränkisch; Ruster Ausbruch and Trockenbeerenauslese sweet wines."
+  },
+  {
+    "country": "Austria", "name": "Steiermark", "lat": 46.75, "lng": 15.55,
+    "summary": "Styria, in Austria's hilly south near Slovenia, celebrated for vivid Sauvignon Blanc from steep slopes.",
+    "climate": "Moist and mild, with warm Illyrian influence and cool nights.",
+    "soils": "Sand, marl, slate and volcanic soils.",
+    "typical_varietals": "Sauvignon Blanc, Morillon (Chardonnay), Gelber Muskateller, Blauer Wildbacher.",
+    "blends": "Sauvignon Blanc; Schilcher rosé."
+  },
+  {
+    "country": "Austria", "name": "Wien", "lat": 48.25, "lng": 16.35,
+    "summary": "Vienna, the only capital city with a significant wine-growing area, known for Gemischter Satz field blends and Heurigen taverns.",
+    "climate": "Pannonian continental.",
+    "soils": "Limestone, loess and sandy loam.",
+    "typical_varietals": "Grüner Veltliner, Riesling, Weissburgunder.",
+    "blends": "Wiener Gemischter Satz (field blend)."
+  },
+  {
+    "country": "Switzerland", "name": "Valais", "lat": 46.25, "lng": 7.5,
+    "summary": "Switzerland's largest wine canton, along the upper Rhône valley, with some of Europe's highest vineyards.",
+    "climate": "Dry, sunny Alpine valley with warm foehn winds.",
+    "soils": "Alluvial fans, schist, limestone and glacial moraine.",
+    "typical_varietals": "Chasselas (Fendant), Pinot Noir, Gamay, Petite Arvine, Cornalin, Humagne Rouge.",
+    "blends": "Dôle (Pinot Noir–Gamay)."
+  },
+  {
+    "country": "Switzerland", "name": "Vaud", "lat": 46.5, "lng": 6.7,
+    "summary": "Terraced vineyards above Lake Geneva, including the UNESCO-listed Lavaux, the home of fine Chasselas.",
+    "climate": "Moderate, with the lake reflecting light and heat.",
+    "soils": "Limestone, moraine and alluvium.",
+    "typical_varietals": "Chasselas, Pinot Noir, Gamay.",
+    "blends": "Chasselas; Salvagnin reds."
+  },
+  {
+    "country": "Hungary", "name": "Tokaj", "lat": 48.12, "lng": 21.4,
+    "summary": "Historic north-eastern region whose botrytised Tokaji Aszú was 'the wine of kings, king of wines', with one of the world's first vineyard classifications.",
+    "climate": "Continental; autumn mists from the Bodrog and Tisza rivers bring noble rot.",
+    "soils": "Volcanic rhyolite, andesite and loess.",
+    "typical_varietals": "Furmint, Hárslevelű, Sárga Muskotály, Kövérszőlő.",
+    "blends": "Tokaji Aszú, Eszencia and Szamorodni; dry Furmint."
+  },
+  {
+    "country": "Hungary", "name": "Eger", "lat": 47.9, "lng": 20.37,
+    "summary": "Baroque town in northern Hungary famed for Egri Bikavér ('Bull's Blood') red blends.",
+    "climate": "Cool continental.",
+    "soils": "Volcanic tuff, rhyolite and clay.",
+    "typical_varietals": "Kékfrankos (Blaufränkisch), Kadarka, Pinot Noir, Olaszrizling.",
+    "blends": "Egri Bikavér (Kékfrankos-based); Egri Csillag white blend."
+  },
+  {
+    "country": "Hungary", "name": "Villány", "lat": 45.87, "lng": 18.45,
+    "summary": "Hungary's warmest region, in the far south near Croatia, known for rich Cabernet Franc and Bordeaux-style reds.",
+    "climate": "Sub-Mediterranean, warm and sunny.",
+    "soils": "Limestone, loess and clay.",
+    "typical_varietals": "Cabernet Franc, Cabernet Sauvignon, Merlot, Portugieser, Kékfrankos.",
+    "blends": "Bordeaux-style blends; Villányi Franc."
+  },
+  {
+    "country": "Slovenia", "name": "Goriška Brda", "lat": 46.0, "lng": 13.55,
+    "summary": "Hilly zone on the Italian border, continuing Friuli's Collio, known for skin-contact (orange) wines and Rebula.",
+    "climate": "Sub-Mediterranean, warmed by the Adriatic and sheltered by the Alps.",
+    "soils": "Opoka (flysch marl and sandstone).",
+    "typical_varietals": "Rebula (Ribolla Gialla), Friulano, Pinot Grigio, Merlot.",
+    "blends": "Skin-contact whites; white blends."
+  },
+  {
+    "country": "Croatia", "name": "Dalmatia", "lat": 42.97, "lng": 17.4,
+    "summary": "Croatia's Adriatic coast and islands, including the Pelješac peninsula and Hvar, home of Plavac Mali and Zinfandel's ancestor, Crljenak Kaštelanski.",
+    "climate": "Hot Mediterranean.",
+    "soils": "Limestone and karst, with red terra rossa.",
+    "typical_varietals": "Plavac Mali, Pošip, Grk, Babić, Tribidrag.",
+    "blends": "Dingač and Postup (Plavac Mali)."
+  },
+  {
+    "country": "Croatia", "name": "Istria", "lat": 45.2, "lng": 13.9,
+    "summary": "Peninsula at the north of the Adriatic shared with Slovenia, known for Malvazija Istarska and Teran.",
+    "climate": "Mediterranean on the coast, cooler inland.",
+    "soils": "Red terra rossa, white limestone, and grey flysch.",
+    "typical_varietals": "Malvazija Istarska, Teran, Muškat Momjanski.",
+    "blends": "Malvazija (including skin-contact)."
+  },
+  {
+    "country": "Georgia", "name": "Kakheti", "lat": 41.9, "lng": 45.6,
+    "summary": "Georgia's main wine region in the Alazani valley under the Caucasus, birthplace of qvevri winemaking, which is about 8,000 years old.",
+    "climate": "Continental, with the Caucasus blocking cold northern air.",
+    "soils": "Alluvial, calcareous and cinnamonic soils.",
+    "typical_varietals": "Saperavi, Rkatsiteli, Mtsvane, Kisi.",
+    "blends": "Amber qvevri wines; Saperavi reds."
+  },
+  {
+    "country": "Greece", "name": "Santorini", "lat": 36.4, "lng": 25.43,
+    "summary": "Volcanic Cycladic island with ancient, phylloxera-free vines trained in low baskets (kouloura) against the wind.",
+    "climate": "Hot, dry and windy; vines live on sea mist.",
+    "soils": "Volcanic pumice and ash (aspa).",
+    "typical_varietals": "Assyrtiko, Athiri, Aidani, Mavrotragano.",
+    "blends": "Bone-dry Assyrtiko; sweet Vinsanto."
+  },
+  {
+    "country": "Greece", "name": "Crete", "lat": 35.25, "lng": 25.1,
+    "summary": "Greece's largest island, with a 4,000-year winemaking history and a revival of native grapes.",
+    "climate": "Hot Mediterranean, cooled by altitude and the north wind.",
+    "soils": "Limestone, clay and schist.",
+    "typical_varietals": "Vidiano, Liatiko, Kotsifali, Mandilaria, Vilana.",
+    "blends": "Kotsifali–Mandilaria reds."
+  },
+  {
+    "country": "Lebanon", "name": "Bekaa Valley", "lat": 33.85, "lng": 35.9,
+    "summary": "High valley between the Lebanon and Anti-Lebanon mountains, made famous by Château Musar.",
+    "climate": "Dry, sunny and continental at 900–1,000 m.",
+    "soils": "Gravel, clay and limestone.",
+    "typical_varietals": "Cabernet Sauvignon, Cinsault, Carignan, Syrah, Obaideh, Merwah.",
+    "blends": "Cabernet–Cinsault–Carignan."
+  },
+  {
+    "country": "Israel", "name": "Golan Heights", "lat": 33.0, "lng": 35.75,
+    "summary": "High-altitude volcanic plateau, Israel's top wine area since the 1980s.",
+    "climate": "Cool for the region, with altitude up to 1,200 m and snow in winter.",
+    "soils": "Volcanic basalt and tuff.",
+    "typical_varietals": "Cabernet Sauvignon, Merlot, Syrah, Chardonnay.",
+    "blends": "Bordeaux-style blends."
+  },
+  {
+    "country": "England", "name": "Sussex", "lat": 50.9, "lng": -0.3,
+    "summary": "The centre of England's booming traditional-method sparkling wine, on chalk like Champagne's.",
+    "climate": "Cool maritime, marginal but warming.",
+    "soils": "Chalk of the South Downs, greensand and clay.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Pinot Meunier, Bacchus.",
+    "blends": "Traditional-method sparkling."
+  },
+  {
+    "country": "England", "name": "Kent", "lat": 51.2, "lng": 0.8,
+    "summary": "'The Garden of England', with major sparkling producers on North Downs chalk.",
+    "climate": "Cool maritime, among England's warmest and driest.",
+    "soils": "Chalk, clay and greensand.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Pinot Meunier, Bacchus.",
+    "blends": "Traditional-method sparkling."
+  },
+  {
+    "country": "United States", "name": "Sonoma County", "lat": 38.5, "lng": -122.8,
+    "summary": "Napa's larger, more varied western neighbour, from the foggy Sonoma Coast to warm Dry Creek and Alexander valleys.",
+    "climate": "Ranges from cool, fog-bound coastal sites to warm inland valleys.",
+    "soils": "Very diverse: Goldridge sandy loam, volcanic soils, alluvium and clay.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Zinfandel, Cabernet Sauvignon, Sauvignon Blanc.",
+    "blends": "Old-vine Zinfandel field blends; Bordeaux blends."
+  },
+  {
+    "country": "United States", "name": "Russian River Valley", "lat": 38.45, "lng": -122.9,
+    "summary": "Sonoma AVA shaped by Pacific fog funnelled up the Russian River, renowned for Pinot Noir and Chardonnay.",
+    "climate": "Cool, with morning fog and warm afternoons.",
+    "soils": "Goldridge sandy loam and alluvium.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Zinfandel.",
+    "blends": "Mostly varietal; sparkling."
+  },
+  {
+    "country": "United States", "name": "Paso Robles", "lat": 35.63, "lng": -120.7,
+    "summary": "Central Coast AVA between San Francisco and Los Angeles, with eleven sub-AVAs and a Rhône Rangers tradition.",
+    "climate": "Warm days, cool nights from Pacific air through the Templeton Gap.",
+    "soils": "Calcareous limestone, shale and sandy loam.",
+    "typical_varietals": "Cabernet Sauvignon, Zinfandel, Syrah, Grenache, Mourvèdre.",
+    "blends": "GSM and Rhône blends; Cabernet blends."
+  },
+  {
+    "country": "United States", "name": "Santa Barbara County", "lat": 34.65, "lng": -120.2,
+    "summary": "Central Coast area whose east–west valleys (Santa Rita Hills, Santa Maria) channel ocean air; setting of the film Sideways.",
+    "climate": "Cool maritime near the coast, warmer inland (Happy Canyon).",
+    "soils": "Sand, diatomaceous earth and clay loam.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Syrah, Grenache, Sauvignon Blanc.",
+    "blends": "Mostly varietal; Rhône blends."
+  },
+  {
+    "country": "United States", "name": "Santa Cruz Mountains", "lat": 37.2, "lng": -122.05,
+    "summary": "Rugged AVA south of San Francisco, home of Ridge Monte Bello and Mount Eden.",
+    "climate": "Cool mountain, above the fog line.",
+    "soils": "Shale, sandstone and limestone, cut by the San Andreas Fault.",
+    "typical_varietals": "Cabernet Sauvignon, Pinot Noir, Chardonnay, Zinfandel.",
+    "blends": "Bordeaux blends."
+  },
+  {
+    "country": "United States", "name": "Lodi", "lat": 38.13, "lng": -121.27,
+    "summary": "Central Valley AVA east of San Francisco Bay with California's largest stock of old-vine Zinfandel.",
+    "climate": "Warm Mediterranean, cooled by Delta breezes.",
+    "soils": "Sandy granitic loam.",
+    "typical_varietals": "Zinfandel, Cabernet Sauvignon, Chardonnay, Petite Sirah.",
+    "blends": "Old-vine Zinfandel."
+  },
+  {
+    "country": "United States", "name": "Mendocino", "lat": 39.15, "lng": -123.2,
+    "summary": "Northern California county including the cool Anderson Valley, known for Pinot Noir, sparkling and old-vine field blends.",
+    "climate": "Cool coastal to warm inland.",
+    "soils": "Sandstone, shale and alluvium.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Zinfandel, Carignan, Gewürztraminer.",
+    "blends": "Sparkling; Carignan field blends."
+  },
+  {
+    "country": "United States", "name": "Willamette Valley", "lat": 45.1, "lng": -123.1,
+    "summary": "Oregon's main region south of Portland, celebrated for Burgundian-style Pinot Noir since the 1960s.",
+    "climate": "Cool, maritime-influenced, with dry summers and wet winters.",
+    "soils": "Volcanic Jory, marine sediment Willakenzie and windblown loess.",
+    "typical_varietals": "Pinot Noir, Pinot Gris, Chardonnay.",
+    "blends": "Mostly varietal; sparkling."
+  },
+  {
+    "country": "United States", "name": "Columbia Valley", "lat": 46.3, "lng": -119.5,
+    "summary": "Huge, dry AVA covering most of Washington State's vineyards, east of the Cascades.",
+    "climate": "Semi-arid desert with long, sunny summer days; irrigated.",
+    "soils": "Windblown loess and sand over flood-deposited basalt.",
+    "typical_varietals": "Cabernet Sauvignon, Merlot, Syrah, Riesling, Chardonnay.",
+    "blends": "Bordeaux blends."
+  },
+  {
+    "country": "United States", "name": "Walla Walla Valley", "lat": 46.05, "lng": -118.35,
+    "summary": "AVA straddling Washington and Oregon, known for Syrah and Cabernet; includes the cobbled Rocks District.",
+    "climate": "Semi-arid continental.",
+    "soils": "Loess, and basalt cobbles in The Rocks.",
+    "typical_varietals": "Syrah, Cabernet Sauvignon, Merlot.",
+    "blends": "Bordeaux blends."
+  },
+  {
+    "country": "United States", "name": "Finger Lakes", "lat": 42.6, "lng": -76.9,
+    "summary": "Glacial lakes in upstate New York, America's leading cool-climate Riesling region.",
+    "climate": "Cool continental; deep lakes moderate temperatures.",
+    "soils": "Glacial till, shale and limestone.",
+    "typical_varietals": "Riesling, Cabernet Franc, Pinot Noir, Grüner Veltliner.",
+    "blends": "Dry to sweet Riesling; ice wine."
+  },
+  {
+    "country": "United States", "name": "Long Island", "lat": 40.98, "lng": -72.55,
+    "summary": "North Fork and Hamptons vineyards on New York's Long Island.",
+    "climate": "Moderate maritime.",
+    "soils": "Sandy, glacial outwash.",
+    "typical_varietals": "Merlot, Cabernet Franc, Chardonnay, Sauvignon Blanc.",
+    "blends": "Merlot blends."
+  },
+  {
+    "country": "United States", "name": "Virginia", "lat": 38.0, "lng": -78.5,
+    "summary": "Historic state (Jefferson's Monticello) with a growing reputation, especially around Charlottesville.",
+    "climate": "Humid continental with summer heat and rain.",
+    "soils": "Granite and greenstone in the Blue Ridge foothills.",
+    "typical_varietals": "Viognier, Cabernet Franc, Petit Manseng, Petit Verdot, Norton.",
+    "blends": "Bordeaux blends."
+  },
+  {
+    "country": "Canada", "name": "Niagara Peninsula", "lat": 43.1, "lng": -79.3,
+    "summary": "Ontario's main region between Lakes Ontario and Erie, world-famous for ice wine.",
+    "climate": "Cool continental; the Niagara Escarpment and the lakes moderate it.",
+    "soils": "Clay, loam and limestone.",
+    "typical_varietals": "Riesling, Chardonnay, Cabernet Franc, Vidal, Pinot Noir.",
+    "blends": "Icewine (Vidal, Riesling, Cabernet Franc)."
+  },
+  {
+    "country": "Canada", "name": "Okanagan Valley", "lat": 49.5, "lng": -119.6,
+    "summary": "British Columbia's long lake valley, running from desert in the south to cooler lakeside sites in the north.",
+    "climate": "Semi-arid; hot days, cold nights and northern latitude.",
+    "soils": "Glacial sands, gravel and silt.",
+    "typical_varietals": "Merlot, Pinot Noir, Chardonnay, Pinot Gris, Syrah.",
+    "blends": "Bordeaux blends."
+  },
+  {
+    "country": "Mexico", "name": "Valle de Guadalupe", "lat": 32.1, "lng": -116.6,
+    "summary": "Baja California valley near Ensenada producing most of Mexico's wine.",
+    "climate": "Mediterranean, cooled by Pacific breezes.",
+    "soils": "Decomposed granite and sand.",
+    "typical_varietals": "Nebbiolo, Tempranillo, Cabernet Sauvignon, Grenache, Chenin Blanc.",
+    "blends": "Red blends."
+  },
+  {
+    "country": "Argentina", "name": "Uco Valley", "lat": -33.6, "lng": -69.2,
+    "summary": "High-altitude Mendoza valley (Tupungato, Tunuyán, San Carlos) at the foot of the Andes, the source of Argentina's finest Malbec.",
+    "climate": "Cool, dry high desert (900–1,600 m) with intense sunlight and big diurnal ranges.",
+    "soils": "Alluvial stones, sand and limestone deposits (Paraje Altamira, Gualtallary).",
+    "typical_varietals": "Malbec, Cabernet Franc, Chardonnay, Pinot Noir, Sauvignon Blanc.",
+    "blends": "Malbec–Cabernet Franc."
+  },
+  {
+    "country": "Argentina", "name": "Luján de Cuyo", "lat": -33.05, "lng": -68.9,
+    "summary": "Historic heart of Mendoza just south of the city, Argentina's first designation of origin, with old-vine Malbec.",
+    "climate": "Dry continental at 800–1,100 m.",
+    "soils": "Alluvial soils with clay and stones.",
+    "typical_varietals": "Malbec, Cabernet Sauvignon, Bonarda.",
+    "blends": "Malbec."
+  },
+  {
+    "country": "Argentina", "name": "Salta", "lat": -26.0, "lng": -65.95,
+    "summary": "North-western Calchaquí valleys around Cafayate, with some of the world's highest vineyards (above 3,000 m).",
+    "climate": "High desert with intense sun, extreme day–night swings.",
+    "soils": "Sandy, stony alluvium.",
+    "typical_varietals": "Torrontés, Malbec, Cabernet Sauvignon, Tannat.",
+    "blends": "Aromatic Torrontés."
+  },
+  {
+    "country": "Argentina", "name": "San Juan", "lat": -31.55, "lng": -68.55,
+    "summary": "Argentina's second-largest wine province, north of Mendoza, warm and known for Syrah.",
+    "climate": "Hot and very dry, irrigated from the Andes.",
+    "soils": "Alluvial sands and clays.",
+    "typical_varietals": "Syrah, Malbec, Bonarda, Torrontés.",
+    "blends": "Syrah."
+  },
+  {
+    "country": "Argentina", "name": "Patagonia", "lat": -39.0, "lng": -67.6,
+    "summary": "Southern Argentina's Río Negro and Neuquén valleys, with cooler, windy conditions and old Pinot Noir and Malbec vines.",
+    "climate": "Cool, dry and windy, with long sunny days.",
+    "soils": "Alluvial and sandy soils.",
+    "typical_varietals": "Pinot Noir, Malbec, Merlot, Semillon.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Chile", "name": "Maipo Valley", "lat": -33.65, "lng": -70.65,
+    "summary": "Region around Santiago, historic heart of Chilean Cabernet, especially in Alto Maipo at the foot of the Andes.",
+    "climate": "Warm Mediterranean with cool Andean nights.",
+    "soils": "Alluvial gravels and stony soils.",
+    "typical_varietals": "Cabernet Sauvignon, Carmenère, Merlot, Syrah.",
+    "blends": "Cabernet-led Bordeaux blends."
+  },
+  {
+    "country": "Chile", "name": "Colchagua Valley", "lat": -34.65, "lng": -71.25,
+    "summary": "Rapel valley sub-region known for rich reds, with Apalta's steep hillside vineyards.",
+    "climate": "Warm Mediterranean, with coastal influence increasing westwards.",
+    "soils": "Granite, clay and alluvium.",
+    "typical_varietals": "Carmenère, Cabernet Sauvignon, Syrah, Malbec.",
+    "blends": "Carmenère blends."
+  },
+  {
+    "country": "Chile", "name": "Casablanca Valley", "lat": -33.3, "lng": -71.4,
+    "summary": "Cool coastal valley between Santiago and Valparaíso, pioneered for white wine in the 1980s.",
+    "climate": "Cool, with morning fog from the Humboldt current.",
+    "soils": "Sandy clay over granite.",
+    "typical_varietals": "Sauvignon Blanc, Chardonnay, Pinot Noir.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Chile", "name": "San Antonio Valley", "lat": -33.6, "lng": -71.55,
+    "summary": "Coastal valley including Leyda, within kilometres of the Pacific, making zesty whites and Pinot Noir.",
+    "climate": "Very cool maritime.",
+    "soils": "Granite and clay.",
+    "typical_varietals": "Sauvignon Blanc, Pinot Noir, Chardonnay, Syrah.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Chile", "name": "Maule Valley", "lat": -35.5, "lng": -71.7,
+    "summary": "Chile's largest region, with old dry-farmed Carignan and País vines.",
+    "climate": "Mediterranean with more rain than further north.",
+    "soils": "Granite and volcanic soils.",
+    "typical_varietals": "Carignan, País, Cabernet Sauvignon, Carmenère.",
+    "blends": "VIGNO (old-vine Carignan)."
+  },
+  {
+    "country": "Chile", "name": "Itata Valley", "lat": -36.6, "lng": -72.4,
+    "summary": "Southern region with some of the oldest vines in the Americas, revived for natural-leaning País and Cinsault.",
+    "climate": "Cool and wet, maritime.",
+    "soils": "Granite.",
+    "typical_varietals": "País, Cinsault, Moscatel.",
+    "blends": "Light, dry-farmed reds."
+  },
+  {
+    "country": "Chile", "name": "Limarí Valley", "lat": -30.6, "lng": -71.3,
+    "summary": "Northern semi-desert valley with chalky soils unusual for Chile, noted for mineral Chardonnay.",
+    "climate": "Cool, with morning fog (camanchaca); arid.",
+    "soils": "Limestone and clay.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Syrah, Sauvignon Blanc.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "Uruguay", "name": "Canelones", "lat": -34.55, "lng": -56.2,
+    "summary": "Region north of Montevideo, making most of Uruguay's wine, famous for Tannat.",
+    "climate": "Humid, Atlantic-influenced maritime.",
+    "soils": "Clay-limestone.",
+    "typical_varietals": "Tannat, Merlot, Albariño, Sauvignon Blanc.",
+    "blends": "Tannat blends."
+  },
+  {
+    "country": "Brazil", "name": "Serra Gaúcha", "lat": -29.15, "lng": -51.5,
+    "summary": "Hilly area of Rio Grande do Sul settled by Italian immigrants, Brazil's main region and known for sparkling wine.",
+    "climate": "Humid subtropical with high rainfall.",
+    "soils": "Basalt-derived clay.",
+    "typical_varietals": "Chardonnay, Pinot Noir, Merlot, Moscato.",
+    "blends": "Sparkling (espumante)."
+  },
+  {
+    "country": "South Africa", "name": "Swartland", "lat": -33.4, "lng": 18.75,
+    "summary": "Wheat country north of Cape Town transformed by a revolution of old-vine Chenin Blanc and Rhône-style blends.",
+    "climate": "Hot and dry Mediterranean; dry-farmed bush vines.",
+    "soils": "Shale, granite and iron-rich clay.",
+    "typical_varietals": "Chenin Blanc, Syrah, Grenache, Cinsault, Mourvèdre.",
+    "blends": "Rhône-style red and Cape white blends."
+  },
+  {
+    "country": "South Africa", "name": "Constantia", "lat": -34.03, "lng": 18.43,
+    "summary": "South Africa's oldest wine area, in the Cape Town suburbs, whose sweet Vin de Constance was celebrated in the eighteenth century.",
+    "climate": "Cool maritime, from two oceans and Table Mountain's slopes.",
+    "soils": "Decomposed granite.",
+    "typical_varietals": "Sauvignon Blanc, Semillon, Muscat de Frontignan.",
+    "blends": "Vin de Constance (sweet Muscat); Sauvignon Blanc–Semillon."
+  },
+  {
+    "country": "South Africa", "name": "Paarl", "lat": -33.73, "lng": 18.95,
+    "summary": "Large region north-east of Cape Town under a granite dome, with a broad mix of styles.",
+    "climate": "Warm Mediterranean.",
+    "soils": "Granite, sandstone and shale.",
+    "typical_varietals": "Shiraz, Chenin Blanc, Cabernet Sauvignon, Pinotage.",
+    "blends": "Cape blends."
+  },
+  {
+    "country": "South Africa", "name": "Franschhoek", "lat": -33.9, "lng": 19.12,
+    "summary": "Mountain valley settled by French Huguenots in 1688, now a food and wine tourism hub.",
+    "climate": "Warm Mediterranean, enclosed by mountains.",
+    "soils": "Granite and sandstone alluvium.",
+    "typical_varietals": "Semillon, Chardonnay, Cabernet Sauvignon, Shiraz.",
+    "blends": "Traditional-method sparkling (Cap Classique)."
+  },
+  {
+    "country": "South Africa", "name": "Walker Bay", "lat": -34.38, "lng": 19.3,
+    "summary": "Coastal area around Hermanus, including the Hemel-en-Aarde valley, famous for Pinot Noir and Chardonnay.",
+    "climate": "Cool maritime, cooled by the Atlantic.",
+    "soils": "Bokkeveld shale and decomposed granite.",
+    "typical_varietals": "Pinot Noir, Chardonnay, Sauvignon Blanc.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "South Africa", "name": "Elgin", "lat": -34.2, "lng": 19.05,
+    "summary": "Cool, high apple-growing valley south-east of Cape Town, making elegant whites and Pinot Noir.",
+    "climate": "Cool, with altitude and ocean influence.",
+    "soils": "Bokkeveld shale and Table Mountain sandstone.",
+    "typical_varietals": "Sauvignon Blanc, Chardonnay, Pinot Noir, Riesling.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "South Africa", "name": "Robertson", "lat": -33.8, "lng": 19.88,
+    "summary": "Breede River valley inland of the Cape, 'the valley of wine and roses', known for Chardonnay on limestone.",
+    "climate": "Hot and dry, irrigated; south-east breezes cool afternoons.",
+    "soils": "Limestone-rich alluvium.",
+    "typical_varietals": "Chardonnay, Colombard, Shiraz, Cabernet Sauvignon.",
+    "blends": "Cap Classique sparkling."
+  },
+  {
+    "country": "New Zealand", "name": "Martinborough", "lat": -41.22, "lng": 175.46,
+    "summary": "Small village sub-region at the southern end of the Wairarapa, about an hour from Wellington, whose terrace vineyards made New Zealand's early reputation for Pinot Noir.",
+    "climate": "Cool and dry, sheltered from westerly rain by the Rimutaka and Tararua ranges, but exposed to strong spring winds that cut yields.",
+    "soils": "Free-draining alluvial gravels and silt loams on the Martinborough Terrace.",
+    "typical_varietals": "Pinot Noir, Sauvignon Blanc, Pinot Gris, Chardonnay, Syrah.",
+    "blends": "Mostly varietal; concentrated, savoury Pinot Noir."
+  },
+  {
+    "country": "New Zealand", "name": "Gisborne", "lat": -38.65, "lng": 177.95,
+    "summary": "East-coast North Island region, the first to see the sun each day and a prime source of Chardonnay.",
+    "climate": "Warm, sunny maritime with autumn rains.",
+    "soils": "Fertile alluvial loams and clay.",
+    "typical_varietals": "Chardonnay, Pinot Gris, Gewürztraminer, Albariño.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "New Zealand", "name": "Nelson", "lat": -41.3, "lng": 173.05,
+    "summary": "Sunny region at the top of the South Island, west of Marlborough, with small artisan producers.",
+    "climate": "Sunny maritime, slightly wetter than Marlborough.",
+    "soils": "Clay-gravel in the Moutere Hills; alluvial Waimea plains.",
+    "typical_varietals": "Sauvignon Blanc, Chardonnay, Pinot Noir, Riesling, Pinot Gris.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "New Zealand", "name": "North Canterbury", "lat": -43.0, "lng": 172.75,
+    "summary": "Region north of Christchurch including Waipara Valley, known for Riesling and Pinot Noir.",
+    "climate": "Cool and dry, sheltered from easterlies by the Teviotdale Hills.",
+    "soils": "Limestone, gravel and clay.",
+    "typical_varietals": "Pinot Noir, Riesling, Sauvignon Blanc, Chardonnay.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "New Zealand", "name": "Auckland", "lat": -36.85, "lng": 174.75,
+    "summary": "Region around New Zealand's largest city, including Waiheke Island and the Croatian-founded wineries of Kumeu.",
+    "climate": "Warm, humid maritime.",
+    "soils": "Clay over sandstone; volcanic soils.",
+    "typical_varietals": "Chardonnay, Syrah, Merlot, Cabernet Sauvignon.",
+    "blends": "Bordeaux blends."
+  },
+  {
+    "country": "Japan", "name": "Yamanashi", "lat": 35.65, "lng": 138.6,
+    "summary": "Prefecture at the foot of Mount Fuji, Japan's wine heartland and home of the delicate Koshu grape.",
+    "climate": "Continental basin with hot, humid summers and typhoons.",
+    "soils": "Volcanic and alluvial soils.",
+    "typical_varietals": "Koshu, Muscat Bailey A, Merlot, Chardonnay.",
+    "blends": "Delicate dry Koshu."
+  },
+  {
+    "country": "Japan", "name": "Hokkaido", "lat": 43.17, "lng": 140.77,
+    "summary": "Japan's northern island, a cool-climate region drawing foreign producers for Pinot Noir.",
+    "climate": "Cool with snowy winters; less humid than the main island.",
+    "soils": "Volcanic and clay.",
+    "typical_varietals": "Pinot Noir, Kerner, Zweigelt, Chardonnay.",
+    "blends": "Mostly varietal."
+  },
+  {
+    "country": "China", "name": "Ningxia", "lat": 38.45, "lng": 105.95,
+    "summary": "Region on the eastern foothills of the Helan Mountains, China's best-known quality wine area.",
+    "climate": "Arid continental with hot summers and freezing winters; vines are buried for winter.",
+    "soils": "Gravelly, sandy alluvium.",
+    "typical_varietals": "Cabernet Sauvignon, Merlot, Cabernet Gernischt (Carmenère), Marselan.",
+    "blends": "Bordeaux blends."
+  },
+  {
+    "country": "India", "name": "Nashik", "lat": 20.0, "lng": 73.8,
+    "summary": "Maharashtra plateau north-east of Mumbai, 'India's wine capital', with most of the country's wineries.",
+    "climate": "Tropical; altitude and pruning for winter harvest make viticulture possible.",
+    "soils": "Basalt-derived red and black soils.",
+    "typical_varietals": "Sauvignon Blanc, Chenin Blanc, Shiraz, Cabernet Sauvignon.",
+    "blends": "Mostly varietal."
   }
 ]

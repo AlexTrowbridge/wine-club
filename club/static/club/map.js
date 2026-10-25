@@ -1,5 +1,6 @@
 // Wine region map: one circle per region the club has tasted from, sized by bottles
-// and coloured by club average. Clicking a circle loads its details panel with htmx.
+// and coloured by club average, plus small hollow dots for established regions not tasted
+// yet. Clicking a marker loads its details panel with htmx.
 (function () {
   const TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
   const TILE_ATTRIBUTION =
@@ -14,7 +15,9 @@
   const FIT_PADDING = [24, 24];
   const MIN_RADIUS = 6;
   const RADIUS_PER_SQRT_BOTTLE = 3;
+  const UNTASTED_RADIUS = 4;
   const PANEL_SELECTOR = "#region-panel";
+  const UNTASTED_TOGGLE_ID = "show-untasted";
   const NARROW_SCREEN = "(max-width: 860px)";
 
   function css(name) {
@@ -57,32 +60,66 @@
   }
 
   function tooltip(marker) {
+    const place = "<strong>" + escapeHtml(marker.name) + "</strong>, " + escapeHtml(marker.country);
+    if (!marker.tasted) return place + "<br>not tasted yet";
     const average = marker.mean === null ? "not scored" : "avg " + marker.mean.toFixed(2);
     const bottles = marker.bottles + (marker.bottles === 1 ? " bottle" : " bottles");
-    return "<strong>" + escapeHtml(marker.name) + "</strong>, " + escapeHtml(marker.country) +
-      "<br>" + bottles + " · " + average;
+    return place + "<br>" + bottles + " · " + average;
   }
 
-  function addMarkers(map, markers) {
-    const colour = colourFor(markers);
-    const surface = css("--surface");
-    let selected = null;
-    // Largest first, so small regions stay clickable on top of big neighbours.
-    markers.slice().sort(function (a, b) { return b.bottles - a.bottles; }).forEach(function (marker) {
-      const circle = L.circleMarker([marker.lat, marker.lng], {
+  function tastedStyle(colour, surface) {
+    return function (marker) {
+      return {
         radius: MIN_RADIUS + RADIUS_PER_SQRT_BOTTLE * Math.sqrt(marker.bottles),
         color: surface,
         weight: 1.5,
         fillColor: colour(marker),
         fillOpacity: 0.85,
-      }).addTo(map);
-      circle.bindTooltip(tooltip(marker), { direction: "top" });
-      circle.on("click", function () {
-        if (selected) selected.setStyle({ color: surface, weight: 1.5 });
-        circle.setStyle({ color: css("--text"), weight: 3 });
-        selected = circle;
-        showPanel(marker.url);
-      });
+      };
+    };
+  }
+
+  function untastedStyle(muted) {
+    return function () {
+      return { radius: UNTASTED_RADIUS, color: muted, weight: 1.5, fillOpacity: 0 };
+    };
+  }
+
+  // Returns the layer holding untasted regions, so it can be toggled.
+  function addMarkers(map, tasted, untasted) {
+    const styleTasted = tastedStyle(colourFor(tasted), css("--surface"));
+    const styleUntasted = untastedStyle(css("--muted"));
+    const untastedLayer = L.featureGroup().addTo(map);
+    const tastedLayer = L.layerGroup().addTo(map);
+    let selected = null;
+
+    function add(layer, style) {
+      return function (marker) {
+        const circle = L.circleMarker([marker.lat, marker.lng], style(marker)).addTo(layer);
+        circle.bindTooltip(tooltip(marker), { direction: "top" });
+        circle.on("click", function () {
+          if (selected) selected.circle.setStyle(selected.style(selected.marker));
+          circle.setStyle({ color: css("--text"), weight: 3 });
+          selected = { circle: circle, style: style, marker: marker };
+          showPanel(marker.url);
+        });
+      };
+    }
+
+    untasted.forEach(add(untastedLayer, styleUntasted));
+    // Largest first, so small regions stay clickable on top of big neighbours.
+    tasted.slice().sort(function (a, b) { return b.bottles - a.bottles; })
+      .forEach(add(tastedLayer, styleTasted));
+    return untastedLayer;
+  }
+
+  function bindUntastedToggle(map, layer) {
+    const toggle = document.getElementById(UNTASTED_TOGGLE_ID);
+    if (!toggle) return;
+    toggle.addEventListener("change", function () {
+      // Re-added layers draw on top; keep untasted dots under the tasted circles.
+      if (toggle.checked) layer.addTo(map).bringToBack();
+      else map.removeLayer(layer);
     });
   }
 
@@ -126,8 +163,10 @@
       attribution: TILE_ATTRIBUTION,
       referrerPolicy: TILE_REFERRER_POLICY,
     }).addTo(map);
-    addMarkers(map, markers);
-    bindViewTabs(map, markers);
+    const tasted = markers.filter(function (m) { return m.tasted; });
+    const untasted = markers.filter(function (m) { return !m.tasted; });
+    bindUntastedToggle(map, addMarkers(map, tasted, untasted));
+    bindViewTabs(map, tasted);
   }
 
   document.addEventListener("DOMContentLoaded", init);

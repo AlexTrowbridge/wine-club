@@ -182,6 +182,9 @@ svg.qr { display: block; width: 160px; height: auto; border-radius: 4px; }
 .map-legend .swatch.low { background: var(--chart-2); }
 .map-legend .swatch.high { background: var(--chart-1); }
 .map-legend .swatch.none { background: var(--muted); }
+.map-legend .swatch.untasted { box-sizing: border-box; border: 1.5px solid var(--muted); }
+.map-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
+.map-controls .tabs { margin-bottom: 0; }
 @media (prefers-color-scheme: dark) {
   .region-map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
   .region-map { background: var(--surface); }

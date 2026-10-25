@@ -8,18 +8,22 @@
 {% endblock %}
 {% block content %}
 <h1>Wine region map</h1>
-<p class="muted">{{ n_regions }} regions in {{ n_countries }} countries. Circle size shows how many bottles the club has tasted; colour ranks regions by club average. Click a region for its details.</p>
+<p class="muted">The club has tasted from {{ n_regions }} regions in {{ n_countries }} countries. Circle size shows how many bottles; colour ranks regions by club average. Hollow dots mark {{ n_untasted }} other established regions not tasted yet. Click a region for its details.</p>
 <div class="map-layout">
   <div>
-    <div class="tabs" id="map-views">
-      <a href="#" data-view="australia" class="active">Australia</a>
-      <a href="#" data-view="world">World</a>
+    <div class="map-controls">
+      <div class="tabs" id="map-views">
+        <a href="#" data-view="australia" class="active">Australia</a>
+        <a href="#" data-view="world">World</a>
+      </div>
+      <label class="small"><input type="checkbox" id="show-untasted" checked> Show untasted regions</label>
     </div>
     <div id="region-map" class="region-map" data-markers="region-markers"></div>
     <p class="small muted map-legend">
       <span class="swatch low"></span> lowest average
       <span class="swatch high"></span> highest average
       <span class="swatch none"></span> not scored
+      <span class="swatch untasted"></span> not tasted yet
     </p>
   </div>
   <aside id="region-panel" class="card region-panel-box" aria-live="polite">

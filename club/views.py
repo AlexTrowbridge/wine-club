@@ -386,7 +386,7 @@ def wine_list(request):
             "bottles": data,
             "sort": sort,
             "filters": f,
-            "countries": Country.objects.all(),
+            "countries": Country.objects.filter(regions__wines__isnull=False).distinct(),
             "varietals": Varietal.objects.annotate(n=Count("wines")).filter(n__gt=0),
             "eras": Era.objects.all(),
             "years": years,
