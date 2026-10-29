@@ -1,3 +1,4 @@
+import logging
 import statistics
 from collections import defaultdict
 
@@ -24,6 +25,26 @@ from .permissions import (
 from .scoring_tokens import qr_svg
 from .services import save_score
 
+logger = logging.getLogger(__name__)
+
+TOP_WINES_DEFAULT = 3
+TOP_WINES_MAX = 20
+# Wine list filters: query parameter -> Tasting lookup, all taking a numeric id/year.
+WINE_ID_FILTERS = {
+    "country": "wine__region__country_id",
+    "varietal": "wine__varietals",
+    "era": "session__era_id",
+    "year": "session__date__year",
+    "purchaser": "purchaser_id",
+}
+
+
+def _int_param(raw) -> int | None:
+    """A non-negative integer from a query/form value, or None if it isn't one."""
+    raw = (raw or "").strip()
+    return int(raw) if raw.isdigit() else None
+
+
 # --- Health -----------------------------------------------------------------------
 
 
@@ -37,8 +58,9 @@ def readyz(request):
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT 1")
-    except Exception as exc:  # noqa: BLE001 - report any DB failure as not ready
-        return JsonResponse({"status": "unavailable", "error": str(exc)}, status=503)
+    except Exception:  # noqa: BLE001 - report any DB failure as not ready
+        logger.exception("Readiness check failed")
+        return JsonResponse({"status": "unavailable"}, status=503)
     return JsonResponse({"status": "ok"})
 
 
@@ -219,7 +241,7 @@ def session_status(request, number):
 @require_POST
 def session_attendance(request, number):
     session = get_object_or_404(Session, number=number)
-    member = get_object_or_404(Member, pk=request.POST.get("member"))
+    member = get_object_or_404(Member, pk=_int_param(request.POST.get("member")))
     if request.POST.get("action") == "remove":
         if Rating.objects.filter(tasting__session=session, member=member).exists():
             messages.error(request, f"{member} has scores in this session; remove those first.")
@@ -275,7 +297,7 @@ def session_score(request, number):
     organiser = is_organiser(request.user)
     member = me
     if organiser and request.GET.get("member"):
-        member = get_object_or_404(Member, pk=request.GET["member"])
+        member = get_object_or_404(Member, pk=_int_param(request.GET["member"]))
     tastings = list(session.tastings.select_related("wine", "purchaser"))
     mine = {}
     if member:
@@ -360,16 +382,10 @@ def wine_list(request):
     f = request.GET
     if q := f.get("q", "").strip():
         qs = qs.filter(wine__full_name__icontains=q)
-    if f.get("country"):
-        qs = qs.filter(wine__region__country_id=f["country"])
-    if f.get("varietal"):
-        qs = qs.filter(wine__varietals=f["varietal"])
-    if f.get("era"):
-        qs = qs.filter(session__era_id=f["era"])
-    if f.get("year"):
-        qs = qs.filter(session__date__year=f["year"])
-    if f.get("purchaser"):
-        qs = qs.filter(purchaser_id=f["purchaser"])
+    for param, lookup in WINE_ID_FILTERS.items():
+        value = _int_param(f.get(param))
+        if value is not None:
+            qs = qs.filter(**{lookup: value})
     if f.get("style"):
         qs = qs.filter(wine__style=f["style"])
     data = stats.bottles(qs)
@@ -503,13 +519,18 @@ def leaderboards(request):
         request,
         "club/leaderboards.html",
         {
-            "groups": stats.top_wine_groups(data, n=int(request.GET.get("n", 3))),
+            "groups": stats.top_wine_groups(data, n=_top_wines_count(request)),
             "by_purchases": stats.ranked(ms, lambda r: r.avg_of_purchases),
             "by_difference": stats.ranked(ms, lambda r: r.purchase_difference),
             "by_contribution": stats.ranked(ms, lambda r: r.bottles_per_session),
             "by_generosity": stats.ranked(ms, lambda r: r.avg_given),
         },
     )
+
+
+def _top_wines_count(request) -> int:
+    requested = _int_param(request.GET.get("n")) or TOP_WINES_DEFAULT
+    return min(requested, TOP_WINES_MAX)
 
 
 def analysis(request, dimension="varietal"):
@@ -548,7 +569,7 @@ def analysis(request, dimension="varietal"):
 
 
 def price_analysis(request):
-    data = [b for b in stats.bottles() if b.tasting.price]
+    data = stats.priced(stats.bottles())
     fit = stats.price_fit(data)
     points = [
         {"x": float(b.tasting.price), "y": round(b.avg, 3), "label": b.wine.full_name} for b in data
@@ -620,6 +641,7 @@ def attendance(request):
     totals = Member.objects.annotate(n=Count("attendances")).values_list("pk", "n")
     totals = dict(totals)
     members = [m for m in members if totals.get(m.pk)]
+    n_held = stats.held_session_count() or 1
     grid = [
         (
             s,
@@ -637,7 +659,7 @@ def attendance(request):
             "members": members,
             "grid": grid,
             "totals": [totals.get(m.pk, 0) for m in members],
-            "rates": [totals.get(m.pk, 0) / (len(sessions) or 1) for m in members],
+            "rates": [totals.get(m.pk, 0) / n_held for m in members],
         },
     )
 

@@ -12,13 +12,16 @@ from django.views.decorators.http import require_POST
 
 from .forms import SCORE_CHOICES, ScoreForm
 from .models import Member, Rating, Session, Tasting
-from .permissions import member_for
+from .permissions import can_see_scores, member_for
 from .scoring_tokens import normalise_token
 from .services import save_score
 from .views import render_score_item
 
 # Django session key remembering who this browser last scored as: {"token", "member"}.
 CHOSEN_MEMBER_KEY = "scoring_member"
+# Django session key listing whom this browser has scored as: {"token", "members"}.
+# Only they (or someone allowed to see everyone's scores) see those members' saved scores.
+SCORED_AS_KEY = "scored_as"
 UNKNOWN_CODE = "That code isn't valid, or scoring for its session has closed."
 
 
@@ -51,7 +54,7 @@ def token_score(request, token):
             "token": session.scoring_token,
             "members": members,
             "member": member,
-            "items": score_items(session, member),
+            "items": score_items(session, member, may_see_scores_of(request, session, member)),
             "choices": SCORE_CHOICES,
         },
     )
@@ -74,6 +77,7 @@ def token_rate(request, token, pk):
         return HttpResponseBadRequest("Choose who you are first.")
     entered_by = request.user if request.user.is_authenticated else None
     rating = save_score(tasting, member, form.cleaned_data, entered_by)
+    record_scored_as(request, session, member)
     return render_score_item(request, tasting, member, rating, token=session.scoring_token)
 
 
@@ -103,11 +107,43 @@ def remember_member(request, session, member):
     request.session[CHOSEN_MEMBER_KEY] = {"token": session.scoring_token, "member": member.pk}
 
 
-def score_items(session, member):
+def record_scored_as(request, session, member):
+    scored = request.session.get(SCORED_AS_KEY) or {}
+    members = scored.get("members", []) if scored.get("token") == session.scoring_token else []
+    if member.pk not in members:
+        members = [*members, member.pk]
+    request.session[SCORED_AS_KEY] = {"token": session.scoring_token, "members": members}
+
+
+def may_see_scores_of(request, session, member):
+    """Whether this visitor may see ``member``'s saved scores on the code-based page.
+
+    Anyone with the code can pick any name, so picking a name alone doesn't reveal
+    that member's scores before the organiser reveals them.
+    """
+    if member is None or can_see_scores(request.user, session):
+        return True
+    own = member_for(request.user)
+    if own is not None and own.pk == member.pk:
+        return True
+    scored = request.session.get(SCORED_AS_KEY) or {}
+    return scored.get("token") == session.scoring_token and member.pk in scored.get("members", [])
+
+
+def score_items(session, member, show_scores):
+    """Scoring cards for ``member``; without ``show_scores``, saved scores are only flagged."""
     if member is None:
         return []
     mine = {r.tasting_id: r for r in Rating.objects.filter(tasting__session=session, member=member)}
-    return [
-        {"tasting": t, "rating": mine.get(t.pk), "can_rate": True}
-        for t in session.tastings.select_related("wine", "purchaser")
-    ]
+    items = []
+    for t in session.tastings.select_related("wine", "purchaser"):
+        rating = mine.get(t.pk)
+        items.append(
+            {
+                "tasting": t,
+                "rating": rating if show_scores else None,
+                "hidden_rating": rating is not None and not show_scores,
+                "can_rate": True,
+            }
+        )
+    return items

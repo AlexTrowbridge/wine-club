@@ -29,7 +29,7 @@ def test_member_scores_own_wine_and_attendance_is_recorded(alice_client, open_se
     assert not Rating.objects.filter(tasting=t, member=alice).exists()
 
 
-@pytest.mark.parametrize("bad", ["11", "7.3", "-1", "abc"])
+@pytest.mark.parametrize("bad", ["11", "7.3", "-1", "abc", "nan", "inf"])
 def test_invalid_scores_rejected(alice_client, open_session, bad):
     assert rate(alice_client, open_session["tasting"], score=bad).status_code == 400
     assert not Rating.objects.exists()

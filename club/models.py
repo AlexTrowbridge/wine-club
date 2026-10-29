@@ -10,6 +10,7 @@ from .scoring_tokens import TOKEN_LENGTH, generate_token
 
 SCORE_MIN = Decimal("0")
 SCORE_MAX = Decimal("10")
+PRICE_MIN = Decimal("0.01")
 
 
 class Member(models.Model):
@@ -299,7 +300,13 @@ class Tasting(models.Model):
     shared_purchase = models.BooleanField(
         default=False, help_text="Bought by the whole club ('Everyone')."
     )
-    price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(PRICE_MIN)],
+    )
     notes = models.TextField(blank=True)
     # Spreadsheet row number (#), kept for traceability with the original workbook.
     legacy_number = models.PositiveIntegerField(null=True, blank=True, unique=True)

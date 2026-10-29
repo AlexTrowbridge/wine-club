@@ -86,3 +86,29 @@ def test_export_round_trips(client, organiser, imported, tmp_path, django_db_res
         for t in Tasting.objects.all()
     )
     assert before == after
+
+
+@pytest.mark.parametrize(
+    "name, params",
+    [
+        ("leaderboards", {"n": "abc"}),
+        ("leaderboards", {"n": "-1"}),
+        ("wine_list", {"country": "abc", "year": "x", "era": "1;", "purchaser": " "}),
+        ("session_score", {"member": "abc"}),
+    ],
+)
+def test_bad_query_params_do_not_crash(client, organiser, imported, name, params):
+    client.force_login(organiser)
+    args = [2] if name == "session_score" else []
+    assert client.get(reverse(name, args=args), params).status_code in (200, 404)
+
+
+def test_readyz_hides_error_details(client, db, monkeypatch):
+    class BrokenConnection:
+        def cursor(self):
+            raise RuntimeError("db at secret-host:5432")
+
+    monkeypatch.setattr("club.views.connection", BrokenConnection())
+    resp = client.get(reverse("readyz"))
+    assert resp.status_code == 503
+    assert b"secret-host" not in resp.content
