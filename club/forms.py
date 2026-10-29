@@ -105,7 +105,7 @@ class ScoreForm(forms.Form):
             value = Decimal(raw)
         except ArithmeticError:
             raise forms.ValidationError("Enter a score, x (no score) or leave blank.") from None
-        if not SCORE_MIN <= value <= SCORE_MAX:
+        if not value.is_finite() or not SCORE_MIN <= value <= SCORE_MAX:
             raise forms.ValidationError(f"Scores run from {SCORE_MIN} to {SCORE_MAX}.")
         if (value * 2) % 1:
             raise forms.ValidationError("Scores are in steps of 0.5.")

@@ -10,7 +10,9 @@ Sheets used (cached values only, formulas are ignored):
   onwards; ``P`` = brought a bottle, ``X`` = attended. Era header rows in column A.
 
 The import is idempotent: sessions are keyed on number, tastings on their
-spreadsheet ``#``, ratings on (tasting, member).
+spreadsheet ``#``, ratings on (tasting, member). Wines are keyed on their full name;
+an existing wine only has its blank details filled in, so corrections made in the app
+aren't overwritten by the next import.
 """
 
 import csv
@@ -52,6 +54,8 @@ SHARED_PURCHASER = "Everyone"
 FIRST_MEMBER_COL = 5  # column F in Raw Ratings (0-based)
 ATT_FIRST_MEMBER_COL = 3  # column D in Attendance
 CLOSED_SESSION = {"status": Session.Status.CLOSED, "scores_revealed": True}
+BLEND_LABELS = {"Blend": True, "Single Varietal": False}
+EMPTY_VALUES = (None, "")
 
 
 @dataclass
@@ -145,6 +149,36 @@ def _members_from_header(header) -> list[str]:
             break
         names.append(str(value).strip())
     return names
+
+
+def _import_wine(name, parsed, sheet_fields) -> tuple[Wine, bool]:
+    """Create the wine from the sheet, or fill in only what an existing wine lacks.
+
+    Details corrected in the app (varietals, region, style...) survive a re-import.
+    """
+    wine = Wine.objects.filter(full_name=name).first()
+    if wine is None:
+        wine = Wine.objects.create(
+            full_name=name,
+            producer=parsed.producer,
+            vintage=parsed.vintage,
+            cuvee=parsed.cuvee,
+            **sheet_fields,
+        )
+        set_varietals(wine, parsed.varietals)
+        return wine, True
+    missing = {
+        field_name: value
+        for field_name, value in sheet_fields.items()
+        if value not in EMPTY_VALUES and getattr(wine, field_name) in EMPTY_VALUES
+    }
+    if missing:
+        for field_name, value in missing.items():
+            setattr(wine, field_name, value)
+        wine.save(update_fields=list(missing))
+    if not wine.winevarietal_set.exists():
+        set_varietals(wine, parsed.varietals)
+    return wine, False
 
 
 @transaction.atomic
@@ -245,21 +279,14 @@ def import_workbook(path) -> ImportReport:
             region = regions[key]
         else:
             report.flag(number, name, "missing region/country")
-        blend_label = _text(meta[8])
         jh = _number(meta[15])
-        wine, created = Wine.objects.update_or_create(
-            full_name=name,
-            defaults={
-                "producer": parsed.producer,
-                "vintage": parsed.vintage,
-                "cuvee": parsed.cuvee,
-                "region": region,
-                "style": parsed.style,
-                "is_blend": {"Blend": True, "Single Varietal": False}.get(blend_label),
-                "jh_score": int(jh) if jh else None,
-            },
-        )
-        set_varietals(wine, parsed.varietals)
+        sheet_fields = {
+            "region": region,
+            "style": parsed.style,
+            "is_blend": BLEND_LABELS.get(_text(meta[8])),
+            "jh_score": int(jh) if jh else None,
+        }
+        wine, created = _import_wine(name, parsed, sheet_fields)
         report.wines += created
 
         # Tasting.

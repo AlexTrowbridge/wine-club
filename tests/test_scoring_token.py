@@ -120,3 +120,31 @@ def test_code_only_reaches_its_own_session(client, organiser, open_session, toke
     resp = token_rate(client, token, tasting, member=open_session["bob"].pk, score="8")
     assert resp.status_code == 400
     assert not Rating.objects.exists()
+
+
+def test_picking_a_name_does_not_reveal_their_scores(client, open_session, token):
+    t, bob = open_session["tasting"], open_session["bob"]
+    Rating.objects.create(tasting=t, member=bob, score=Decimal("6.5"))
+    page = client.get(reverse("token_score", args=[token]), {"member": bob.pk}).content.decode()
+    assert "6.5" not in page and "Already scored on another device" in page
+
+    # Bob, logged in, sees his own score.
+    client.login(username="bob", password="pw")
+    page = client.get(reverse("token_score", args=[token]), {"member": bob.pk}).content.decode()
+    assert "6.5" in page
+
+    # Alice doesn't see Bob's until the organiser reveals the scores.
+    client.login(username="alice", password="pw")
+    page = client.get(reverse("token_score", args=[token]), {"member": bob.pk}).content.decode()
+    assert "6.5" not in page
+    Session.objects.filter(pk=t.session_id).update(scores_revealed=True)
+    page = client.get(reverse("token_score", args=[token]), {"member": bob.pk}).content.decode()
+    assert "6.5" in page
+
+
+def test_score_nan_is_rejected_without_login(client, open_session, token):
+    resp = token_rate(
+        client, token, open_session["tasting"], member=open_session["bob"].pk, score="nan"
+    )
+    assert resp.status_code == 400
+    assert not Rating.objects.exists()

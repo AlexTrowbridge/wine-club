@@ -28,6 +28,7 @@ PRICE_BANDS = [
     (math.inf, "$100+"),
 ]
 AGE_CAP = 10  # ages >= this are grouped as "10+"
+MIN_FIT_POINTS = 3  # priced bottles needed before fitting rating against price
 
 
 @dataclass
@@ -133,8 +134,13 @@ class MemberStats:
         return self.bottles_bought / self.attended if self.attended else None
 
 
+def held_session_count() -> int:
+    """Sessions that have happened (or are happening); planned ones don't count yet."""
+    return Session.objects.exclude(status=Session.Status.PLANNED).count()
+
+
 def member_stats(data: list[Bottle]) -> list[MemberStats]:
-    n_sessions = Session.objects.count() or 1
+    n_sessions = held_session_count() or 1
     members = Member.objects.annotate(
         n_attended=Count("attendances", distinct=True),
     )
@@ -360,15 +366,26 @@ class PriceFit:
         return self.a * math.log(price) + self.b
 
     def expected_price(self, rating):
-        return math.exp((rating - self.b) / self.a)
+        """Price at which the fit predicts ``rating``, or None if no price gets there."""
+        if self.a == 0:
+            return None
+        try:
+            return math.exp((rating - self.b) / self.a)
+        except OverflowError:
+            return None
+
+
+def priced(data: list[Bottle]) -> list[Bottle]:
+    """Bottles with a usable (positive) price, for the log-price analyses."""
+    return [b for b in data if b.tasting.price is not None and b.tasting.price > 0]
 
 
 def price_fit(data: list[Bottle]) -> PriceFit | None:
     """Least-squares fit of rating = a*ln(price) + b over priced bottles."""
     import numpy as np
 
-    pts = [(float(b.tasting.price), b.avg) for b in data if b.tasting.price]
-    if len(pts) < 3:
+    pts = [(float(b.tasting.price), b.avg) for b in priced(data)]
+    if len(pts) < MIN_FIT_POINTS or len({price for price, _ in pts}) < 2:
         return None
     x = np.log([p for p, _ in pts])
     y = np.array([r for _, r in pts])

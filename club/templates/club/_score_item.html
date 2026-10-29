@@ -23,7 +23,7 @@
       {% if item.rating %}<button type="submit" name="score" value="" class="link">Clear</button>{% endif %}
     </form>
     <span class="muted">
-      {% if item.rating %}{% if item.rating.score is None %}Saved: tasted, no score{% else %}Saved: <strong>{{ item.rating.score|score }}</strong>{% endif %}{% else %}Not scored yet{% endif %}
+      {% if item.rating %}{% if item.rating.score is None %}Saved: tasted, no score{% else %}Saved: <strong>{{ item.rating.score|score }}</strong>{% endif %}{% elif item.hidden_rating %}Already scored on another device{% else %}Not scored yet{% endif %}
     </span>
   </div>
   {% else %}

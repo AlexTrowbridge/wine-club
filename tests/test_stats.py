@@ -81,3 +81,22 @@ def test_purchaser_rater_matrix(imported):
     ben = next(p for p in purchasers if p.display_name == "Ben")
     cleo = next(r for r in raters if r.display_name == "Cleo")
     assert cells[(ben.pk, cleo.pk)] == (9.0, 1)
+
+
+def test_attendance_rate_ignores_planned_sessions(data):
+    from club.models import Era, Session
+
+    Session.objects.create(number=99, date="2030-01-01", era=Era.objects.first())
+    by_name = {r.member.display_name: r for r in stats.member_stats(data)}
+    assert by_name["Ava"].attendance_rate == 1.0
+
+
+def test_price_fit_needs_distinct_prices(data):
+    for b in data:
+        b.tasting.price = 30
+    assert stats.price_fit(data) is None
+
+
+def test_expected_price_out_of_reach():
+    assert stats.PriceFit(a=0.0, b=7.0, r2=0, n=3).expected_price(8) is None
+    assert stats.PriceFit(a=1e-6, b=7.0, r2=0, n=3).expected_price(8) is None

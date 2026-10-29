@@ -81,3 +81,25 @@ def test_bad_score_cells_are_flagged(db, tmp_path, value):
     report = import_workbook(path)
     flagged = any("unreadable score" in r["issue"] for r in report.review)
     assert flagged == (value == "bad")
+
+
+def test_reimport_keeps_wine_details_corrected_in_app(imported, sample_workbook):
+    from club.models import Varietal
+    from club.services import set_varietals
+
+    wine = Wine.objects.get(producer="Henschke")
+    set_varietals(wine, ["Shiraz"])
+    Wine.objects.filter(pk=wine.pk).update(style=Wine.Style.ROSE, jh_score=95)
+
+    assert import_workbook(sample_workbook).ok
+    wine.refresh_from_db()
+    assert [v.name for v in wine.varietals.all()] == ["Shiraz"]
+    assert (wine.style, wine.jh_score) == (Wine.Style.ROSE, 95)
+
+    # Blank details are still filled in from the sheet.
+    Wine.objects.filter(pk=wine.pk).update(jh_score=None, region=None)
+    wine.winevarietal_set.all().delete()
+    assert import_workbook(sample_workbook).ok
+    wine.refresh_from_db()
+    assert wine.jh_score == 92 and wine.region is not None
+    assert Varietal.objects.filter(wines=wine).count() == 4
